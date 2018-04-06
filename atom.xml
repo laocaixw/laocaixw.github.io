@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://laocaixw.github.io/"/>
-  <updated>2018-04-04T08:48:39.326Z</updated>
+  <updated>2018-04-06T06:39:59.083Z</updated>
   <id>http://laocaixw.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://laocaixw.github.io/2018/04/02/Blog_Hexo_GitHub_Jenkins/"/>
     <id>http://laocaixw.github.io/2018/04/02/Blog_Hexo_GitHub_Jenkins/</id>
     <published>2018-04-02T05:30:00.000Z</published>
-    <updated>2018-04-04T08:48:39.326Z</updated>
+    <updated>2018-04-06T06:39:59.083Z</updated>
     
     <summary type="html">
     
@@ -462,7 +462,7 @@
     <link href="http://laocaixw.github.io/2017/05/15/Android_MultiDex/"/>
     <id>http://laocaixw.github.io/2017/05/15/Android_MultiDex/</id>
     <published>2017-05-15T12:00:00.000Z</published>
-    <updated>2017-11-16T13:29:23.913Z</updated>
+    <updated>2018-04-06T06:37:55.349Z</updated>
     
     <summary type="html">
     
@@ -470,7 +470,7 @@
       
         
         
-          &lt;p&gt;前段时间写了篇有关&lt;a href=&quot;/2017/02/28/Eclipse%E5%B7%A5%E7%A8%8B%E8%BD%ACAndroid%20Studio%E5%B7%A5%E7%A8%8B/&quot;&gt;Eclipse工程转Android
+          &lt;p&gt;前段时间写了篇有关&lt;a href=&quot;/2017/02/28/Eclipse_Convert_Android_Studio/&quot;&gt;Eclipse工程转Android Studio工程&lt;/a&gt;的文章，而导致公司项目需要转 AS
         
       
     

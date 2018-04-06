@@ -62,7 +62,7 @@
           <blockquote>
           <p><strong><a href="http://blog.laocaixw.cn/">转载请声明出处</a></strong></p>
           </blockquote>
-          <p>前段时间写了篇有关<a href="/2017/02/28/Eclipse%E5%B7%A5%E7%A8%8B%E8%BD%ACAndroid%20Studio%E5%B7%A5%E7%A8%8B/">Eclipse工程转Android Studio工程</a>的文章，而导致公司项目需要转 AS 的直接原因，就是今天要写的主题–方法数超限，相信大多数 Android 项目的都会碰到这个问题。</p>
+          <p>前段时间写了篇有关<a href="/2017/02/28/Eclipse_Convert_Android_Studio/">Eclipse工程转Android Studio工程</a>的文章，而导致公司项目需要转 AS 的直接原因，就是今天要写的主题–方法数超限，相信大多数 Android 项目的都会碰到这个问题。</p>
 <p>传统的 Eclipse 解决方法数超限的办法，就是在 project.properties 中加上 dex.force.jumbo=true ，然后清理工程重新编译。但是，当方法数越来越多，这个方法也会解决不了问题，这个时候，就要用到 Google 官方给出的方案 <a href="https://developer.android.google.cn/studio/build/multidex.html" target="_blank" rel="external">MultiDex</a> 了。</p>
 <h2 id="MultiDex-解决方案"><a href="#MultiDex-解决方案" class="headerlink" title="MultiDex 解决方案"></a>MultiDex 解决方案</h2><p>一、 如果你的 minSdkVersion &gt;= 21 ，那么只要在模块的 build.gradle 中添加：</p>
 <figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    defaultConfig &#123;</div><div class="line">        ...</div><div class="line">        multiDexEnabled <span class="keyword">true</span></div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
