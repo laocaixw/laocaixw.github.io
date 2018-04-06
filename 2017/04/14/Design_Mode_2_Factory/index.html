@@ -1,0 +1,138 @@
+<html lang="zh-CN">
+  <head>
+    <title>设计模式学习系列（2）--工厂方法模式 - laocaixw</title>
+    <meta charset="UTF-8">
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+<link href='/img/avatar.png' rel='shortcut icon'>
+<link href='undefined' rel='alternate' type='application/rss+xml'>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+
+  </head>
+  <body>
+    <header>
+  <a id='go-back-home' href='/'><img src='/img/avatar.png' alt='Home' width='60' height='60'></a>
+  <p>laocaixw</p>
+  <p>Android Developer</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://github.com/laocaixw'>Github</a>
+  
+    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+  
+    <a class='main' href='/about.html'>About</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2017/04/17/Design_Mode_3_AbstractFactory/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2017/02/28/Eclipse_Convert_Android_Studio/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2017-04-14</div>
+            设计模式学习系列（2）--工厂方法模式
+          </h1>
+          <blockquote>
+          <p><strong><a href="http://blog.laocaixw.cn/">转载请声明出处</a></strong></p>
+          </blockquote>
+          <p>工厂方法模式：<strong>定义一个用于创建对象的接口，让子类决定实例化哪个类。工厂方法使一个类的实例化延迟到其子类。</strong></p>
+<p><img src="/img/design_mode/2_Factory.jpg" alt="Factory"></p>
+<h3 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h3><p>说工厂方法模式之前，我们先来说说简单的工厂模式。</p>
+<p><strong>简单工厂模式中，一个工厂类处于对产品实例化的中心位置上，它知道每一个产品，它决定哪一个产品应该被实例化。</strong></p>
+<p>比如，现在我们需要生产一个产品 A 和产品 B：</p>
+<p>产品接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Product</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>产品A</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProductA</span> <span class="title">implement</span> <span class="title">Product</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// 产品A方法</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>产品B</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProductB</span> <span class="title">implement</span> <span class="title">Product</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// 产品B方法</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>工厂类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Factory</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Product <span class="title">createProduct</span><span class="params">(String productType)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(<span class="string">"A"</span>.equals(productType)) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> ProductA();</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="string">"B"</span>.equals(productType)) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> ProductB();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>客户端</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Product product = Factory.createProduct(<span class="string">"A"</span>);</div><div class="line">        <span class="comment">// Product product = Factory.createProduct("B");</span></div><div class="line">        product.method();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当我们需要改变 Product 的时候，只要 Factory.createProduct(String type) 传入不同的 type 就可以了，不要去修改 product ，非常方便。当然，这个模式也存在不足，当我们需要加一个 ProductC 的时候，还要去修改 Factory 类，这明显违反了开闭原则，由这里就引申出了工厂方法模式。</p>
+<h3 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h3><p>工厂方法模式其实就是在简单工厂模式基础上进一步抽象，把 Factory 也用接口来实现。</p>
+<p>工厂接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Factory</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> Product <span class="title">createProduct</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>具体工厂A</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FactoryA</span> <span class="title">implement</span> <span class="title">Factory</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> Product <span class="title">createProduct</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// 生产产品A</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ProductA();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>具体工厂B</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FactoryB</span> <span class="title">implement</span> <span class="title">Factory</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> Product <span class="title">createProduct</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// 生产产品B</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ProductB();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>客户端</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Factory factory = <span class="keyword">new</span> FactoryA();</div><div class="line">        <span class="comment">// Factory factory = new FactoryB();</span></div><div class="line">        Product product = factory.createProduct();</div><div class="line">        product.method();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当我们需要加一个 ProductC 的时候，只要再加一个 FactoryC 就可以了。这样明显是符合开闭原则，非常方便。</p>
+<p>工厂方法模式在目前我们讨论的一个产品等级结构中是很方便的，如果现在产品等级结构是多个呢，ProductA1、ProductA2、ProductB1、ProductB2。这样说产品等级结构可能不太好理解，其实就是一个二维数组，举个例子：现在需要生产鼠标，鼠标品牌有 A 和 B，这是第一个等级；鼠标类型是 1、2、3 等，这是第二个产品等级；等等。如果按 A+1、A+2、A+3、B+1… 这样来写 Product ，岂不是要写很多出来，那应该怎么做呢？这就可以再引申到抽象工厂模式了，下一篇继续学。</p>
+
+          
+        </section>
+      </div>
+      
+      
+        <div id="comment-container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  // id: location.href, // 可选。默认为 location.href
+  id: '设计模式学习系列（2）--工厂方法模式',
+  owner: 'laocaixw', // 你的 GitHub ID
+  repo: 'laocaixw.github.io', // 存储评论的 repo
+  oauth: {
+    client_id: 'b41a264d7724fd5a364b', // 你的 client ID
+    client_secret: '9dc474e16291d40597b0ad55daae84c24eb41160', // 你的 client secret
+  },
+})
+gitment.render('comment-container')
+</script>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://github.com/laocaixw'>Github</a>
+  
+    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+  
+    <a class='main' href='/about.html'>About</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; laocaixw. All Rights Reserved.</span><br>
+  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>built with Hexo using Scribble theme</a>
+  <br>
+  <br>
+</footer>
+
+  </body>
+</html>

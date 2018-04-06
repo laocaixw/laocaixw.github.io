@@ -1,0 +1,165 @@
+<html lang="zh-CN">
+  <head>
+    <title>Eclipse工程转Android Studio工程 - laocaixw</title>
+    <meta charset="UTF-8">
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+<link href='/img/avatar.png' rel='shortcut icon'>
+<link href='undefined' rel='alternate' type='application/rss+xml'>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+
+  </head>
+  <body>
+    <header>
+  <a id='go-back-home' href='/'><img src='/img/avatar.png' alt='Home' width='60' height='60'></a>
+  <p>laocaixw</p>
+  <p>Android Developer</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://github.com/laocaixw'>Github</a>
+  
+    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+  
+    <a class='main' href='/about.html'>About</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2017/04/14/Design_Mode_2_Factory/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2017/02/22/Android_PopupWindow/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2017-02-28</div>
+            Eclipse工程转Android Studio工程
+          </h1>
+          <blockquote>
+          <p><strong><a href="http://blog.laocaixw.cn/">转载请声明出处</a></strong></p>
+          </blockquote>
+          <p>目前，用 Android Studio 来开发 Android 项目已是大势所趋，就连 Google 也已经宣布了不再支持 Eclipse 。所以一些老的 Eclipse 工程转 Android Studio 工程也是有必要的。工程转换有两种：一种是兼容模式，即 Eclipse 和 Android Studio 都可以用的工程结构；一种是 Android Studio 的目录结构。这里先记录下兼容模式的转换方法。</p>
+<h2 id="一-从-Eclipse-中导出-Gradle-文件"><a href="#一-从-Eclipse-中导出-Gradle-文件" class="headerlink" title="一.从 Eclipse 中导出 Gradle 文件"></a>一.从 Eclipse 中导出 Gradle 文件</h2><p>首先保证 Eclipse 包含 Gradle 插件，选择菜单 File-&gt;Export-&gt;Generate Gradle build files，</p>
+<p><img src="/img/AS/as_1.png" alt="as_1"></p>
+<p>然后一路无脑 next ，勾选需要转换的工程（如果有依赖工程，把依赖工程也勾选上），在 finish 之前最好勾选上 Force overriding of existing files ，以保证覆盖掉工程中由于之前有过类似操作而存在的文件。</p>
+<p><img src="/img/AS/as_2.png" alt="as_2"></p>
+<h2 id="二-修改-gradle-文件参数"><a href="#二-修改-gradle-文件参数" class="headerlink" title="二.修改 gradle 文件参数"></a>二.修改 gradle 文件参数</h2><p>现在，工程中多出了几个 gradle 相关的文件。修改两个地方为最新版本：</p>
+<ol>
+<li><code>build.gradle</code>。</li>
+</ol>
+<p>找到</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">classpath</span> <span class="string">'com.android.tools.build:gradle:0.8.+'</span></div></pre></td></tr></table></figure>
+<p>改为</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">classpath</span> <span class="string">'com.android.tools.build:gradle:2.2.3'</span>（目前最高版本）</div></pre></td></tr></table></figure>
+<ol>
+<li><code>gradle/wrapper/gradle-wrapper.properties</code>。</li>
+</ol>
+<p>找到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">distributionUrl=http\://services.gradle.org/distributions/gradle-1.10-all.zip</div></pre></td></tr></table></figure>
+<p>改为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">distributionUrl=http\://services.gradle.org/distributions/gradle-2.14.1-all.zip（目前最高版本）</div></pre></td></tr></table></figure>
+<h2 id="三-导入-Android-Studio"><a href="#三-导入-Android-Studio" class="headerlink" title="三.导入 Android Studio"></a>三.导入 Android Studio</h2><p>在 Android Studio 的 Welcome 界面选择 import project（Eclipse ADT,Gradle,etc）</p>
+<p><img src="/img/AS/as_3.png" alt="as_3"></p>
+<p>选择工程，等待编译完成。这时候，不会马上编译成功，需要耐心，根据编译错误信息修改错误。常见的错误有： jni 库位置、构建工具版本低、图片检查报错、Manifest 冲突、jar 包冲突等。</p>
+<h2 id="四-常见编译错误解决方法"><a href="#四-常见编译错误解决方法" class="headerlink" title="四.常见编译错误解决方法"></a>四.常见编译错误解决方法</h2><ol>
+<li>jni 库位置。在 build.gradle 中添加：</li>
+</ol>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">sourceSets</span> &#123;</div><div class="line">    main &#123;</div><div class="line">        jniLibs.srcDirs = [<span class="string">'libs'</span>]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li><p>构建工具版本低。提高构建工具版本，一般 Android Studio 都会有提示。</p>
+</li>
+<li><p>图片检查报错。把 .9 图片放到 dawable 文件夹而不是 mipmap 文件夹；在 build.gradle 中添加：</p>
+</li>
+</ol>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">aaptOptions &#123;</div><div class="line">    cruncherEnabled <span class="keyword">false</span></div><div class="line">    useNewCruncher <span class="keyword">false</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>Manifest 冲突。删除重复的 uses-permission 权限；忽略 Manifest 资源值冲突：</li>
+</ol>
+<p>在 manifest 根标签上加入:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xmlns:tools="http://schemas.android.com/tools"</div></pre></td></tr></table></figure>
+<p>然后，在 application 标签下添加:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tools:replace="android:icon, android:theme"（多个属性用,隔开）</div></pre></td></tr></table></figure>
+<p>或者直接在 gradle 中添加：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">useOldManifestMerger <span class="keyword">true</span></div></pre></td></tr></table></figure>
+<ol>
+<li>jar 包冲突。删除 library 工程中与主工程冲突的 jar 包。</li>
+</ol>
+<h2 id="五-库工程（Library）打-aar-包"><a href="#五-库工程（Library）打-aar-包" class="headerlink" title="五.库工程（Library）打 aar 包"></a>五.库工程（Library）打 aar 包</h2><p>如果工程中有依赖工程（即 Library 工程，Android Studio 中称 Module 工程），那么最好将它打成 aar 包，以提高日常调试时的编译速度。因为 Android Studio 每次编译的时候，都会把项目下的所有工程都编译一遍，这样会浪费一些不必要的时间。所以，如果不是特殊情况，最好将 Module 工程打成 aar 包来使用。那这个 aar 怎么生成呢？</p>
+<p>首先，当我们做完前面的操作，程序都正常跑起来了之后。</p>
+<p>在 Module 工程的 <code>\build\outputs\aar\</code> 下可以找到编译生成的 aar 包，把 aar 包拷到主工程的 <code>\libs\</code> 下。</p>
+<p>去掉根目录下 settings.gradle 文件中原来工程的 include ：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// include ':XXXXX'</span></div></pre></td></tr></table></figure>
+<p>将主工程中 build.gradle 文件的工程依赖关系，改为 aar 包依赖：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// compile project(':XXXXX')</span></div><div class="line"><span class="keyword">compile</span>(name: <span class="string">'XXXXX'</span>, ext: <span class="string">'aar'</span>)</div></pre></td></tr></table></figure>
+<p>点击右上角 Sync Now，等待 gradle 完成，这样就 OK 了，是不是很简单！</p>
+
+          
+        </section>
+      </div>
+      
+      
+        <div id="comment-container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  // id: location.href, // 可选。默认为 location.href
+  id: 'Eclipse工程转Android Studio工程',
+  owner: 'laocaixw', // 你的 GitHub ID
+  repo: 'laocaixw.github.io', // 存储评论的 repo
+  oauth: {
+    client_id: 'b41a264d7724fd5a364b', // 你的 client ID
+    client_secret: '9dc474e16291d40597b0ad55daae84c24eb41160', // 你的 client secret
+  },
+})
+gitment.render('comment-container')
+</script>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://github.com/laocaixw'>Github</a>
+  
+    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+  
+    <a class='main' href='/about.html'>About</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; laocaixw. All Rights Reserved.</span><br>
+  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>built with Hexo using Scribble theme</a>
+  <br>
+  <br>
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,141 @@
+<html lang="zh-CN">
+  <head>
+    <title>Git的科学上网方式 - laocaixw</title>
+    <meta charset="UTF-8">
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+<link href='/img/avatar.png' rel='shortcut icon'>
+<link href='undefined' rel='alternate' type='application/rss+xml'>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+
+  </head>
+  <body>
+    <header>
+  <a id='go-back-home' href='/'><img src='/img/avatar.png' alt='Home' width='60' height='60'></a>
+  <p>laocaixw</p>
+  <p>Android Developer</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://github.com/laocaixw'>Github</a>
+  
+    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+  
+    <a class='main' href='/about.html'>About</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2016/07/26/Android_Studio_NDK/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2016/06/08/Blog_Hexo_GitHub/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2016-07-03</div>
+            Git的科学上网方式
+          </h1>
+          <blockquote>
+          <p><strong><a href="http://blog.laocaixw.cn/">转载请声明出处</a></strong></p>
+          </blockquote>
+          <p>最近从 CSDN 博客上学习了 Android 的网络开源库 Volley 的一些基本用法（<a href="http://blog.csdn.net/guolin_blog/article/details/17482095" target="_blank" rel="external">郭大神的博客</a>），volley 是谷歌推出的，想要下载它的话当然得用科学的上网方式了。虽然从网上也可以下载到已经打包好的<a href="http://download.csdn.net/detail/sinyu890807/7152015" target="_blank" rel="external">volley.jar</a>，但是还是想自己从官网克隆下来，因为谁知道网上下载的纯不纯呢。</p>
+<p>于是，从网上各种搜索，再自己各种测试，终于功夫不负有心人！于是把方法记录下来。</p>
+<p>因为我平时科学上网没有买代理，用的是一个免费的软件<strong>赛风</strong>，一键上网，虽然速度慢，而且不稳定，但是可以用。如果你也是用的赛风，那你就可以看看我的教程。</p>
+<p>首先你要了解 <strong>git 设置代理服务器和恢复默认的方法</strong>：</p>
+<p>1.设置代理服务器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global http.proxy http://proxyuser:proxypwd@proxy.server.com:8080</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global https.proxy https://proxyuser:proxypwd@proxy.server.com:8080</div></pre></td></tr></table></figure>
+<blockquote>
+<p>proxyuser : 代理服务器用户</p>
+<p>proxypwd : 密码</p>
+<p>proxy.server.com ： 代理服务器地址</p>
+<p>8080 ： 代理服务器端口号</p>
+</blockquote>
+<p>2.重设代理，恢复默认：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global --unset http.proxy</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global --unset https.proxy</div></pre></td></tr></table></figure>
+<h3 id="下面开始修改："><a href="#下面开始修改：" class="headerlink" title="下面开始修改："></a>下面开始修改：</h3><ul>
+<li>1.设置赛风本地代理端口：</li>
+</ul>
+<p><img src="/img/gitWall/gitWall.png" alt="gitWall"></p>
+<ul>
+<li>2.修改 Git 配置：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global http.proxy http://127.0.0.1:12345</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global https.proxy https://127.0.0.1:12345</div></pre></td></tr></table></figure>
+<ul>
+<li>3.将代码克隆到本地成功后，恢复 Git 默认配置：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global --unset http.proxy</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global --unset https.proxy</div></pre></td></tr></table></figure>
+
+          
+        </section>
+      </div>
+      
+      
+        <div id="comment-container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  // id: location.href, // 可选。默认为 location.href
+  id: 'Git的科学上网方式',
+  owner: 'laocaixw', // 你的 GitHub ID
+  repo: 'laocaixw.github.io', // 存储评论的 repo
+  oauth: {
+    client_id: 'b41a264d7724fd5a364b', // 你的 client ID
+    client_secret: '9dc474e16291d40597b0ad55daae84c24eb41160', // 你的 client secret
+  },
+})
+gitment.render('comment-container')
+</script>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://github.com/laocaixw'>Github</a>
+  
+    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+  
+    <a class='main' href='/about.html'>About</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; laocaixw. All Rights Reserved.</span><br>
+  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>built with Hexo using Scribble theme</a>
+  <br>
+  <br>
+</footer>
+
+  </body>
+</html>

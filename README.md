@@ -1,2 +1,6 @@
-# laocaixw.github.io
-个人博客
+# laocaixw的个人博客
+
+https://laocaixw.github.io/
+
+http://blog.laocaixw.cn/
+

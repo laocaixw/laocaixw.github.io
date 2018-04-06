@@ -1,0 +1,309 @@
+<html lang="zh-CN">
+  <head>
+    <title>Android中NFC读取金融IC卡 - laocaixw</title>
+    <meta charset="UTF-8">
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+<link href='/img/avatar.png' rel='shortcut icon'>
+<link href='undefined' rel='alternate' type='application/rss+xml'>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+
+  </head>
+  <body>
+    <header>
+  <a id='go-back-home' href='/'><img src='/img/avatar.png' alt='Home' width='60' height='60'></a>
+  <p>laocaixw</p>
+  <p>Android Developer</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://github.com/laocaixw'>Github</a>
+  
+    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+  
+    <a class='main' href='/about.html'>About</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2016/10/31/Design_Mode_0_Summary/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2016/07/28/Android_Volley/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2016-09-21</div>
+            Android中NFC读取金融IC卡
+          </h1>
+          <blockquote>
+          <p><strong><a href="http://blog.laocaixw.cn/">转载请声明出处</a></strong></p>
+          </blockquote>
+          <p>这篇文章具体分为以下几部分：</p>
+<ol>
+<li>Android 中 NFC 的基本使用方法；</li>
+<li>NFC 读取金融 IC 卡步骤；</li>
+<li>读卡过程中涉及到的报文格式解析。</li>
+</ol>
+<h2 id="一、Android-中-NFC-的基本使用方法"><a href="#一、Android-中-NFC-的基本使用方法" class="headerlink" title="一、Android 中 NFC 的基本使用方法"></a>一、Android 中 NFC 的基本使用方法</h2><p>NFC手机相比普通手机来说，有以下3个附加功能：</p>
+<ol>
+<li>可以当成 POS 机来用，也就是“读取”模式</li>
+<li>可以当成一张卡来刷，也就是 NFC 技术最核心的移动支付功能</li>
+<li>可以像蓝牙、 Wi-Fi 一样做点对点通信</li>
+</ol>
+<p>这里要说的就是第一种，”读卡” ! 代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NFCActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> NfcAdapter mNfcAdapter = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">private</span> PendingIntent mPendingIntent = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">private</span> IntentFilter[] mIntentFilter = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">private</span> String[][] mTechList = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.acitivity_nfc);</div><div class="line"></div><div class="line">        nfcCheck();</div><div class="line"></div><div class="line">        mPendingIntent = PendingIntent.getActivity(<span class="keyword">this</span>, <span class="number">0</span>,</div><div class="line">                <span class="keyword">new</span> Intent(<span class="keyword">this</span>, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), <span class="number">0</span>);</div><div class="line"></div><div class="line">        <span class="comment">// 过滤器总共有三种</span></div><div class="line">        IntentFilter intentFilter1 = <span class="keyword">new</span> IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);</div><div class="line">        IntentFilter intentFilter2 = <span class="keyword">new</span> IntentFilter(NfcAdapter.ACTION_TECH_DISCOVERED);</div><div class="line">        IntentFilter intentFilter3 = <span class="keyword">new</span> IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);</div><div class="line">        mIntentFilter = <span class="keyword">new</span> IntentFilter[]&#123;intentFilter1, intentFilter2, intentFilter3&#125;;</div><div class="line"></div><div class="line">        <span class="comment">// 只针对ACTION_TECH_DISCOVERED</span></div><div class="line">        mTechList = <span class="keyword">new</span> String[][]&#123;</div><div class="line">                &#123;IsoDep.class.getName()&#125;, &#123;NfcA.class.getName()&#125;, &#123;NfcB.class.getName()&#125;,</div><div class="line">                &#123;NfcV.class.getName()&#125;, &#123;NfcF.class.getName()&#125;, &#123;Ndef.class.getName()&#125;&#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onNewIntent</span><span class="params">(Intent intent)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onNewIntent(intent);</div><div class="line">        Log.i(<span class="string">"MyLog"</span>, <span class="string">"Tag:"</span> + intent.getParcelableExtra(NfcAdapter.EXTRA_TAG));</div><div class="line">        IsoDep isoDep = IsoDep.get((Tag) intent.getParcelableExtra(NfcAdapter.EXTRA_TAG));</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            isoDep.connect();</div><div class="line">            <span class="keyword">byte</span>[] payload = stringToBytes(<span class="string">"00A404000E315041592E5359532E4444463031"</span>); <span class="comment">// 将字符串转为byte数组</span></div><div class="line">            <span class="keyword">byte</span>[] data = isoDep.transceive(payload);</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onResume();</div><div class="line">        mNfcAdapter.enableForegroundDispatch(<span class="keyword">this</span>, mPendingIntent, mIntentFilter, mTechList);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPause</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onPause();</div><div class="line">        mNfcAdapter.disableForegroundDispatch(<span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">nfcCheck</span><span class="params">()</span> </span>&#123;</div><div class="line">        mNfcAdapter = NfcAdapter.getDefaultAdapter(<span class="keyword">this</span>);</div><div class="line">        <span class="keyword">if</span> (mNfcAdapter == <span class="keyword">null</span>) &#123;</div><div class="line">            Toast.makeText(<span class="keyword">this</span>, <span class="string">"本机不支持NFC"</span>, Toast.LENGTH_SHORT).show();</div><div class="line">            finish();</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">if</span> (!mNfcAdapter.isEnabled()) &#123; <span class="comment">// NFC未打开</span></div><div class="line">                Intent setNfc = <span class="keyword">new</span> Intent(Settings.ACTION_NFC_SETTINGS);</div><div class="line">                startActivity(setNfc);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="keyword">byte</span>[] stringToBytes(String s) &#123;</div><div class="line">    	<span class="keyword">int</span> len = s.length();</div><div class="line">    	<span class="keyword">byte</span>[] data = <span class="keyword">new</span> <span class="keyword">byte</span>[len / <span class="number">2</span>];</div><div class="line">    	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i += <span class="number">2</span>) &#123;</div><div class="line">    		data[(i / <span class="number">2</span>)] = ((<span class="keyword">byte</span>) ((Character.digit(s.charAt(i), <span class="number">16</span>) &lt;&lt; <span class="number">4</span>) + Character</div><div class="line">    				.digit(s.charAt(i + <span class="number">1</span>), <span class="number">16</span>)));</div><div class="line">    	&#125;</div><div class="line">    	<span class="keyword">return</span> data;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">bytesToString</span><span class="params">(<span class="keyword">byte</span>[] data)</span> </span>&#123;</div><div class="line">    	String temp = <span class="string">""</span>;</div><div class="line">    	<span class="keyword">for</span> (<span class="keyword">byte</span> d : data) &#123;</div><div class="line">    		temp += String.format(<span class="string">"%02X"</span>, d);</div><div class="line">    	&#125;</div><div class="line">    	<span class="keyword">return</span> temp;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里在 <code>nfcCheck()</code> 方法中检查手机是否支持 NFC 功能和 NFC 是否开启， <code>NfcAdapter</code> 就是手机的 NFC 适配器。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mNfcAdapter.enableForegroundDispatch(<span class="keyword">this</span>, mPendingIntent, mIntentFilter, mTechList);</div><div class="line">mNfcAdapter.disableForegroundDispatch(<span class="keyword">this</span>);</div></pre></td></tr></table></figure>
+<p>在 <code>onResume()</code> 和 <code>onPause()</code> 方法中，这两个方法分别表示前台读取 Tag （就是指卡片）的开关。一旦手机检测到卡片， <code>onNewIntent(Intent intent)</code> 方法就会执行。</p>
+<p><code>IsoDep</code> 可以看做一个与卡片通信的工具类。 <code>intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)</code> 就是表示 Tag （卡片）； <code>isoDep.connect()</code> 就是手机 NFC 与卡片连接； <code>isoDep.transceive(payload)</code> 就是向卡片发送报文，它的返回数据就是卡片的响应报文，这里都是通过 <code>byte</code> 数组通信的。</p>
+<h2 id="二、-NFC-读取金融-IC-卡步骤"><a href="#二、-NFC-读取金融-IC-卡步骤" class="headerlink" title="二、 NFC 读取金融 IC 卡步骤"></a>二、 NFC 读取金融 IC 卡步骤</h2><p>具体的读卡步骤可以参考《中国金融集成电路（IC）卡规范》、《中国银联IC卡技术规范》等，这边简化如下，有兴趣的可以自己往上加：</p>
+<ol>
+<li>应用选择；</li>
+<li>应用初始化；</li>
+<li>读应用数据；</li>
+<li>生成应用密文。</li>
+</ol>
+<h3 id="1-应用选择"><a href="#1-应用选择" class="headerlink" title="1.应用选择"></a>1.应用选择</h3><blockquote>
+<ul>
+<li><strong>说明</strong>:</li>
+<li>这里图片内容大多来自《中国金融集成电路（IC）卡规范》，建议参考。</li>
+<li>终端接收到卡片发来的数据大多数都是 TLV 格式的数据， TLV 格式数据详解见本文第三部分，建议先理解 TLV 格式后再继续往下看。</li>
+<li>下文命令都以 16 进制表示。</li>
+<li>9000为响应成功状态码。</li>
+</ul>
+</blockquote>
+<h5 id="1-使用-SELECT-命令选择文件-1PAY-SYS-DDF01"><a href="#1-使用-SELECT-命令选择文件-1PAY-SYS-DDF01" class="headerlink" title="(1) 使用 SELECT 命令选择文件: 1PAY.SYS.DDF01"></a>(1) 使用 <code>SELECT</code> 命令选择文件: <code>1PAY.SYS.DDF01</code></h5><p><img src="/img/nfc/SELECT1.JPG" alt="SELECT1"></p>
+<p>即命令为： <code>00-A4-04-00-0E-315041592E5359532E4444463031</code></p>
+<p><strong>发送： <code>00A404000E315041592E5359532E4444463031</code></strong></p>
+<p><strong>接收： <code>6F1E840E315041592E5359532E4444463031A50C8801015F2D027A689F1101019000</code></strong></p>
+<p><img src="/img/nfc/SELECT2.JPG" alt="SELECT2"></p>
+<p>从接收到的数据中，按 TLV 格式解析，可以得到 <code>SFI(88)</code> 为 <code>01</code> ，下一步需要用到。</p>
+<h5 id="2-根据-SFI-发送读记录-READ-RECORD-命令"><a href="#2-根据-SFI-发送读记录-READ-RECORD-命令" class="headerlink" title="(2) 根据 SFI 发送读记录 READ RECORD 命令"></a>(2) 根据 <code>SFI</code> 发送读记录 <code>READ RECORD</code> 命令</h5><p><img src="/img/nfc/READRECORD1.JPG" alt="READRECORD1"></p>
+<p><code>SFI</code> 为 <code>01</code> ，即 <code>0000 0001</code> ，低三位为 <code>100</code> ，所以引用控制参数 <code>P2</code> 为 <code>00001 100</code> ，即 <code>0C</code> 。<br>所以读记录命令为： <code>00-B2-01-0C-00</code> </p>
+<p><strong>发送： <code>00B2010C00</code></strong></p>
+<p><strong>接收： <code>702861264F08A000000333010101500A50424F432044454249548701019F120A50424F432044454249549000</code></strong></p>
+<p><img src="/img/nfc/READRECORD2.JPG" alt="READRECORD2"></p>
+<p>同样，按 TLV 格式解析，得到应用标识符 <code>AID(4F)</code> 为 <code>A000000333010101</code></p>
+<h5 id="3-根据-AID-选择应用"><a href="#3-根据-AID-选择应用" class="headerlink" title="(3) 根据 AID 选择应用"></a>(3) 根据 AID 选择应用</h5><p><strong>发送： <code>00A4040008A000000333010101</code></strong></p>
+<p><strong>接收： <code>6F548408A000000333010101A548500A50424F432044454249548701019F38189F66049F02069F03069F1A0295055F2A029A039C019F37045F2D027A689F1101019F120A50424F43204445424954BF0C059F4D020B0A9000</code></strong></p>
+<p><img src="/img/nfc/SELECT3.JPG" alt="SELECT3"></p>
+<p>按 TLV 格式解析，得到 <code>PDOL</code> 的数据 <code>(9F38)</code> 为 <code>9F66049F02069F03069F1A0295055F2A029A039C019F3704</code> 。这里的 PDOL 数据不是 TLV ，只有命令部分类似 TLV ， PDOL 数据为多条“命令+长度”组合而成。分解如下：</p>
+<table>
+<thead>
+<tr>
+<th>命令:长度</th>
+<th>名称</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>9F66:04</td>
+<td>终端交易属性</td>
+</tr>
+<tr>
+<td>9F02:06</td>
+<td>授权金额,消费金额</td>
+</tr>
+<tr>
+<td>9F03:06</td>
+<td>其它金额，目前还没有定义</td>
+</tr>
+<tr>
+<td>9F1A:02</td>
+<td>终端国家代码,中国：0156</td>
+</tr>
+<tr>
+<td>95:05</td>
+<td>终端验证结果</td>
+</tr>
+<tr>
+<td>5F2A:02</td>
+<td>交易货币代码</td>
+</tr>
+<tr>
+<td>9A:03</td>
+<td>交易日期</td>
+</tr>
+<tr>
+<td>9C:01</td>
+<td>交易类型</td>
+</tr>
+<tr>
+<td>9F37:04</td>
+<td>不可预知数,最好去随机数</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-应用初始化"><a href="#2-应用初始化" class="headerlink" title="2.应用初始化"></a>2.应用初始化</h3><h5 id="1-获取处理选项"><a href="#1-获取处理选项" class="headerlink" title="(1) 获取处理选项"></a>(1) 获取处理选项</h5><p><img src="/img/nfc/GETPROCESSINGOPTIONS1.JPG" alt="GETPROCESSINGOPTIONS1"></p>
+<p>根据上一步得到的 <code>PDOL</code> 数据，按照顺序发送 <code>GET PROCESSING OPTIONS</code> 命令。 <code>80-A8-00-00-23-83-21-40800000-000000000000-000000000000-0156-0000000000-0156-160913-99-4D23571A</code> 。 <code>83</code> 表示 <code>GPO</code> 数据。</p>
+<p><strong>发送： <code>80A8000023832140800000000000000000000000000000015600000000000156160913994D23571A</code></strong></p>
+<p><strong>接收： <code>80127C00080101001001030118010300200101009000</code></strong></p>
+<p><img src="/img/nfc/GETPROCESSINGOPTIONS2.JPG" alt="GETPROCESSINGOPTIONS2"></p>
+<p>响应分解： <code>80-12-7C00-08010100-10010301-18010300-20010100-9000</code></p>
+<p><code>7C00</code> 为 <code>AIP</code> ，后面每4个字节为一个 AFL 。</p>
+<p><img src="/img/nfc/AFL.JPG" alt="AFL"></p>
+<blockquote>
+<ul>
+<li>以 10010301 为例：</li>
+<li>10 即 0001 0000 ，前五位为 SFI；</li>
+<li>01 表示第一条要读的记录；</li>
+<li>03 表示最后一条要读的记录；</li>
+<li>01 表示从第一个记录开始的用于脱机数据认证的连续记录数</li>
+</ul>
+</blockquote>
+<h3 id="3-读应用数据"><a href="#3-读应用数据" class="headerlink" title="3.读应用数据"></a>3.读应用数据</h3><p>根据上一步返回的 AFL 逐条读取应用数据，即逐条发送读记录命令：<code>00B2010C00</code>；<code>00B2011400</code>，<code>00B2021400</code>，<code>00B2031400</code>；<code>00B2011C00</code>，<code>00B2021C00</code>，<code>00B2031C00</code>；<code>00B2012400</code>。返回的数据都是 TLV 格式的报文，把每次读记录得到的响应解析出来，应用数据包括卡号什么的都在里面了。在返回的数据中包括了一个 <code>CDOL1(8C)</code> 数据: <code>9F02069F03069F1A0295055F2A029A039C019F37049F21039F4E14</code> ，这个跟前文中的 <code>PDOL</code> 数据类似。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>长度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>9F02</td>
+<td>06</td>
+</tr>
+<tr>
+<td>9F03</td>
+<td>06</td>
+</tr>
+<tr>
+<td>9F1A</td>
+<td>02</td>
+</tr>
+<tr>
+<td>95</td>
+<td>05</td>
+</tr>
+<tr>
+<td>5F2A</td>
+<td>02</td>
+</tr>
+<tr>
+<td>9A</td>
+<td>03</td>
+</tr>
+<tr>
+<td>9C</td>
+<td>01</td>
+</tr>
+<tr>
+<td>9F37</td>
+<td>04</td>
+</tr>
+<tr>
+<td>9F21</td>
+<td>03</td>
+</tr>
+<tr>
+<td>9F4E</td>
+<td>14</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-生成应用密文"><a href="#4-生成应用密文" class="headerlink" title="4.生成应用密文"></a>4.生成应用密文</h3><p>根据上一步得到的 <code>CDOL1</code> ，发送 <code>GENERATE AC</code> 命令，来生成应用密文。</p>
+<p><img src="/img/nfc/GENERATEAC1.JPG" alt="GENERATEAC1"></p>
+<p>这里要生成一个 ARQC 密文，<br><code>80-AE-80-00-34-000000000000000000000000015600000000000156160913994D23571A000000000000000000000000000000000000000000000000</code></p>
+<p><strong>发送：<code>80AE800034000000000000000000000000015600000000000156160913994D23571A000000000000000000000000000000000000000000000000</code></strong></p>
+<p><strong>接收：<code>801E8000750317DB9AEDE4DD5607010103A0A000010A010000000000890C15B29000</code></strong></p>
+<p>按 TLV 格式解析，得到一个 <code>80</code> 数据：<code>8000750317DB9AEDE4DD5607010103A0A000010A010000000000890C15B2</code></p>
+<p>分解如下：<br><code>80-0075-0317DB9AEDE4DD56-07010103A0A000010A010000000000890C15B2</code></p>
+<blockquote>
+<ul>
+<li>应用交易计数器: <code>0075</code></li>
+<li>应用密文: <code>0317DB9AEDE4DD56</code></li>
+<li>发卡行应用数据: <code>07010103A0A000010A010000000000890C15B2</code></li>
+</ul>
+</blockquote>
+<h2 id="三、读卡过程中涉及到的报文格式解析"><a href="#三、读卡过程中涉及到的报文格式解析" class="headerlink" title="三、读卡过程中涉及到的报文格式解析"></a>三、读卡过程中涉及到的报文格式解析</h2><h3 id="1-TLV-格式解析"><a href="#1-TLV-格式解析" class="headerlink" title="1.TLV 格式解析"></a>1.TLV 格式解析</h3><p>TLV 就是 Tag + Length + Value 。Tag 是标识，Length 是后面数据值 Value 的长度。 TLV 数据可以有复合数据，即一个 TLV 中的 Value 还可以包含一个或多个 TLV 。</p>
+<h5 id="1-Tag"><a href="#1-Tag" class="headerlink" title="(1) Tag"></a>(1) Tag</h5><p>Tag 最多可以占两个字节，编码规则如下：</p>
+<p><img src="/img/nfc/TLV1.JPG" alt="TLV1"></p>
+<p>第一图表示第一个字节的编码规则，b6 决定当前的 TLV 数据是单一结构的数据或者复合结构的数据。 b5-b1 如果全为1，则这个 Tag 占两个字节，否则只占一个字节。</p>
+<p><img src="/img/nfc/TLV2.JPG" alt="TLV2"></p>
+<p>如果 Tag 占两个字节，则第二图表示第二个字节的编码规则。 b8 决定 Tag 是否还有后绪的字节存在，因为 PBOC/EMV 里的 Tag 最多占两个字节, 所以该位保持为 0。</p>
+<p>所以：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> ((tlvData[i] &amp; <span class="number">0x20</span>) != <span class="number">0x20</span>) &#123; <span class="comment">// 单一结构</span></div><div class="line">    <span class="keyword">if</span> ((tlvData[i] &amp; <span class="number">0x1F</span>) == <span class="number">0x1F</span>) &#123; <span class="comment">// tag两字节</span></div><div class="line">        tagIndex++;</div><div class="line">        <span class="comment">// 解析length域</span></div><div class="line">        <span class="comment">// 解析value域</span></div><div class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// tag单字节</span></div><div class="line">        <span class="comment">// 解析length域</span></div><div class="line">        <span class="comment">// 解析value域</span></div><div class="line">    &#125;</div><div class="line">&#125; <span class="keyword">else</span> &#123; <span class="comment">// 复合结构</span></div><div class="line">    <span class="comment">// 复合结构可以考虑用递归的方法来实现.</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="2-Length"><a href="#2-Length" class="headerlink" title="(2) Length"></a>(2) Length</h5><p>Length 最多可以有四个字节。如果第一个字节的最高位 b8 为 0，b7-b1 的值就是 value 域的长度；如果 b8 为 1，b7-b1 的值就表示了下面有几个子字节，下面子字节的值就是 value 域的长度。</p>
+<h5 id="3-Value"><a href="#3-Value" class="headerlink" title="(3) Value"></a>(3) Value</h5><p>Value 的编码格式要根据具体 Value 所表示的数据元决定，有可能还是 TLV 格式的数据，也有可能是其他数据。</p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>最后，感谢以下博客的博主：</p>
+<ol>
+<li><a href="http://blog.csdn.net/lvxiangan/article/details/17218409" target="_blank" rel="external">http://blog.csdn.net/lvxiangan/article/details/17218409</a></li>
+<li><a href="http://blog.csdn.net/kxd_ysheng/article/details/21178101" target="_blank" rel="external">http://blog.csdn.net/kxd_ysheng/article/details/21178101</a></li>
+<li><a href="http://blog.csdn.net/kxd_ysheng/article/details/21237957" target="_blank" rel="external">http://blog.csdn.net/kxd_ysheng/article/details/21237957</a></li>
+<li><a href="http://blog.csdn.net/artmcu/article/details/8086153" target="_blank" rel="external">http://blog.csdn.net/artmcu/article/details/8086153</a></li>
+<li><a href="http://blog.chinaunix.net/uid-20551291-id-3340818.html" target="_blank" rel="external">http://blog.chinaunix.net/uid-20551291-id-3340818.html</a></li>
+<li><a href="http://blog.sina.com.cn/s/blog_625033800101f5cm.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_625033800101f5cm.html</a></li>
+<li><a href="http://blog.sina.com.cn/s/blog_a20257d80101n17j.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_a20257d80101n17j.html</a></li>
+</ol>
+
+          
+        </section>
+      </div>
+      
+      
+        <div id="comment-container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  // id: location.href, // 可选。默认为 location.href
+  id: 'Android中NFC读取金融IC卡',
+  owner: 'laocaixw', // 你的 GitHub ID
+  repo: 'laocaixw.github.io', // 存储评论的 repo
+  oauth: {
+    client_id: 'b41a264d7724fd5a364b', // 你的 client ID
+    client_secret: '9dc474e16291d40597b0ad55daae84c24eb41160', // 你的 client secret
+  },
+})
+gitment.render('comment-container')
+</script>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://github.com/laocaixw'>Github</a>
+  
+    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+  
+    <a class='main' href='/about.html'>About</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; laocaixw. All Rights Reserved.</span><br>
+  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>built with Hexo using Scribble theme</a>
+  <br>
+  <br>
+</footer>
+
+  </body>
+</html>

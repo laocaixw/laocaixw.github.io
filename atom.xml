@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>laocaixw</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://laocaixw.github.io/"/>
+  <updated>2018-04-04T08:48:39.326Z</updated>
+  <id>http://laocaixw.github.io/</id>
+  
+  <author>
+    <name>laocaixw</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>用Jenkins自动部署hexo搭建的GitHub静态博客</title>
+    <link href="http://laocaixw.github.io/2018/04/02/Blog_Hexo_GitHub_Jenkins/"/>
+    <id>http://laocaixw.github.io/2018/04/02/Blog_Hexo_GitHub_Jenkins/</id>
+    <published>2018-04-02T05:30:00.000Z</published>
+    <updated>2018-04-04T08:48:39.326Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;hexo 为我们提供了一套非常方便的静态博客搭建框架，我们只需要编写文章的 MarkDown 文件即可。但是即便方便，还是会有几个繁琐的步骤：每次写一篇博客都需要执行编译命令，再将新生成的网页代码提交到 GitHub；而且，如果博客是由团队成员共同贡献，很难做到协同维护。使用 Jenkins 可以帮我们一定程度上解决这两个问题。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="hexo" scheme="http://laocaixw.github.io/tags/hexo/"/>
+    
+      <category term="Jenkins" scheme="http://laocaixw.github.io/tags/Jenkins/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式学习系列（7）--装饰模式</title>
+    <link href="http://laocaixw.github.io/2018/01/07/Design_Mode_7_Decorator/"/>
+    <id>http://laocaixw.github.io/2018/01/07/Design_Mode_7_Decorator/</id>
+    <published>2018-01-07T02:30:00.000Z</published>
+    <updated>2018-01-07T05:47:47.721Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;装饰模式：&lt;strong&gt;动态地给一个对象添加一些额外的职责。就增加功能来说，装饰模式比生成子类更为灵活。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/design_mode/7_Decorator.jpg&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="设计模式" scheme="http://laocaixw.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2017年总结</title>
+    <link href="http://laocaixw.github.io/2017/12/30/Summary_2017/"/>
+    <id>http://laocaixw.github.io/2017/12/30/Summary_2017/</id>
+    <published>2017-12-30T02:30:00.000Z</published>
+    <updated>2018-01-09T12:09:35.813Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;突然发现时间过得好快，2017 年马上就过去了。这也是自己转行做 IT 后第一次写总结，以前都是老师或者领导布置任务，属于被写总结。从去年六月份从国企辞职，到现在也有一年半的时间了，就对自己这一点半做一个总结吧。&lt;/p&gt;
+&lt;p&gt;参加工作一年左右开始有了转行做 IT
+        
+      
+    
+    </summary>
+    
+    
+      <category term="总结" scheme="http://laocaixw.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式学习系列（6）--代理模式</title>
+    <link href="http://laocaixw.github.io/2017/12/23/Design_Mode_6_Proxy/"/>
+    <id>http://laocaixw.github.io/2017/12/23/Design_Mode_6_Proxy/</id>
+    <published>2017-12-23T02:30:00.000Z</published>
+    <updated>2017-12-30T08:02:21.661Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;代理模式：&lt;strong&gt;为其他对象提供一种代理以控制对这个对象的访问。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/design_mode/6_Proxy.jpg&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="设计模式" scheme="http://laocaixw.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式学习系列（5）--原型模式</title>
+    <link href="http://laocaixw.github.io/2017/11/24/Design_Mode_5_Prototype/"/>
+    <id>http://laocaixw.github.io/2017/11/24/Design_Mode_5_Prototype/</id>
+    <published>2017-11-24T02:30:00.000Z</published>
+    <updated>2017-12-30T04:45:26.682Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;原型模式：&lt;strong&gt;用原型实例指定创建对象的种类，并且通过复制这些原型创建新的对象。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/design_mode/5_Prototype.jpg&quot; alt=&quot;Prototype&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Java
+        
+      
+    
+    </summary>
+    
+    
+      <category term="设计模式" scheme="http://laocaixw.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Proguard混淆配置</title>
+    <link href="http://laocaixw.github.io/2017/09/26/Android_Proguard/"/>
+    <id>http://laocaixw.github.io/2017/09/26/Android_Proguard/</id>
+    <published>2017-09-26T02:00:00.000Z</published>
+    <updated>2017-11-16T13:50:25.826Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;1-基本配置&quot;&gt;&lt;a href=&quot;#1-基本配置&quot; class=&quot;headerlink&quot; title=&quot;1. 基本配置&quot;&gt;&lt;/a&gt;1. 基本配置&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://laocaixw.github.io/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android中WebView的配置和填坑记录</title>
+    <link href="http://laocaixw.github.io/2017/09/25/Android_WebView_Config_Record/"/>
+    <id>http://laocaixw.github.io/2017/09/25/Android_WebView_Config_Record/</id>
+    <published>2017-09-25T02:00:00.000Z</published>
+    <updated>2018-04-04T08:22:32.683Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;持续更新中&lt;/p&gt;
+&lt;h2 id=&quot;1-一些基本配置&quot;&gt;&lt;a href=&quot;#1-一些基本配置&quot; class=&quot;headerlink&quot; title=&quot;1. 一些基本配置&quot;&gt;&lt;/a&gt;1. 一些基本配置&lt;/h2&gt;&lt;figure class=&quot;highlight
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://laocaixw.github.io/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>网站服务器搭建相关</title>
+    <link href="http://laocaixw.github.io/2017/09/05/Web_Server_Setup/"/>
+    <id>http://laocaixw.github.io/2017/09/05/Web_Server_Setup/</id>
+    <published>2017-09-05T13:30:00.000Z</published>
+    <updated>2018-04-04T07:31:22.250Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;以下内容基于此系统版本：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Web" scheme="http://laocaixw.github.io/tags/Web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Sublime Text 3 插件及快捷键</title>
+    <link href="http://laocaixw.github.io/2017/08/27/Sublime_Text_3_Plugin_Key/"/>
+    <id>http://laocaixw.github.io/2017/08/27/Sublime_Text_3_Plugin_Key/</id>
+    <published>2017-08-27T13:30:00.000Z</published>
+    <updated>2017-11-24T06:22:24.319Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;快捷键大全&quot;&gt;&lt;a href=&quot;#快捷键大全&quot; class=&quot;headerlink&quot; title=&quot;快捷键大全&quot;&gt;&lt;/a&gt;快捷键大全&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://www.douban.com/note/362268947/&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="工具" scheme="http://laocaixw.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Git命令</title>
+    <link href="http://laocaixw.github.io/2017/08/17/Git_Bash/"/>
+    <id>http://laocaixw.github.io/2017/08/17/Git_Bash/</id>
+    <published>2017-08-17T03:00:00.000Z</published>
+    <updated>2018-04-04T09:01:36.051Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Git 的一些命令&lt;/p&gt;
+&lt;h3 id=&quot;git-init&quot;&gt;&lt;a href=&quot;#git-init&quot; class=&quot;headerlink&quot; title=&quot;git init&quot;&gt;&lt;/a&gt;git init&lt;/h3&gt;&lt;p&gt;将当前目录初始化为一个 git 仓库。&lt;/p&gt;
+&lt;h3
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Git" scheme="http://laocaixw.github.io/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式学习系列（4）--建造者模式</title>
+    <link href="http://laocaixw.github.io/2017/08/11/Design_Mode_4_Builder/"/>
+    <id>http://laocaixw.github.io/2017/08/11/Design_Mode_4_Builder/</id>
+    <published>2017-08-11T02:30:00.000Z</published>
+    <updated>2017-12-30T02:30:52.626Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;建造者模式：&lt;strong&gt;将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/design_mode/4_Builder.jpg&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="设计模式" scheme="http://laocaixw.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android耗电分析</title>
+    <link href="http://laocaixw.github.io/2017/08/08/Android_Battery_Analysis/"/>
+    <id>http://laocaixw.github.io/2017/08/08/Android_Battery_Analysis/</id>
+    <published>2017-08-08T02:30:00.000Z</published>
+    <updated>2018-04-04T07:53:13.099Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;Battery-Historian-3&quot;&gt;&lt;a href=&quot;#Battery-Historian-3&quot; class=&quot;headerlink&quot; title=&quot;Battery Historian 3&quot;&gt;&lt;/a&gt;Battery Historian
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://laocaixw.github.io/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android反编译</title>
+    <link href="http://laocaixw.github.io/2017/08/03/Android_Decompile/"/>
+    <id>http://laocaixw.github.io/2017/08/03/Android_Decompile/</id>
+    <published>2017-08-03T02:30:00.000Z</published>
+    <updated>2018-04-04T07:46:21.672Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;1-apktool&quot;&gt;&lt;a href=&quot;#1-apktool&quot; class=&quot;headerlink&quot; title=&quot;1. apktool&quot;&gt;&lt;/a&gt;1. apktool&lt;/h3&gt;&lt;p&gt;将 apk 文件复制到 &lt;code&gt;apktool&lt;/code&gt; ，进入
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://laocaixw.github.io/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android自定义View（3）事件机制</title>
+    <link href="http://laocaixw.github.io/2017/08/01/Android_Custom_View_3/"/>
+    <id>http://laocaixw.github.io/2017/08/01/Android_Custom_View_3/</id>
+    <published>2017-08-01T13:00:00.000Z</published>
+    <updated>2017-11-29T05:21:00.716Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;以 Activity 为最底层，View 为最顶层（底层 -&amp;gt; 顶层： Activity -&amp;gt; ViewGroup -&amp;gt; View）。事件的分发是从底层到顶层传递，而事件的消费又是从顶层往底层传递。事件的分发过程可以通过
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://laocaixw.github.io/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android自定义View（2）测量布局绘制</title>
+    <link href="http://laocaixw.github.io/2017/07/22/Android_Custom_View_2/"/>
+    <id>http://laocaixw.github.io/2017/07/22/Android_Custom_View_2/</id>
+    <published>2017-07-22T02:00:00.000Z</published>
+    <updated>2017-11-29T05:19:24.683Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;一、-测量-onMeasure-widthMeasureSpec-heightMeasureSpec&quot;&gt;&lt;a href=&quot;#一、-测量-onMeasure-widthMeasureSpec-heightMeasureSpec&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://laocaixw.github.io/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android自定义View（1）官网教程</title>
+    <link href="http://laocaixw.github.io/2017/07/15/Android_Custom_View_1/"/>
+    <id>http://laocaixw.github.io/2017/07/15/Android_Custom_View_1/</id>
+    <published>2017-07-15T02:00:00.000Z</published>
+    <updated>2017-11-29T05:19:13.780Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;概括一下&lt;a href=&quot;https://developer.android.google.cn/training/custom-views/index.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;官网的教程&lt;/a&gt;。&lt;/p&gt;
+&lt;h2
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://laocaixw.github.io/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>获取双卡双待手机SIM卡信息</title>
+    <link href="http://laocaixw.github.io/2017/06/14/Android_DualCard_SIM/"/>
+    <id>http://laocaixw.github.io/2017/06/14/Android_DualCard_SIM/</id>
+    <published>2017-06-14T02:30:00.000Z</published>
+    <updated>2017-11-18T15:32:47.209Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;使用反射遍历 TelephonyManager 中的方法，通过肉眼基本能找到获取双卡双待号码的方法，最后通过反射取到 SIM 卡信息。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://laocaixw.github.io/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>多渠道打包</title>
+    <link href="http://laocaixw.github.io/2017/06/11/Android_MultiChannel_APK/"/>
+    <id>http://laocaixw.github.io/2017/06/11/Android_MultiChannel_APK/</id>
+    <published>2017-06-11T02:00:00.000Z</published>
+    <updated>2017-11-16T13:30:42.280Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;这段时间，公司项目集成了第三方行为分析 SDK ，并且希望对各个渠道的信息做一些统计，这就必然会设计到多渠道打包。&lt;/p&gt;
+&lt;p&gt;多渠道打包思路其实也很简单，通过 Gradle 配置修改 Manifest 中 meta-data 的值，这样打包生成的多个包中
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://laocaixw.github.io/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android方法数超限问题探究与启动优化</title>
+    <link href="http://laocaixw.github.io/2017/05/15/Android_MultiDex/"/>
+    <id>http://laocaixw.github.io/2017/05/15/Android_MultiDex/</id>
+    <published>2017-05-15T12:00:00.000Z</published>
+    <updated>2017-11-16T13:29:23.913Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;前段时间写了篇有关&lt;a href=&quot;/2017/02/28/Eclipse%E5%B7%A5%E7%A8%8B%E8%BD%ACAndroid%20Studio%E5%B7%A5%E7%A8%8B/&quot;&gt;Eclipse工程转Android
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://laocaixw.github.io/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android权限申请</title>
+    <link href="http://laocaixw.github.io/2017/05/12/Android_Permission_Apply/"/>
+    <id>http://laocaixw.github.io/2017/05/12/Android_Permission_Apply/</id>
+    <published>2017-05-12T02:00:00.000Z</published>
+    <updated>2018-04-04T07:54:56.882Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;Android-6-0-变化&quot;&gt;&lt;a href=&quot;#Android-6-0-变化&quot; class=&quot;headerlink&quot; title=&quot;Android 6.0 变化&quot;&gt;&lt;/a&gt;Android 6.0 变化&lt;/h2&gt;&lt;p&gt;Android 6.0 (API23)
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://laocaixw.github.io/tags/Android/"/>
+    
+  </entry>
+  
+</feed>

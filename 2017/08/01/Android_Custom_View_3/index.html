@@ -1,0 +1,124 @@
+<html lang="zh-CN">
+  <head>
+    <title>Android自定义View（3）事件机制 - laocaixw</title>
+    <meta charset="UTF-8">
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+<link href='/img/avatar.png' rel='shortcut icon'>
+<link href='undefined' rel='alternate' type='application/rss+xml'>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+
+  </head>
+  <body>
+    <header>
+  <a id='go-back-home' href='/'><img src='/img/avatar.png' alt='Home' width='60' height='60'></a>
+  <p>laocaixw</p>
+  <p>Android Developer</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://github.com/laocaixw'>Github</a>
+  
+    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+  
+    <a class='main' href='/about.html'>About</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2017/08/03/Android_Decompile/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2017/07/22/Android_Custom_View_2/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2017-08-01</div>
+            Android自定义View（3）事件机制
+          </h1>
+          <blockquote>
+          <p><strong><a href="http://blog.laocaixw.cn/">转载请声明出处</a></strong></p>
+          </blockquote>
+          <p>以 Activity 为最底层，View 为最顶层（底层 -&gt; 顶层： Activity -&gt; ViewGroup -&gt; View）。事件的分发是从底层到顶层传递，而事件的消费又是从顶层往底层传递。事件的分发过程可以通过 onInterceptTouchEvent 拦截。事件的消费过程中，返回 false 代表不消费事件，继续传递给下一层；而返回 true 代表消费掉事件，事件不再继续往下一层传递。</p>
+<p>与事件相关组件包括 Activity、ViewGroup、View 等，与事件相关的方法有 dispatchTouchEvent、onInterceptTouchEvent、onTouch、onTouchEvent、onClick 等。其中 dispatchTouchEvent 负责分发事件；onInterceptTouchEvent 负责拦截事件；onTouchEvent会消费事件。</p>
+<h5 id="Activity"><a href="#Activity" class="headerlink" title="Activity"></a>Activity</h5><p>dispatchTouchEvent 分发事件，往 ViewGroup 分发事件；</p>
+<p>onTouchEvent 如果 ViewGroup 消费掉事件(返回 true)，则这里接收不到；</p>
+<h5 id="ViewGroup"><a href="#ViewGroup" class="headerlink" title="ViewGroup"></a>ViewGroup</h5><p>dispatchTouchEvent 分发事件，往下一层 ViewGroup 或 View 分发事件；</p>
+<p>onInterceptTouchEvent 拦截事件，如果这层不希望该事件往下传递，而是让本层的 onTouch 消费，只需重写此方法并返回 true 即可；</p>
+<p>onTouch 如果返回 false，则事件会继续往 onTouchEvent 传递；如果返回 true，则表示事件被消费，不继续传递；</p>
+<p>onTouchEvent 如果下一层 ViewGroup 或 View  消费掉事件( 返回 true )，则这里接收不到；</p>
+<h5 id="View"><a href="#View" class="headerlink" title="View"></a>View</h5><p>dispatchTouchEvent 负责分发事件，往本层 onTouch 分发事件；</p>
+<p>onTouch 如果返回 false，则事件会继续往 onTouchEvent 传递；如果返回 true，则表示事件被消费，不继续传递；</p>
+<p>onTouchEvent 如果下一层 ViewGroup 或 View  消费掉事件( 返回 true )，则这里接收不到；</p>
+<h3 id="事件传递图"><a href="#事件传递图" class="headerlink" title="事件传递图"></a>事件传递图</h3><p>以触摸事件为例。</p>
+<p><img src="/img/view/event_dispatch.png" alt="event_dispatch"></p>
+
+          
+        </section>
+      </div>
+      
+      
+        <div id="comment-container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  // id: location.href, // 可选。默认为 location.href
+  id: 'Android自定义View（3）事件机制',
+  owner: 'laocaixw', // 你的 GitHub ID
+  repo: 'laocaixw.github.io', // 存储评论的 repo
+  oauth: {
+    client_id: 'b41a264d7724fd5a364b', // 你的 client ID
+    client_secret: '9dc474e16291d40597b0ad55daae84c24eb41160', // 你的 client secret
+  },
+})
+gitment.render('comment-container')
+</script>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://github.com/laocaixw'>Github</a>
+  
+    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+  
+    <a class='main' href='/about.html'>About</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; laocaixw. All Rights Reserved.</span><br>
+  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>built with Hexo using Scribble theme</a>
+  <br>
+  <br>
+</footer>
+
+  </body>
+</html>

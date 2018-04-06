@@ -1,0 +1,129 @@
+<html lang="zh-CN">
+  <head>
+    <title>Proguard混淆配置 - laocaixw</title>
+    <meta charset="UTF-8">
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+<link href='/img/avatar.png' rel='shortcut icon'>
+<link href='undefined' rel='alternate' type='application/rss+xml'>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+
+  </head>
+  <body>
+    <header>
+  <a id='go-back-home' href='/'><img src='/img/avatar.png' alt='Home' width='60' height='60'></a>
+  <p>laocaixw</p>
+  <p>Android Developer</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://github.com/laocaixw'>Github</a>
+  
+    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+  
+    <a class='main' href='/about.html'>About</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2017/11/24/Design_Mode_5_Prototype/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2017/09/25/Android_WebView_Config_Record/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2017-09-26</div>
+            Proguard混淆配置
+          </h1>
+          <blockquote>
+          <p><strong><a href="http://blog.laocaixw.cn/">转载请声明出处</a></strong></p>
+          </blockquote>
+          <h3 id="1-基本配置"><a href="#1-基本配置" class="headerlink" title="1. 基本配置"></a>1. 基本配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"># 代码混淆压缩比，在0和7之间，默认为5，一般不需要改</div><div class="line">-optimizationpasses 5</div><div class="line"></div><div class="line"># 混淆时不使用大小写混合，混淆后的类名为小写</div><div class="line">-dontusemixedcaseclassnames</div><div class="line"></div><div class="line"># 指定不去忽略非公共的库的类</div><div class="line">-dontskipnonpubliclibraryclasses</div><div class="line"></div><div class="line"># 指定不去忽略非公共的库的类的成员</div><div class="line">-dontskipnonpubliclibraryclassmembers</div><div class="line"></div><div class="line"># 不做预校验，preverify是proguard的4个步骤之一</div><div class="line"># Android不需要preverify，去掉这一步可加快混淆速度</div><div class="line">-dontpreverify</div><div class="line"></div><div class="line"># 有了verbose这句话，混淆后就会生成映射文件</div><div class="line"># 包含有类名-&gt;混淆后类名的映射关系</div><div class="line"># 然后使用printmapping指定映射文件的名称</div><div class="line">-verbose</div><div class="line">-printmapping proguardMapping.txt</div><div class="line"></div><div class="line"># 指定混淆时采用的算法，后面的参数是一个过滤器</div><div class="line"># 这个过滤器是谷歌推荐的算法，一般不改变</div><div class="line">-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*</div><div class="line"></div><div class="line"># 保护代码中的Annotation不被混淆，这在JSON实体映射时非常重要，比如fastJson</div><div class="line">-keepattributes *Annotation*</div><div class="line"></div><div class="line"># 避免混淆泛型，这在JSON实体映射时非常重要，比如fastJson</div><div class="line">-keepattributes Signature</div><div class="line"></div><div class="line"># 抛出异常时保留代码行号，在第6章异常分析中我们提到过</div><div class="line">-keepattributes SourceFile,LineNumberTable</div></pre></td></tr></table></figure>
+<h6 id="特别说明"><a href="#特别说明" class="headerlink" title="特别说明"></a>特别说明</h6><ol>
+<li>-dontusemixedcaseclassnames。Windows 用户需要这条配置；UNIX 用户可去掉这条可以进一步缩小包的大小。</li>
+</ol>
+<h3 id="2-需要保留的东西"><a href="#2-需要保留的东西" class="headerlink" title="2. 需要保留的东西"></a>2. 需要保留的东西</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line"># 保留所有的本地native方法不被混淆</div><div class="line">-keepclasseswithmembernames class * &#123;</div><div class="line">    native &lt;methods&gt;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># 保留了继承自Activity、Application这些类的子类</div><div class="line"># 因为这些子类，都有可能被外部调用</div><div class="line"># 比如说，第一行就保证了所有Activity的子类不要被混淆</div><div class="line">-keep public class * extends android.app.Activity</div><div class="line">-keep public class * extends android.app.Application</div><div class="line">-keep public class * extends android.app.Service</div><div class="line">-keep public class * extends android.content.BroadcastReceiver</div><div class="line">-keep public class * extends android.content.ContentProvider</div><div class="line">-keep public class * extends android.app.backup.BackupAgentHelper</div><div class="line">-keep public class * extends android.preference.Preference</div><div class="line">-keep public class * extends android.view.View</div><div class="line">-keep public class com.android.vending.licensing.ILicensingService</div><div class="line"></div><div class="line"># 如果有引用android-support-v4.jar包，可以添加下面这行</div><div class="line">-keep public class com.youngheart.app.ui.fragment.** &#123;*;&#125;</div><div class="line"></div><div class="line"># 保留在Activity中的方法参数是view的方法，</div><div class="line"># 从而我们在layout里面编写onClick就不会被影响</div><div class="line">-keepclassmembers class * extends android.app.Activity &#123;</div><div class="line">    public void *(android.view.View);</div><div class="line">&#125;</div><div class="line"></div><div class="line"># 枚举类不能被混淆</div><div class="line">-keepclassmembers enum * &#123;</div><div class="line">    public static **[] values();</div><div class="line">    public static ** valueOf(java.lang.String);</div><div class="line">&#125;</div><div class="line"></div><div class="line"># 保留自定义控件（继承自View）不被混淆</div><div class="line">-keep public class * extends android.view.View &#123;</div><div class="line">    *** get*();</div><div class="line">    void set*(***);</div><div class="line">    public &lt;init&gt;(android.content.Context);</div><div class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet);</div><div class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet, int);</div><div class="line">&#125;</div><div class="line"></div><div class="line"># 保留Parcelable序列化的类不被混淆</div><div class="line">-keep class * implements android.os.Parcelable &#123;</div><div class="line">    public static final android.os.Parcelable$Creator *;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># 保留Serializable序列化的类不被混淆</div><div class="line">-keepclassmembers class * implements java.io.Serializable &#123;</div><div class="line">    static final long serialVersionUID;</div><div class="line">    private static final java.io.ObjectStreamField[] serialPersistentFields;</div><div class="line">    private void writeObject(java.io.ObjectOutputStream);</div><div class="line">    private void readObject(java.io.ObjectInputStream);</div><div class="line">    java.lang.Object writeReplace();</div><div class="line">    java.lang.Object readResolve();</div><div class="line">&#125;</div><div class="line"></div><div class="line"># 对于R（资源）下的所有类及其方法，都不能被混淆</div><div class="line">-keep class **.R$* &#123;</div><div class="line">    *;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># 对于带有回调函数onXXEvent的，不能被混淆</div><div class="line">-keepclassmembers class * &#123;</div><div class="line">    void *(**On*Event);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="3-针对App的量身定制"><a href="#3-针对App的量身定制" class="headerlink" title="3. 针对App的量身定制"></a>3. 针对App的量身定制</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"># 保留实体类和成员不被混淆</div><div class="line">-keep public class com.youndheart.entity.** &#123;</div><div class="line">    public void set*(***);</div><div class="line">    public *** get*();</div><div class="line">    public *** is*();</div><div class="line">&#125;</div><div class="line"></div><div class="line"># 保留内嵌类不被混淆</div><div class="line">-keep class com.example.youngheart.MainActivity$* &#123; *; &#125;</div><div class="line"></div><div class="line"># 对WebView的处理</div><div class="line">-keepclassmembers class * extends android.webkit.webViewClient &#123;</div><div class="line">    public void *(android.webkit.WebView, java.lang.String, android.graphics.Bitmap);</div><div class="line">    public boolean *(android.webkit.WebView, java.lang.String)</div><div class="line">&#125;</div><div class="line">-keepclassmembers class * extends android.webkit.webViewClient &#123;</div><div class="line">    public void *(android.webkit.webView, java.lang.String)</div><div class="line">&#125;</div><div class="line"></div><div class="line"># 保留JS方法不被混淆</div><div class="line">-keepclassmembers class com.example.youngheart.MainActivity$JSInterface1 &#123;</div><div class="line">    &lt;methods&gt;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h6 id="特别说明-1"><a href="#特别说明-1" class="headerlink" title="特别说明"></a>特别说明</h6><ol>
+<li>实体类。对于实体类，要保留他们的 set 和 get 方法，对于 boolean 型的 get 方法，有些人喜欢命名为 isXXX 的方式，所以不要遗漏了。另外，实体类应该放在一个包下进行管理，这样只要写一次混淆就够了。</li>
+<li>内嵌类。内嵌类经常会被忘记而被混淆，最后导致奔溃。最好把内嵌类提取出来，如果非要内嵌，那不就不要忘记配置混淆。</li>
+<li>处理反射。应在代码中搜索：forName、getField、getDeclaredField、getMethod、getDeclaredField、newUpdater等方法，保留这些类，以免混淆过程被移除。</li>
+<li>自定义View。对于在布局 xml 文件中用到的自定义 View，都不能被混淆。一种思路：在 xml 中使用自定义 View 时，加上包名，以便查找。</li>
+</ol>
+<h3 id="4-针对第三方-jar-包的解决方案"><a href="#4-针对第三方-jar-包的解决方案" class="headerlink" title="4. 针对第三方 jar 包的解决方案"></a>4. 针对第三方 jar 包的解决方案</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"># 针对android-support-v4.jar的解决方案</div><div class="line">-libraryjars libs/android-support-v4.jar</div><div class="line">-dontwarn android.support.v4.**</div><div class="line">-keep class android.support.v4.**  &#123; *; &#125;</div><div class="line">-keep interface android.support.v4.app.** &#123; *; &#125;</div><div class="line">-keep public class * extends android.support.v4.**</div><div class="line">-keep public class * extends android.app.Fragment</div><div class="line"></div><div class="line"># 对alipay的混淆处理</div><div class="line">-libraryjars libs/alipaysdk.jar</div><div class="line">-dontwarn com.alipay.android.app.**</div><div class="line">-keep public class com.alipay.**  &#123; *; &#125;</div></pre></td></tr></table></figure>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ol>
+<li>eclipse，在 project.properties 中加上： <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">proguard.config = proguard.cfg</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://www.cnblogs.com/Jax/p/4639221.html" target="_blank" rel="external">http://www.cnblogs.com/Jax/p/4639221.html</a></p>
+
+          
+        </section>
+      </div>
+      
+      
+        <div id="comment-container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  // id: location.href, // 可选。默认为 location.href
+  id: 'Proguard混淆配置',
+  owner: 'laocaixw', // 你的 GitHub ID
+  repo: 'laocaixw.github.io', // 存储评论的 repo
+  oauth: {
+    client_id: 'b41a264d7724fd5a364b', // 你的 client ID
+    client_secret: '9dc474e16291d40597b0ad55daae84c24eb41160', // 你的 client secret
+  },
+})
+gitment.render('comment-container')
+</script>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://github.com/laocaixw'>Github</a>
+  
+    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+  
+    <a class='main' href='/about.html'>About</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; laocaixw. All Rights Reserved.</span><br>
+  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>built with Hexo using Scribble theme</a>
+  <br>
+  <br>
+</footer>
+
+  </body>
+</html>

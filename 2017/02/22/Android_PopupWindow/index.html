@@ -1,0 +1,126 @@
+<html lang="zh-CN">
+  <head>
+    <title>PopupWindow用法及源码浅析 - laocaixw</title>
+    <meta charset="UTF-8">
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+<link href='/img/avatar.png' rel='shortcut icon'>
+<link href='undefined' rel='alternate' type='application/rss+xml'>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+
+  </head>
+  <body>
+    <header>
+  <a id='go-back-home' href='/'><img src='/img/avatar.png' alt='Home' width='60' height='60'></a>
+  <p>laocaixw</p>
+  <p>Android Developer</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://github.com/laocaixw'>Github</a>
+  
+    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+  
+    <a class='main' href='/about.html'>About</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2017/02/28/Eclipse_Convert_Android_Studio/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2016/11/10/Git_gitignore/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2017-02-22</div>
+            PopupWindow用法及源码浅析
+          </h1>
+          <blockquote>
+          <p><strong><a href="http://blog.laocaixw.cn/">转载请声明出处</a></strong></p>
+          </blockquote>
+          <p>最近手头上的事比较多，博客也荒废了有三四个月，趁这几天任务稍微轻一点，也正好把这段时间学到的东西做个总结，对自己来说也是一种进步。</p>
+<p>作为 Android 开发者一定对 AlertDialog 对话框很熟悉，与它类似的 PopupWindow 对于初学者来说可能接触得就比较少，但是 PopupWindow 也是常用的对话框控件之一。</p>
+<h2 id="1-用法"><a href="#1-用法" class="headerlink" title="1.用法"></a>1.用法</h2><p>PopupWindow 的基本用法（ PopupWindow 的用法网上也有很多，想了解更多可以上网搜，这里只是写了个简单的）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 实例化，顾名思义，contentView 就是要显示的内容，width 和 height 就是宽和高</span></div><div class="line">PopupWindow popupWindow = <span class="keyword">new</span> PopupWindow (contentView, width, height);</div><div class="line"><span class="comment">// 显示 PopupWindow，相对于父控件的位置</span></div><div class="line">popupWindow.showAtLocation(parent, gravity, x, y);</div></pre></td></tr></table></figure>
+<h2 id="2-监听返回键"><a href="#2-监听返回键" class="headerlink" title="2.监听返回键"></a>2.监听返回键</h2><p>大部分人可能需要让 PopupWindow 响应返回键，当 PopupWindow 显示的时候，按下返回键需要把 PopupWindow 关闭掉。</p>
+<p>如果没有给 PopupWindow 设置焦点（即setFocusable(false);），那么我们就要在 Activity 的 onBackPressed 方法中关闭 PopupWindow。如果给 PopupWindow 设置了焦点（即 setFocusable(true);），这时候想要响应返回键，网上流传了一种方法，就是给 PopupWindow 设置背景。</p>
+<p>为什么会这样呢？我们来看一下源码（这里是 Android-19 的源码），我们顺着 showAtLocation() 方法点进去，会看到 preparePopup() 方法，里面有这样一段代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (mBackground != <span class="keyword">null</span>) &#123;</div><div class="line">    <span class="keyword">final</span> ViewGroup.LayoutParams layoutParams = mContentView.getLayoutParams();</div><div class="line">    <span class="keyword">int</span> height = ViewGroup.LayoutParams.MATCH_PARENT;</div><div class="line">    <span class="keyword">if</span> (layoutParams != <span class="keyword">null</span> &amp;&amp;</div><div class="line">            layoutParams.height == ViewGroup.LayoutParams.WRAP_CONTENT) &#123;</div><div class="line">        height = ViewGroup.LayoutParams.WRAP_CONTENT;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    PopupViewContainer popupViewContainer = <span class="keyword">new</span> PopupViewContainer(mContext);</div><div class="line">    PopupViewContainer.LayoutParams listParams = <span class="keyword">new</span> PopupViewContainer.LayoutParams(</div><div class="line">            ViewGroup.LayoutParams.MATCH_PARENT, height</div><div class="line">    );</div><div class="line">    popupViewContainer.setBackgroundDrawable(mBackground);</div><div class="line">    popupViewContainer.addView(mContentView, listParams);</div><div class="line"></div><div class="line">    mPopupView = popupViewContainer;</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    mPopupView = mContentView;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当给 PopupWindow 设置背景时，它会给 contentView 外面套上一个 PopupViewContainer ，这个 PopupViewContainer 是 PopupWindow 的一个内部类，它已经把返回键事件给消费掉了，并且还 dismiss 了 PopupWindow ，所以网上流传的这段代码说起来也是可行的。</p>
+<h2 id="3-Android-6-0-之后的坑"><a href="#3-Android-6-0-之后的坑" class="headerlink" title="3. Android 6.0 之后的坑"></a>3. Android 6.0 之后的坑</h2><p>公司的项目里有一个加载框，就是用 PopupWindow 来实现的，但是公司做出来的效果是，当在请求网络数据时，显示这个加载框，并且不让用户做任何操作，只有请求结束后，才通过代码关闭这个加载框。那么可能有人就想到，不给它设焦点，然后在 Activity 的 onBackPressed 方法中拦截返回事件。抱歉，由于我们公司项目比较特别，我们的 Activity 管不到这个加载框，加载框是由服务端控制的。那么可能有人又想到，给它设焦点，然后不给它设置背景，bingo！我们公司就是这么做的。但是，当有人拿出 6.0 的手机时，按返回键莫名其妙就把 PopupWindow 给关掉了。这又是怎么回事呢？我们继续来看源码(这回是 Android-23)。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (mBackground != <span class="keyword">null</span>) &#123;</div><div class="line">    mBackgroundView = createBackgroundView(mContentView);</div><div class="line">    mBackgroundView.setBackground(mBackground);</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    mBackgroundView = mContentView;</div><div class="line">&#125;</div><div class="line"></div><div class="line">mDecorView = createDecorView(mBackgroundView);</div></pre></td></tr></table></figure>
+<p>可以看到，无论是否设置了背景，最终都要 createDecorView ，这个 createDecorView 又是干什么的呢？继续往下看。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> PopupDecorView <span class="title">createDecorView</span><span class="params">(View contentView)</span> </span>&#123;</div><div class="line">    <span class="keyword">final</span> ViewGroup.LayoutParams layoutParams = mContentView.getLayoutParams();</div><div class="line">    <span class="keyword">final</span> <span class="keyword">int</span> height;</div><div class="line">    <span class="keyword">if</span> (layoutParams != <span class="keyword">null</span> &amp;&amp; layoutParams.height == ViewGroup.LayoutParams.WRAP_CONTENT) &#123;</div><div class="line">        height = ViewGroup.LayoutParams.WRAP_CONTENT;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        height = ViewGroup.LayoutParams.MATCH_PARENT;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">final</span> PopupDecorView decorView = <span class="keyword">new</span> PopupDecorView(mContext);</div><div class="line">    decorView.addView(contentView, ViewGroup.LayoutParams.MATCH_PARENT, height);</div><div class="line">    decorView.setClipChildren(<span class="keyword">false</span>);</div><div class="line">    decorView.setClipToPadding(<span class="keyword">false</span>);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> decorView;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们可以看到无论是否设置了背景，这边都会在外面套上一层 PopupDecorView ，而这个万恶的 PopupDecorView 竟然几乎就是 6.0 之前的那个 PopupViewContainer ，把 PopupWindow 关闭了还把我的返回键事件给消费掉了！</p>
+<h2 id="4-结局"><a href="#4-结局" class="headerlink" title="4.结局"></a>4.结局</h2><p>万般无奈之下，只好将 PopupWindow 改为 AlertDialog 了！虽然改动了之后，影响的地方比较多，需要测试的也比较多，但是，加载框和 AlertDialog 还是更合适哦！</p>
+
+          
+        </section>
+      </div>
+      
+      
+        <div id="comment-container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  // id: location.href, // 可选。默认为 location.href
+  id: 'PopupWindow用法及源码浅析',
+  owner: 'laocaixw', // 你的 GitHub ID
+  repo: 'laocaixw.github.io', // 存储评论的 repo
+  oauth: {
+    client_id: 'b41a264d7724fd5a364b', // 你的 client ID
+    client_secret: '9dc474e16291d40597b0ad55daae84c24eb41160', // 你的 client secret
+  },
+})
+gitment.render('comment-container')
+</script>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://github.com/laocaixw'>Github</a>
+  
+    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+  
+    <a class='main' href='/about.html'>About</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; laocaixw. All Rights Reserved.</span><br>
+  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>built with Hexo using Scribble theme</a>
+  <br>
+  <br>
+</footer>
+
+  </body>
+</html>

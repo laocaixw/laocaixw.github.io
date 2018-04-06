@@ -1,0 +1,160 @@
+<html lang="zh-CN">
+  <head>
+    <title>KMP算法的个人理解 - laocaixw</title>
+    <meta charset="UTF-8">
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+<link href='/img/avatar.png' rel='shortcut icon'>
+<link href='undefined' rel='alternate' type='application/rss+xml'>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+
+  </head>
+  <body>
+    <header>
+  <a id='go-back-home' href='/'><img src='/img/avatar.png' alt='Home' width='60' height='60'></a>
+  <p>laocaixw</p>
+  <p>Android Developer</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://github.com/laocaixw'>Github</a>
+  
+    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+  
+    <a class='main' href='/about.html'>About</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2016/06/08/Blog_Hexo_GitHub/'>
+        ‹
+      </a>
+    </div>
+  
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2016-05-06</div>
+            KMP算法的个人理解
+          </h1>
+          <blockquote>
+          <p><strong><a href="http://blog.laocaixw.cn/">转载请声明出处</a></strong></p>
+          </blockquote>
+          <p>自学了一段时间，刚刚准备转行做软件开发，面试过程中被指出计算机基础知识薄弱。因为是非科班出生，确实有些计算机方面的基础没有学过，也开始恶补这些方面的东西。<br>最近在学习数据结构与算法过程中，学到 KMP 算法，甚是难解。看了<a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html?20160506194537#comment-last" target="_blank" rel="external">阮一峰的网络日志</a>后才慢慢理解，但也发现其中的瑕疵，在此也顺带指出，至于对或不对，还请各位看客指正。</p>
+<blockquote>
+<p>图片和例子讲解均引自<a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html?20160506194537#comment-last" target="_blank" rel="external">阮一峰的网络日志</a>，稍作修改，侵改。</p>
+</blockquote>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>举例来说，有一个字符串”BBC ABCDAB ABCDABCDABDE”，我想知道，里面是否包含另一个字符串”ABCDABD”，即字符串”ABCDABD”是否是字符串”BBC ABCDAB ABCDABCDABDE”的子串。</p>
+<p>定义</p>
+<ul>
+<li><strong>字符串1</strong>：”BBC ABCDAB ABCDABCDABDE”(包含空格)</li>
+<li><strong>搜索词2</strong>：”ABCDABD”</li>
+</ul>
+<h3 id="普通的字符串匹配算法"><a href="#普通的字符串匹配算法" class="headerlink" title="普通的字符串匹配算法"></a>普通的字符串匹配算法</h3><p>将<strong>搜索词2</strong>中的第一位“A”，与<strong>字符串1</strong>中的第一位“B”匹配，若不匹配，则与<strong>字符串1</strong>中的第二位“B”匹配 … 直到匹配到第五位“A”，可匹配。</p>
+<p>将<strong>搜索词2</strong>中的第二位“B”，与<strong>字符串1</strong>中的第六位“B”匹配，可匹配，则继续进行后面的字符匹配。</p>
+<p>直到<strong>搜索词2</strong>与<strong>字符串1</strong>的某段完全匹配，则可认为<strong>搜索词2</strong>是<strong>字符串1</strong>的子串。</p>
+<p>这种方法简单粗暴，但效率极低。</p>
+<h3 id="KMP-算法"><a href="#KMP-算法" class="headerlink" title="KMP 算法"></a>KMP 算法</h3><p>1.首先，<strong>字符串1</strong>的第一个字符与<strong>搜索词2</strong>的第一个字符，进行比较。因为 B 与 A 不匹配，所以搜索词后移一位。<br><img src="/img/kmp/kmp01.png" alt="kmp01"></p>
+<p>2.因为B与A不匹配，搜索词再往后移。<br><img src="/img/kmp/kmp02.png" alt="kmp02"></p>
+<p>3.就这样，直到字符串有一个字符，与搜索词的第一个字符相同为止。<br><img src="/img/kmp/kmp03.png" alt="kmp03"></p>
+<p>4.接着比较字符串和搜索词的下一个字符，还是相同。<br><img src="/img/kmp/kmp04.png" alt="kmp04"></p>
+<p>5.直到字符串有一个字符，与搜索词对应的字符不相同为止。<br><img src="/img/kmp/kmp05.png" alt="kmp05"></p>
+<p>6.这时，<strong>普通的字符串匹配算法</strong>是，将搜索词整个后移一位，再从头逐个比较。这样做虽然可行，但是效率很差，因为你要把”搜索位置”移到已经比较过的位置，重比一遍。<br><img src="/img/kmp/kmp06.png" alt="kmp06"></p>
+<p>7.一个基本事实是，当空格与D不匹配时，你其实知道前面六个字符是”ABCDAB”。KMP算法的想法是，设法利用这个已知信息，不要把”搜索位置”移回已经比较过的位置，继续把它向后移，这样就提高了效率。<br><img src="/img/kmp/kmp07.png" alt="kmp07"></p>
+<p>8.怎么做到这一点呢？可以针对搜索词，算出一张《部分匹配表》（Partial Match Table）。这张表是如何产生的，后面再介绍，这里只要会用就可以了。<br><img src="/img/kmp/kmp08.png" alt="kmp08"></p>
+<p>9.已知空格与D不匹配时，前面六个字符”ABCDAB”是匹配的。查表可知，最后一个匹配字符B对应的”部分匹配值”为2，因此按照下面的公式算出向后移动的位数：<br><img src="/img/kmp/kmp09.png" alt="kmp09"></p>
+<blockquote>
+<p>移动位数 = 已经匹配对的字符数 - 最后一个匹配对的<strong>部分匹配值</strong> + 当前匹配错的<strong>部分匹配值</strong></p>
+</blockquote>
+<p>因为 6 - 2 + 0 等于4，所以将搜索词向后移动4位。</p>
+<p>10.因为空格与Ｃ不匹配，搜索词还要继续往后移。这时，已匹配的字符数为2（”AB”），对应的”部分匹配值”为0。所以，移动位数 = 2 - 0 + 0，结果为 2，于是将搜索词向后移2位。<br><img src="/img/kmp/kmp10.png" alt="kmp10"></p>
+<p>11.因为空格与A不匹配，继续后移一位。<br><img src="/img/kmp/kmp11.png" alt="kmp11"></p>
+<p>12.逐位比较，直到发现C与D不匹配。于是，移动位数 = 6 - 2 + 0，继续将搜索词向后移动4位。<br><img src="/img/kmp/kmp12.png" alt="kmp12"></p>
+<p>13.逐位比较，直到搜索词的最后一位，发现完全匹配，于是搜索完成。<br><img src="/img/kmp/kmp13.png" alt="kmp13"></p>
+<h4 id="部分匹配表"><a href="#部分匹配表" class="headerlink" title="部分匹配表"></a>部分匹配表</h4><p>下面介绍 部分匹配表 是如何产生的<br><img src="/img/kmp/kmp14.png" alt="kmp14"></p>
+<p>“部分匹配值”就是”前缀”和”后缀”的最长的共有元素的长度。以”ABCDABD”为例，</p>
+<ul>
+<li><p>“A”的前缀和后缀都为空集，共有元素的长度为0；</p>
+</li>
+<li><p>“AB”的前缀为[A]，后缀为[B]，共有元素的长度为0；</p>
+</li>
+<li><p>“ABC”的前缀为[A, AB]，后缀为[BC, C]，共有元素的长度0；</p>
+</li>
+<li><p>“ABCD”的前缀为[A, AB, ABC]，后缀为[BCD, CD, D]，共有元素的长度为0；</p>
+</li>
+<li><p>“ABCDA”的前缀为[A, AB, ABC, ABCD]，后缀为[BCDA, CDA, DA, A]，共有元素为”A”，长度为1；</p>
+</li>
+<li><p>“ABCDAB”的前缀为[A, AB, ABC, ABCD, ABCDA]，后缀为[BCDAB, CDAB, DAB, AB, B]，共有元素为”AB”，长度为2；</p>
+</li>
+<li><p>“ABCDABD”的前缀为[A, AB, ABC, ABCD, ABCDA, ABCDAB]，后缀为[BCDABD, CDABD, DABD, ABD, BD, D]，共有元素的长度为0。<br><img src="/img/kmp/kmp15.png" alt="kmp15"></p>
+</li>
+</ul>
+<p>“部分匹配”的实质是，有时候，字符串头部和尾部会有重复。比如，”ABCDAB”之中有两个”AB”，那么它的”部分匹配值”就是2（”AB”的长度）。搜索词移动的时候，第一个”AB”向后移动4位（字符串长度-部分匹配值），就可以来到第二个”AB”的位置。</p>
+<blockquote>
+<p>如果大家有兴趣可以用以下两组数进行匹配，就会发现一个不一样的过程： </p>
+<p>字符串：ABCABDABCABC </p>
+<p>搜索词：ABCABC</p>
+</blockquote>
+
+          
+        </section>
+      </div>
+      
+      
+        <div id="comment-container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  // id: location.href, // 可选。默认为 location.href
+  id: 'KMP算法的个人理解',
+  owner: 'laocaixw', // 你的 GitHub ID
+  repo: 'laocaixw.github.io', // 存储评论的 repo
+  oauth: {
+    client_id: 'b41a264d7724fd5a364b', // 你的 client ID
+    client_secret: '9dc474e16291d40597b0ad55daae84c24eb41160', // 你的 client secret
+  },
+})
+gitment.render('comment-container')
+</script>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://github.com/laocaixw'>Github</a>
+  
+    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+  
+    <a class='main' href='/about.html'>About</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; laocaixw. All Rights Reserved.</span><br>
+  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>built with Hexo using Scribble theme</a>
+  <br>
+  <br>
+</footer>
+
+  </body>
+</html>

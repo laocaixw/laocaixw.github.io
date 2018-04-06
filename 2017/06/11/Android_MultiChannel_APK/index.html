@@ -1,0 +1,123 @@
+<html lang="zh-CN">
+  <head>
+    <title>多渠道打包 - laocaixw</title>
+    <meta charset="UTF-8">
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+<link href='/img/avatar.png' rel='shortcut icon'>
+<link href='undefined' rel='alternate' type='application/rss+xml'>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+
+  </head>
+  <body>
+    <header>
+  <a id='go-back-home' href='/'><img src='/img/avatar.png' alt='Home' width='60' height='60'></a>
+  <p>laocaixw</p>
+  <p>Android Developer</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://github.com/laocaixw'>Github</a>
+  
+    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+  
+    <a class='main' href='/about.html'>About</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2017/06/14/Android_DualCard_SIM/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2017/05/15/Android_MultiDex/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2017-06-11</div>
+            多渠道打包
+          </h1>
+          <blockquote>
+          <p><strong><a href="http://blog.laocaixw.cn/">转载请声明出处</a></strong></p>
+          </blockquote>
+          <p>这段时间，公司项目集成了第三方行为分析 SDK ，并且希望对各个渠道的信息做一些统计，这就必然会设计到多渠道打包。</p>
+<p>多渠道打包思路其实也很简单，通过 Gradle 配置修改 Manifest 中 meta-data 的值，这样打包生成的多个包中 meta-data 就可以不一样，在代码中获取到不同的 meta-data 值，由此来区分不同的渠道。</p>
+<h3 id="1-配置-Gradle"><a href="#1-配置-Gradle" class="headerlink" title="1.配置 Gradle"></a>1.配置 Gradle</h3><p>在项目主工程的 build.gradle 中，添加如下配置：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    productFlavors &#123;</div><div class="line">        xiaomi &#123;</div><div class="line">            manifestPlaceholders = [CHANNEL_VALUE: <span class="string">"xiaomi"</span>]</div><div class="line">        &#125;</div><div class="line">        tencent &#123;</div><div class="line">            manifestPlaceholders = [CHANNEL_VALUE: <span class="string">"tencent"</span>]</div><div class="line">        &#125;</div><div class="line">        baidu &#123;</div><div class="line">            manifestPlaceholders = [CHANNEL_VALUE: <span class="string">"baidu"</span>]</div><div class="line">        &#125;</div><div class="line">        ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里的 CHANNEL_VALUE 是后面 Manifest 中对应的值。如果一个项目要在 meta-data 中配多个参数，每增加一个渠道难免会多写很多行代码，可以参考下面的简便写法：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    productFlavors &#123;</div><div class="line">        xiaomi &#123;&#125;</div><div class="line">        tencent &#123;&#125;</div><div class="line">        baidu &#123;&#125;</div><div class="line">        ...</div><div class="line">    &#125;  </div><div class="line">    productFlavors.all &#123; </div><div class="line">        flavor -&gt; flavor.manifestPlaceholders = [CHANNEL_VALUE: name] </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样写可以直接把 productFlavors 的 name 配到 meta-data 中。</p>
+<h3 id="2-配置-Manifest"><a href="#2-配置-Manifest" class="headerlink" title="2.配置 Manifest"></a>2.配置 Manifest</h3><p>在 Manifest 的 application 下配置 meta-data ，如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">application</span></span></div><div class="line">    <span class="attr">android:name</span>=<span class="string">"..."</span></div><div class="line">    <span class="attr">android:icon</span>=<span class="string">"..."</span></div><div class="line">    <span class="attr">android:label</span>=<span class="string">"..."</span>&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">meta-data</span></span></div><div class="line">        <span class="attr">android:name</span>=<span class="string">"channel_value"</span></div><div class="line">        <span class="attr">android:value</span>=<span class="string">"$&#123;CHANNEL_VALUE&#125;"</span> /&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">"..."</span></span></div><div class="line">        <span class="attr">android:label</span>=<span class="string">"..."</span> /&gt;</div><div class="line">    ...</div><div class="line"><span class="tag">&lt;/<span class="name">application</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这里的 CHANNEL_VALUE 就会被赋值为上面 gradle 中配的 name（CHANNEL_VALUE: name），而 channel_value 可以在 java 中获取到。</p>
+<h3 id="3-获取-meta-data-值"><a href="#3-获取-meta-data-值" class="headerlink" title="3.获取 meta-data 值"></a>3.获取 meta-data 值</h3><p>在 java 中可以获取到 meta-data 配置的值，通过这个值，我们就可以区分不同的渠道信息了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">String channelValue = <span class="string">""</span>;</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    ApplicationInfo appInfo = getPackageManager().getApplicationInfo(getPackageName(),</div><div class="line">            PackageManager.GET_META_DATA);</div><div class="line">    channelValue = appInfo.metaData.getString(<span class="string">"channel_value"</span>);</div><div class="line">&#125; <span class="keyword">catch</span> (PackageManager.NameNotFoundException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        </section>
+      </div>
+      
+      
+        <div id="comment-container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  // id: location.href, // 可选。默认为 location.href
+  id: '多渠道打包',
+  owner: 'laocaixw', // 你的 GitHub ID
+  repo: 'laocaixw.github.io', // 存储评论的 repo
+  oauth: {
+    client_id: 'b41a264d7724fd5a364b', // 你的 client ID
+    client_secret: '9dc474e16291d40597b0ad55daae84c24eb41160', // 你的 client secret
+  },
+})
+gitment.render('comment-container')
+</script>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://github.com/laocaixw'>Github</a>
+  
+    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+  
+    <a class='main' href='/about.html'>About</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; laocaixw. All Rights Reserved.</span><br>
+  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>built with Hexo using Scribble theme</a>
+  <br>
+  <br>
+</footer>
+
+  </body>
+</html>

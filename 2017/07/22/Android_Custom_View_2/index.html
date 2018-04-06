@@ -1,0 +1,135 @@
+<html lang="zh-CN">
+  <head>
+    <title>Android自定义View（2）测量布局绘制 - laocaixw</title>
+    <meta charset="UTF-8">
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+<link href='/img/avatar.png' rel='shortcut icon'>
+<link href='undefined' rel='alternate' type='application/rss+xml'>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+
+  </head>
+  <body>
+    <header>
+  <a id='go-back-home' href='/'><img src='/img/avatar.png' alt='Home' width='60' height='60'></a>
+  <p>laocaixw</p>
+  <p>Android Developer</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://github.com/laocaixw'>Github</a>
+  
+    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+  
+    <a class='main' href='/about.html'>About</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2017/08/01/Android_Custom_View_3/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2017/07/15/Android_Custom_View_1/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2017-07-22</div>
+            Android自定义View（2）测量布局绘制
+          </h1>
+          <blockquote>
+          <p><strong><a href="http://blog.laocaixw.cn/">转载请声明出处</a></strong></p>
+          </blockquote>
+          <h2 id="一、-测量-onMeasure-widthMeasureSpec-heightMeasureSpec"><a href="#一、-测量-onMeasure-widthMeasureSpec-heightMeasureSpec" class="headerlink" title="一、 测量 onMeasure(widthMeasureSpec, heightMeasureSpec)"></a>一、 测量 onMeasure(widthMeasureSpec, heightMeasureSpec)</h2><p>MeasureSpec 是测量规格，里面包含了模式和尺寸，测量模式有一下三种：</p>
+<ol>
+<li><p>MeasureSpec.EXACTLY</p>
+<p>精确模式。当宽高指定大小、或者指定为 match_parent 时。</p>
+</li>
+<li><p>MeasureSpec.AT_MOST</p>
+<p>最大值模式。当宽高指定为 wrap_content 时。此时控件大小一般随子控件或内容而变化。</p>
+</li>
+<li><p>MeasureSpec.UNSPECIFIED</p>
+<p>不指定大小测量模式，想多大就多大。</p>
+</li>
+</ol>
+<p>View 类默认 onMeasure 方法只支持EXACTLY模式，因此想要支持 wrap_content 就必须重写 onMeasure 方法来指定 wrap_content 时的大小。</p>
+<p>以测量宽度为例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onMeasure(widthMeasureSpec, heightMeasureSpec);</div><div class="line">    setMeasuredDimension(measureWidth(widthMeasureSpec), measureHeight(heightMeasureSpec));</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">measureWidth</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> result;</div><div class="line">    <span class="keyword">int</span> specMode = MeasureSpec.getMode(widthMeasureSpec);</div><div class="line">    <span class="keyword">int</span> specSize = MeasureSpec.getSize(widthMeasureSpec);</div><div class="line">    <span class="keyword">if</span> (specMode == MeasureSpec.EXACTLY) &#123;</div><div class="line">        result = specSize;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        result = <span class="number">200</span>;</div><div class="line">        <span class="keyword">if</span> (specMode == MeasureSpec.AT_MOST) &#123;</div><div class="line">            result = Math.min(result, specSize);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>测量后调用 setMeasuredDimension(); 来保存测量后的尺寸。</p>
+<h6 id="ViewGroup-的测量"><a href="#ViewGroup-的测量" class="headerlink" title="ViewGroup 的测量"></a>ViewGroup 的测量</h6><p>ViewGroup 的测量，是通过遍历所有子 View，从而调用子 View 的 measure 方法来获得所有子 View 的测量结果，再根据 ViewGroup 的需求来计算出 ViewGroup 的尺寸，从而完成 ViewGroup 的测量。</p>
+<h2 id="二、-布局-onLayout-changed-left-top-right-bottom"><a href="#二、-布局-onLayout-changed-left-top-right-bottom" class="headerlink" title="二、 布局 onLayout(changed, left, top, right, bottom)"></a>二、 布局 onLayout(changed, left, top, right, bottom)</h2><p>测量完成后，会进行 Layout 过程，将子 View 放在合适的位置。</p>
+<p>一般来说，自定义 View 没有子 View，所以是不用实现 Layout 过程的，有子 View 的 ViewGroup 才需要通过 Layout 过程来正确地摆放子 View。</p>
+<h6 id="ViewGroup-的布局"><a href="#ViewGroup-的布局" class="headerlink" title="ViewGroup 的布局"></a>ViewGroup 的布局</h6><p>ViewGroup 的布局，是通过遍历所有的子 View，根据 ViewGroup 的需求计算出它们的位置，最后调用它们的 layout() 来确定每个子 View 的位置。</p>
+<h2 id="三、-绘制-onDraw-canvas"><a href="#三、-绘制-onDraw-canvas" class="headerlink" title="三、 绘制 onDraw(canvas)"></a>三、 绘制 onDraw(canvas)</h2><p>通常，绘制 View 的 onDraw() 方法中会有一个 Canvas 对象，使用这个 Canvas 对象就可以进行绘图了。而如果在其他地方则需要创建一个 Canvas 对象，一般会通过  bitmap 创建，这样绘制的效果会作用在这个 bitmap 上。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Canvas canvas = <span class="keyword">new</span> Canvas(bitmap);</div></pre></td></tr></table></figure>
+<p>绘制的过程比较简单，一般需要画什么形状，就调用 Canvas 的相应方法。具体的形状和位置，都是数学问题。</p>
+<h6 id="ViewGroup-的绘制"><a href="#ViewGroup-的绘制" class="headerlink" title="ViewGroup 的绘制"></a>ViewGroup 的绘制</h6><p>ViewGroup 通常不需要绘制，但是会调用 dispatchDraw 方法来绘制子 View ，其过程也是通过遍历子 View ，调用子 View 的 onDraw 方法来完成工作。</p>
+
+          
+        </section>
+      </div>
+      
+      
+        <div id="comment-container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  // id: location.href, // 可选。默认为 location.href
+  id: 'Android自定义View（2）测量布局绘制',
+  owner: 'laocaixw', // 你的 GitHub ID
+  repo: 'laocaixw.github.io', // 存储评论的 repo
+  oauth: {
+    client_id: 'b41a264d7724fd5a364b', // 你的 client ID
+    client_secret: '9dc474e16291d40597b0ad55daae84c24eb41160', // 你的 client secret
+  },
+})
+gitment.render('comment-container')
+</script>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://github.com/laocaixw'>Github</a>
+  
+    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+  
+    <a class='main' href='/about.html'>About</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; laocaixw. All Rights Reserved.</span><br>
+  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>built with Hexo using Scribble theme</a>
+  <br>
+  <br>
+</footer>
+
+  </body>
+</html>

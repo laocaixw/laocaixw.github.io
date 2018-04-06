@@ -1,0 +1,138 @@
+<html lang="zh-CN">
+  <head>
+    <title>Volley的用法 - laocaixw</title>
+    <meta charset="UTF-8">
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+<link href='/img/avatar.png' rel='shortcut icon'>
+<link href='undefined' rel='alternate' type='application/rss+xml'>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+
+  </head>
+  <body>
+    <header>
+  <a id='go-back-home' href='/'><img src='/img/avatar.png' alt='Home' width='60' height='60'></a>
+  <p>laocaixw</p>
+  <p>Android Developer</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://github.com/laocaixw'>Github</a>
+  
+    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+  
+    <a class='main' href='/about.html'>About</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2016/09/21/Android_NFC_Read_ICCard/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2016/07/26/Android_Studio_NDK/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2016-07-28</div>
+            Volley的用法
+          </h1>
+          <blockquote>
+          <p><strong><a href="http://blog.laocaixw.cn/">转载请声明出处</a></strong></p>
+          </blockquote>
+          <p>Volley 是谷歌官方推出的一个Android网络通信框架库，既可以做普通的网络请求，又可以做图片的异步加载和缓存处理，适用于通信频繁的网络操作。如果是加载的图片较多，不建议用Volley的本地缓存，因为经本人测试，如果缓存图片较多，Volley加载本地缓存的速度非常慢。参考：<a href="http://blog.csdn.net/guolin_blog/article/details/17482095" target="_blank" rel="external">郭霖的博客</a>。</p>
+<h2 id="1-下载Volley"><a href="#1-下载Volley" class="headerlink" title="1.下载Volley"></a>1.下载Volley</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://android.googlesource.com/platform/frameworks/volley</div></pre></td></tr></table></figure>
+<h2 id="2-Volley的用法"><a href="#2-Volley的用法" class="headerlink" title="2.Volley的用法"></a>2.Volley的用法</h2><ul>
+<li>1.获取一个请求队列；</li>
+<li>2.创建一个请求对象；</li>
+<li>3.将请求对象加到请求队列中。</li>
+</ul>
+<p>Volley 的请求对象有： StringRequest 、 JsonRequest 、 ImageRequest ，对于图片还有 ImageLoader 、 NetworkImageView ，另外还可以定制自己的 Request 。</p>
+<h4 id="简单的-StringRequest-请求对象用法："><a href="#简单的-StringRequest-请求对象用法：" class="headerlink" title="简单的 StringRequest 请求对象用法："></a>简单的 StringRequest 请求对象用法：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">RequestQueue mQueue = Volley.newRequestQueue(context);</div><div class="line">StringRequest stringRequest = <span class="keyword">new</span> StringRequest(url,</div><div class="line">                        <span class="keyword">new</span> Response.Listener&lt;String&gt;() &#123;</div><div class="line">                            <span class="meta">@Override</span></div><div class="line">                            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(String response)</span> </span>&#123;</div><div class="line">                                Log.d(<span class="string">"TAG"</span>, response);</div><div class="line">                            &#125;</div><div class="line">                        &#125;, <span class="keyword">new</span> Response.ErrorListener() &#123;</div><div class="line">                            <span class="meta">@Override</span></div><div class="line">                            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onErrorResponse</span><span class="params">(VolleyError error)</span> </span>&#123;</div><div class="line">                                Log.e(<span class="string">"TAG"</span>, error.getMessage(), error);</div><div class="line">                            &#125;</div><div class="line">                        &#125;);</div><div class="line">mQueue.add(stringRequest);</div></pre></td></tr></table></figure>
+<h4 id="简单的-JsonRequest-请求对象用法："><a href="#简单的-JsonRequest-请求对象用法：" class="headerlink" title="简单的 JsonRequest 请求对象用法："></a>简单的 JsonRequest 请求对象用法：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">RequestQueue mQueue = Volley.newRequestQueue(context);</div><div class="line">JsonObjectRequest jsonObjectRequest = <span class="keyword">new</span> JsonObjectRequest(rul, <span class="keyword">null</span>,</div><div class="line">        <span class="keyword">new</span> Response.Listener&lt;JSONObject&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(JSONObject response)</span> </span>&#123;</div><div class="line">                Log.d(<span class="string">"TAG"</span>, response.toString());</div><div class="line">            &#125;</div><div class="line">        &#125;, <span class="keyword">new</span> Response.ErrorListener() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onErrorResponse</span><span class="params">(VolleyError error)</span> </span>&#123;</div><div class="line">                Log.e(<span class="string">"TAG"</span>, error.getMessage(), error);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">mQueue.add(jsonObjectRequest);</div></pre></td></tr></table></figure>
+<h4 id="简单的-ImageRequest-请求对象用法："><a href="#简单的-ImageRequest-请求对象用法：" class="headerlink" title="简单的 ImageRequest 请求对象用法："></a>简单的 ImageRequest 请求对象用法：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">RequestQueue mQueue = Volley.newRequestQueue(context);</div><div class="line">ImageRequest imageRequest = <span class="keyword">new</span> ImageRequest(url,</div><div class="line">        <span class="keyword">new</span> Response.Listener&lt;Bitmap&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(Bitmap response)</span> </span>&#123;</div><div class="line">                imageView.setImageBitmap(response);</div><div class="line">            &#125;</div><div class="line">        &#125;, <span class="number">0</span>, <span class="number">0</span>, Config.RGB_565, <span class="keyword">new</span> Response.ErrorListener() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onErrorResponse</span><span class="params">(VolleyError error)</span> </span>&#123;</div><div class="line">                imageView.setImageResource(R.drawable.default_image);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">mQueue.add(imageRequest);</div></pre></td></tr></table></figure>
+<h4 id="ImageLoader-的用法"><a href="#ImageLoader-的用法" class="headerlink" title="ImageLoader 的用法"></a>ImageLoader 的用法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">RequestQueue mQueue = Volley.newRequestQueue(context);</div><div class="line">ImageLoader imageLoader = <span class="keyword">new</span> ImageLoader(mQueue,</div><div class="line">    <span class="keyword">new</span> ImageCache() &#123; <span class="comment">//本地缓存</span></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">putBitmap</span><span class="params">(String url, Bitmap bitmap)</span> </span>&#123;</div><div class="line">            </div><div class="line">        &#125;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> Bitmap <span class="title">getBitmap</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line">&#125;);</div><div class="line">ImageListener listener = ImageLoader.getImageListener(imageView,</div><div class="line">        R.drawable.default_image, R.drawable.failed_image);</div><div class="line">imageLoader.get(imageUrl, listener);</div><div class="line"><span class="comment">//imageLoader.get(imageUrl, listener, 200, 200); // 指定图片允许的最大宽度和高度</span></div></pre></td></tr></table></figure>
+<p>这里可以根据个人需要加入LruCache做个内存缓存。</p>
+<h4 id="NetworkImageView-的用法"><a href="#NetworkImageView-的用法" class="headerlink" title="NetworkImageView 的用法"></a>NetworkImageView 的用法</h4><p>NetworkImageView 是一个继承自 ImageView 的控件， ImageView 有的属性它基本都有。</p>
+<p>在布局中添加控件：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">com.android.volley.toolbox.NetworkImageView</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/network_image_view"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"200dp"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"200dp"</span></div><div class="line">        <span class="attr">android:layout_gravity</span>=<span class="string">"center_horizontal"</span></div><div class="line">        /&gt;</div></pre></td></tr></table></figure>
+<p>用法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">networkImageView = (NetworkImageView) findViewById(R.id.network_image_view);</div><div class="line">networkImageView.setDefaultImageResId(R.drawable.default_image);</div><div class="line">networkImageView.setErrorImageResId(R.drawable.failed_image);</div><div class="line"></div><div class="line">RequestQueue mQueue = Volley.newRequestQueue(context);</div><div class="line">ImageLoader imageLoader = <span class="keyword">new</span> ImageLoader(mQueue,</div><div class="line">    <span class="keyword">new</span> ImageCache() &#123; <span class="comment">//本地缓存</span></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">putBitmap</span><span class="params">(String url, Bitmap bitmap)</span> </span>&#123;</div><div class="line">            </div><div class="line">        &#125;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> Bitmap <span class="title">getBitmap</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line">&#125;);</div><div class="line">networkImageView.setImageUrl(imageUrl, imageLoader);</div></pre></td></tr></table></figure>
+<h4 id="自定义-Request"><a href="#自定义-Request" class="headerlink" title="自定义 Request"></a>自定义 Request</h4><p>可以参考 StringRequest 源码，自定义 XMLRequest：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XMLRequest</span> <span class="keyword">extends</span> <span class="title">Request</span>&lt;<span class="title">XmlPullParser</span>&gt; </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Listener&lt;XmlPullParser&gt; mListener;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">XMLRequest</span><span class="params">(<span class="keyword">int</span> method, String url, Listener&lt;XmlPullParser&gt; listener,</span></span></div><div class="line">            ErrorListener errorListener) &#123; <span class="comment">// 带请求方式的构造函数</span></div><div class="line">        <span class="keyword">super</span>(method, url, errorListener);</div><div class="line">        mListener = listener;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">XMLRequest</span><span class="params">(String url, Listener&lt;XmlPullParser&gt; listener,</span></span></div><div class="line">            ErrorListener errorListener) &#123; <span class="comment">// 不带请求方式的构造函数</span></div><div class="line">        <span class="keyword">this</span>(Method.GET, url, listener, errorListener);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> Response&lt;XmlPullParser&gt; <span class="title">parseNetworkResponse</span><span class="params">(NetworkResponse response)</span> </span>&#123;</div><div class="line">        <span class="comment">// 获取响应后通过此函数得到一个XmlPullParser的响应</span></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            String xmlString = <span class="keyword">new</span> String(response.data,</div><div class="line">                    HttpHeaderParser.parseCharset(response.headers));</div><div class="line">            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();</div><div class="line">            XmlPullParser xmlPullParser = factory.newPullParser();</div><div class="line">            xmlPullParser.setInput(<span class="keyword">new</span> StringReader(xmlString));</div><div class="line">            <span class="keyword">return</span> Response.success(xmlPullParser, HttpHeaderParser.parseCacheHeaders(response));</div><div class="line">        &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</div><div class="line">            <span class="keyword">return</span> Response.error(<span class="keyword">new</span> ParseError(e));</div><div class="line">        &#125; <span class="keyword">catch</span> (XmlPullParserException e) &#123;</div><div class="line">            <span class="keyword">return</span> Response.error(<span class="keyword">new</span> ParseError(e));</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">deliverResponse</span><span class="params">(XmlPullParser response)</span> </span>&#123;</div><div class="line">        mListener.onResponse(response);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用自定义的 XMLRequest：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">RequestQueue mQueue = Volley.newRequestQueue(context);</div><div class="line">XMLRequest xmlRequest = <span class="keyword">new</span> XMLRequest(url,</div><div class="line">        <span class="keyword">new</span> Response.Listener&lt;XmlPullParser&gt;() &#123;  </div><div class="line">            <span class="meta">@Override</span>  </div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(XmlPullParser response)</span> </span>&#123;  </div><div class="line">                <span class="comment">// 在此对得到的XmlPullParser响应做处理</span></div><div class="line">                </div><div class="line">            &#125;  </div><div class="line">        &#125;, <span class="keyword">new</span> Response.ErrorListener() &#123;  </div><div class="line">            <span class="meta">@Override</span>  </div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onErrorResponse</span><span class="params">(VolleyError error)</span> </span>&#123;  </div><div class="line">                Log.e(<span class="string">"TAG"</span>, error.getMessage(), error);  </div><div class="line">            &#125;  </div><div class="line">        &#125;);  </div><div class="line">mQueue.add(xmlRequest);</div></pre></td></tr></table></figure>
+<h2 id="3-Volley-源码分析"><a href="#3-Volley-源码分析" class="headerlink" title="3.Volley 源码分析"></a>3.Volley 源码分析</h2><p>官方图解：</p>
+<p><img src="http://img.blog.csdn.net/20140511114837375?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZ3VvbGluX2Jsb2c=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="volley_guolin"></p>
+<p>估计也就只有我能看懂的图解分析：</p>
+<p><img src="/img/volley/volley_mine.jpg" alt="volley_mine"></p>
+<p>总的来说，volley 是开了一个缓存线程和四个网络线程，当一个请求被加到队列中后，会先查看是否有缓存，如果有缓存那么走缓存线程读取缓存数据，如果没有则将请求加入到网络线程队列，读取网络数据。</p>
+
+          
+        </section>
+      </div>
+      
+      
+        <div id="comment-container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  // id: location.href, // 可选。默认为 location.href
+  id: 'Volley的用法',
+  owner: 'laocaixw', // 你的 GitHub ID
+  repo: 'laocaixw.github.io', // 存储评论的 repo
+  oauth: {
+    client_id: 'b41a264d7724fd5a364b', // 你的 client ID
+    client_secret: '9dc474e16291d40597b0ad55daae84c24eb41160', // 你的 client secret
+  },
+})
+gitment.render('comment-container')
+</script>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://github.com/laocaixw'>Github</a>
+  
+    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+  
+    <a class='main' href='/about.html'>About</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; laocaixw. All Rights Reserved.</span><br>
+  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>built with Hexo using Scribble theme</a>
+  <br>
+  <br>
+</footer>
+
+  </body>
+</html>
