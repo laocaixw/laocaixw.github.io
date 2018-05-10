@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://laocaixw.github.io/"/>
-  <updated>2018-04-06T06:39:59.083Z</updated>
+  <updated>2018-05-10T06:38:38.342Z</updated>
   <id>http://laocaixw.github.io/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java中的四种引用</title>
+    <link href="http://laocaixw.github.io/2018/05/09/Java_Reference/"/>
+    <id>http://laocaixw.github.io/2018/05/09/Java_Reference/</id>
+    <published>2018-05-09T02:00:00.000Z</published>
+    <updated>2018-05-10T06:38:38.342Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Java 中有四种引用：强引用、软引用、弱引用、虚引用。引用的存在，就是为了让开发者可以更好地管理内存。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="http://laocaixw.github.io/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>用Jenkins自动部署hexo搭建的GitHub静态博客</title>
@@ -471,30 +489,6 @@
         
         
           &lt;p&gt;前段时间写了篇有关&lt;a href=&quot;/2017/02/28/Eclipse_Convert_Android_Studio/&quot;&gt;Eclipse工程转Android Studio工程&lt;/a&gt;的文章，而导致公司项目需要转 AS
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Android" scheme="http://laocaixw.github.io/tags/Android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android权限申请</title>
-    <link href="http://laocaixw.github.io/2017/05/12/Android_Permission_Apply/"/>
-    <id>http://laocaixw.github.io/2017/05/12/Android_Permission_Apply/</id>
-    <published>2017-05-12T02:00:00.000Z</published>
-    <updated>2018-04-04T07:54:56.882Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;Android-6-0-变化&quot;&gt;&lt;a href=&quot;#Android-6-0-变化&quot; class=&quot;headerlink&quot; title=&quot;Android 6.0 变化&quot;&gt;&lt;/a&gt;Android 6.0 变化&lt;/h2&gt;&lt;p&gt;Android 6.0 (API23)
         
       
     
