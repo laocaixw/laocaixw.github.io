@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://laocaixw.github.io/"/>
-  <updated>2018-05-10T06:38:38.342Z</updated>
+  <updated>2018-05-25T05:59:17.861Z</updated>
   <id>http://laocaixw.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android与Vue的交互</title>
+    <link href="http://laocaixw.github.io/2018/05/17/Android_WebView_Vue/"/>
+    <id>http://laocaixw.github.io/2018/05/17/Android_WebView_Vue/</id>
+    <published>2018-05-17T10:00:00.000Z</published>
+    <updated>2018-05-25T05:59:17.861Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;做过 Android 混合开发的，应该都知道 Android 中 Java 代码和 Javascript 代码之间的交互怎么做。&lt;/p&gt;
+&lt;p&gt;首先回顾一下 Java 和 Javascript 之间的交互。&lt;/p&gt;
+&lt;h3
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://laocaixw.github.io/tags/Android/"/>
+    
+  </entry>
   
   <entry>
     <title>Java中的四种引用</title>
@@ -465,30 +491,6 @@
         
           &lt;p&gt;这段时间，公司项目集成了第三方行为分析 SDK ，并且希望对各个渠道的信息做一些统计，这就必然会设计到多渠道打包。&lt;/p&gt;
 &lt;p&gt;多渠道打包思路其实也很简单，通过 Gradle 配置修改 Manifest 中 meta-data 的值，这样打包生成的多个包中
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Android" scheme="http://laocaixw.github.io/tags/Android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android方法数超限问题探究与启动优化</title>
-    <link href="http://laocaixw.github.io/2017/05/15/Android_MultiDex/"/>
-    <id>http://laocaixw.github.io/2017/05/15/Android_MultiDex/</id>
-    <published>2017-05-15T12:00:00.000Z</published>
-    <updated>2018-04-06T06:37:55.349Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;前段时间写了篇有关&lt;a href=&quot;/2017/02/28/Eclipse_Convert_Android_Studio/&quot;&gt;Eclipse工程转Android Studio工程&lt;/a&gt;的文章，而导致公司项目需要转 AS
         
       
     
