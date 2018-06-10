@@ -131,6 +131,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo cp /etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/001-ssl.conf</div><div class="line">sudo vim /etc/apache2/sites-enabled/001-ssl.conf</div></pre></td></tr></table></figure>
 <p>在 <code>&lt;VirtualHost *:80&gt;</code> 段中，<code>DocumentRoot</code> 一行的下方加入内容：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">SSLEngine On</div><div class="line">SSLOptions +StrictRequire</div><div class="line">SSLCertificateFile /etc/ssl/certs/server.crt</div><div class="line">SSLCertificateKeyFile /etc/ssl/private/server.key</div><div class="line">SSLCACertificateFile /etc/ssl/apache/root_bundle.crt</div></pre></td></tr></table></figure>
+<p>加入这段配置时，需保证对应的文件是存在的，否则无法重启服务。</p>
 <p>端口修改为：443，即 <code>&lt;VirtualHost *:443&gt;</code> ( ssl 的端口)</p>
 <ul>
 <li>自己签发的证书，浏览器会显示为不安全，通过腾讯云获取免费 ssl 证书，放到相应的文件夹中，并修改以上 <code>SSLCertificateFile</code> 和<br><code>SSLCertificateKeyFile</code> 两项配置，即可。</li>
