@@ -1,0 +1,125 @@
+<html lang="zh-CN">
+  <head>
+    <title>设计模式学习系列（9）--组合模式 - laocaixw</title>
+    <meta charset="UTF-8">
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+<link href='/img/avatar.png' rel='shortcut icon'>
+<link href='undefined' rel='alternate' type='application/rss+xml'>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+
+  </head>
+  <body>
+    <header>
+  <a id='go-back-home' href='/'><img src='/img/avatar.png' alt='Home' width='60' height='60'></a>
+  <p>laocaixw</p>
+  <p>Android Developer</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://github.com/laocaixw'>Github</a>
+  
+    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+  
+    <a class='main' href='/about.html'>About</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+      <section class='paging'>
+  
+  
+    <div class='right'>
+      <a href='/2018/06/16/Design_Mode_8_Adapter/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-06-21</div>
+            设计模式学习系列（9）--组合模式
+          </h1>
+          <blockquote>
+          <p><strong><a href="http://blog.laocaixw.cn/">转载请声明出处</a></strong></p>
+          </blockquote>
+          <p>组合模式：<strong>将对象组合成树形结构以表示“部分-整体”的层次结构，使得用户对单个对象和组合对象的使用具有一致性。</strong></p>
+<p><img src="/img/design_mode/9_Composite.jpg" alt="Composite"></p>
+<p>抽象构件，不管是树枝还是叶子都是继承此构件：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    <span class="keyword">protected</span> String name;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Component</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">(<span class="keyword">int</span> level)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>树枝构件，持有子构件集合，即树枝上可以长出树枝或叶子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Composite</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> level = <span class="number">0</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Composite</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(name);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> ArrayList&lt;Component&gt; componentList = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(Component component)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.componentList.add(component);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(Component component)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.componentList.remove(component);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> ArrayList&lt;Component&gt; <span class="title">getChild</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.componentList;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">(<span class="keyword">int</span> level)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.level = level + <span class="number">1</span>;</div><div class="line">        System.out.println(name);</div><div class="line">        <span class="keyword">for</span> (Component component : componentList) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= level; i++) &#123;</div><div class="line">                System.out.print(<span class="string">"-"</span>);</div><div class="line">            &#125;</div><div class="line">            component.display(<span class="keyword">this</span>.level);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>叶子构件，叶子上不可以长出树枝或叶子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Leaf</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Leaf</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(name);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">(<span class="keyword">int</span> level)</span> </span>&#123;</div><div class="line">        System.out.println(name);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>客户端代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">// 根节点（树枝root）</span></div><div class="line">        Composite root = <span class="keyword">new</span> Composite(<span class="string">"root"</span>);</div><div class="line">        <span class="comment">// 根节点可以长出叶子A、B</span></div><div class="line">        root.add(<span class="keyword">new</span> Leaf(<span class="string">"A"</span>));</div><div class="line">        root.add(<span class="keyword">new</span> Leaf(<span class="string">"B"</span>));</div><div class="line">        <span class="comment">// 根节点也可以长出树枝X</span></div><div class="line">        Composite x = <span class="keyword">new</span> Composite(<span class="string">"X"</span>);</div><div class="line">        <span class="comment">// 树枝X可以长出叶子XA、XB</span></div><div class="line">        x.add(<span class="keyword">new</span> Leaf(<span class="string">"XA"</span>));</div><div class="line">        x.add(<span class="keyword">new</span> Leaf(<span class="string">"XB"</span>));</div><div class="line">        <span class="comment">// 树枝X也可以长出树枝XX</span></div><div class="line">        Composite xx = <span class="keyword">new</span> Composite(<span class="string">"XX"</span>);</div><div class="line">        <span class="comment">// 树枝XX还可以接着长出叶子XXA</span></div><div class="line">        xx.add(<span class="keyword">new</span> Leaf(<span class="string">"XXA"</span>));</div><div class="line">        x.add(xx);</div><div class="line">        root.add(x);</div><div class="line">        root.display(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">root</div><div class="line">-A</div><div class="line">-B</div><div class="line">-X</div><div class="line">--XA</div><div class="line">--XB</div><div class="line">--XX</div><div class="line">---XXA</div></pre></td></tr></table></figure>
+<h4 id="组合模式的优点："><a href="#组合模式的优点：" class="headerlink" title="组合模式的优点："></a>组合模式的优点：</h4><ol>
+<li>高层模块调用简单。由于所有节点都是 Component，局部或整体对调用者来说没有区别；</li>
+<li>节点自由增加。如果想增加树枝或叶子，只需在其父节点处添加即可。</li>
+</ol>
+<h4 id="组合模式的缺点："><a href="#组合模式的缺点：" class="headerlink" title="组合模式的缺点："></a>组合模式的缺点：</h4><ol>
+<li>不易控制构件类型；</li>
+<li>不易使用继承的方法来增加新的行为。</li>
+</ol>
+<h2 id="源码地址"><a href="#源码地址" class="headerlink" title="源码地址"></a>源码地址</h2><p><a href="https://github.com/laocaixw/DesignModeLearning" target="_blank" rel="external">https://github.com/laocaixw/DesignModeLearning</a></p>
+
+          
+        </section>
+      </div>
+      
+      
+        <div id="comment-container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  // id: location.href, // 可选。默认为 location.href
+  id: '设计模式学习系列（9）--组合模式',
+  owner: 'laocaixw', // 你的 GitHub ID
+  repo: 'laocaixw.github.io', // 存储评论的 repo
+  oauth: {
+    client_id: 'b41a264d7724fd5a364b', // 你的 client ID
+    client_secret: '9dc474e16291d40597b0ad55daae84c24eb41160', // 你的 client secret
+  },
+})
+gitment.render('comment-container')
+</script>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://github.com/laocaixw'>Github</a>
+  
+    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+  
+    <a class='main' href='/about.html'>About</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; laocaixw. All Rights Reserved.</span><br>
+  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>built with Hexo using Scribble theme</a>
+  <br>
+  <br>
+</footer>
+
+  </body>
+</html>

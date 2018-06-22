@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://laocaixw.github.io/"/>
-  <updated>2018-06-16T08:22:08.658Z</updated>
+  <updated>2018-06-22T04:27:57.200Z</updated>
   <id>http://laocaixw.github.io/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>设计模式学习系列（9）--组合模式</title>
+    <link href="http://laocaixw.github.io/2018/06/21/Design_Mode_9_Composite/"/>
+    <id>http://laocaixw.github.io/2018/06/21/Design_Mode_9_Composite/</id>
+    <published>2018-06-21T10:00:00.000Z</published>
+    <updated>2018-06-22T04:27:57.200Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;组合模式：&lt;strong&gt;将对象组合成树形结构以表示“部分-整体”的层次结构，使得用户对单个对象和组合对象的使用具有一致性。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/design_mode/9_Composite.jpg&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="设计模式" scheme="http://laocaixw.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>设计模式学习系列（8）--适配器模式</title>
     <link href="http://laocaixw.github.io/2018/06/16/Design_Mode_8_Adapter/"/>
     <id>http://laocaixw.github.io/2018/06/16/Design_Mode_8_Adapter/</id>
     <published>2018-06-16T02:30:00.000Z</published>
-    <updated>2018-06-16T08:22:08.658Z</updated>
+    <updated>2018-06-22T03:03:07.653Z</updated>
     
     <summary type="html">
     
@@ -466,31 +491,6 @@
         
           &lt;p&gt;概括一下&lt;a href=&quot;https://developer.android.google.cn/training/custom-views/index.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;官网的教程&lt;/a&gt;。&lt;/p&gt;
 &lt;h2
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Android" scheme="http://laocaixw.github.io/tags/Android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>获取双卡双待手机SIM卡信息</title>
-    <link href="http://laocaixw.github.io/2017/06/14/Android_DualCard_SIM/"/>
-    <id>http://laocaixw.github.io/2017/06/14/Android_DualCard_SIM/</id>
-    <published>2017-06-14T02:30:00.000Z</published>
-    <updated>2017-11-18T15:32:47.209Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;使用反射遍历 TelephonyManager 中的方法，通过肉眼基本能找到获取双卡双待号码的方法，最后通过反射取到 SIM 卡信息。&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td
         
       
     
