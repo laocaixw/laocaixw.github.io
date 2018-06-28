@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://laocaixw.github.io/"/>
-  <updated>2018-06-22T04:27:57.200Z</updated>
+  <updated>2018-06-28T06:04:15.294Z</updated>
   <id>http://laocaixw.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Git删除历史记录中的大文件</title>
+    <link href="http://laocaixw.github.io/2018/06/28/Git_filter_branch/"/>
+    <id>http://laocaixw.github.io/2018/06/28/Git_filter_branch/</id>
+    <published>2018-06-28T03:20:00.000Z</published>
+    <updated>2018-06-28T06:04:15.294Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Git 作为一个分布式的版本管理工具，代码仓库中是会保存所有历史记录的。虽然，Git 的 &lt;code&gt;.gitignore&lt;/code&gt;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Git" scheme="http://laocaixw.github.io/tags/Git/"/>
+    
+  </entry>
   
   <entry>
     <title>设计模式学习系列（9）--组合模式</title>
@@ -466,31 +490,6 @@
         
         
           &lt;h2 id=&quot;一、-测量-onMeasure-widthMeasureSpec-heightMeasureSpec&quot;&gt;&lt;a href=&quot;#一、-测量-onMeasure-widthMeasureSpec-heightMeasureSpec&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Android" scheme="http://laocaixw.github.io/tags/Android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android自定义View（1）官网教程</title>
-    <link href="http://laocaixw.github.io/2017/07/15/Android_Custom_View_1/"/>
-    <id>http://laocaixw.github.io/2017/07/15/Android_Custom_View_1/</id>
-    <published>2017-07-15T02:00:00.000Z</published>
-    <updated>2017-11-29T05:19:13.780Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;概括一下&lt;a href=&quot;https://developer.android.google.cn/training/custom-views/index.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;官网的教程&lt;/a&gt;。&lt;/p&gt;
-&lt;h2
         
       
     
