@@ -75,7 +75,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Type:Type-A,Name:Name-1</div><div class="line">Type:Type-A,Name:Name-2</div></pre></td></tr></table></figure>
 <p>原型模式就是复制一份原型实例，再在这份复制的实例中修改某些属性，这样不但省去了重复设置属性的麻烦，而且可以避免重复设置属性过程中因粗心导致的错误；原型模式是在内存二进制流的复制，这要比直接 new 一个对象性能更好；但是 clone() 不会执行构造函数，这也是实际应用中应该进行权衡考虑的。</p>
 <blockquote>
-<p>Java 中 Object 提供的 clone() 方法采用的是浅克隆，即只复制内联关联对象的引用，二不复制关联对象的数据。如果需要深克隆，则需要在覆盖 clone() 方法时手动控制克隆的深度。</p>
+<p>Java 中 Object 提供的 clone() 方法采用的是浅克隆，即只复制内联关联对象的引用，而不复制关联对象的数据。如果需要深克隆，则需要在覆盖 clone() 方法时手动控制克隆的深度。</p>
 </blockquote>
 <h2 id="源码地址"><a href="#源码地址" class="headerlink" title="源码地址"></a>源码地址</h2><p><a href="https://github.com/laocaixw/DesignModeLearning" target="_blank" rel="external">https://github.com/laocaixw/DesignModeLearning</a></p>
 
