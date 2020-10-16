@@ -1,6 +1,6 @@
 <html lang="zh-CN">
   <head>
-    <title>laocaixw</title>
+    <title>小生日 - laocaixw</title>
     <meta charset="UTF-8">
 <meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
 <meta content='text/html; charset=utf-8' http-equiv='content-type'>
@@ -37,16 +37,47 @@
 </div>
 
       <div class='content'>
-        <ul class='posts'>
-          
-          <li>
-            <small class='datetime muted' data-time='Mon Apr 02 2018 13:30:00 GMT+0800'>2018-04-02</small>
-            <a href='/2018/04/02/Blog_Hexo_GitHub_Jenkins/'>用Jenkins自动部署hexo搭建的GitHub静态博客</a>
-          </li>
-          
-        </ul>
+        <section class='post'>
+          <h1>小生日</h1>
+          <p>提供记生日和生日提醒服务。</p>
+<p>使用云开发功能储存用户生日数据，通过微信订阅消息给用户发送生日提醒信息。</p>
+<p><img src="/img/project/miniprogram/anivesary.jpg" alt="小生日"></p>
+
+        </section>
       </div>
       
+      
+        <div id="comment-container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  // id: location.href, // 可选。默认为 location.href
+  id: '小生日',
+  owner: 'laocaixw', // 你的 GitHub ID
+  repo: 'laocaixw.github.io', // 存储评论的 repo
+  oauth: {
+    client_id: 'b41a264d7724fd5a364b', // 你的 client ID
+    client_secret: '9dc474e16291d40597b0ad55daae84c24eb41160', // 你的 client secret
+  },
+})
+gitment.render('comment-container')
+</script>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='https://github.com/laocaixw'>Github</a>
+  
+    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+  
+    <a class='main' href='/about/'>About</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
     </div>
     <footer>
   <span class='muted'>&copy; laocaixw. All Rights Reserved.</span><br>
