@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://laocaixw.github.io/"/>
-  <updated>2018-07-09T11:34:28.215Z</updated>
+  <updated>2021-02-07T09:19:23.809Z</updated>
   <id>http://laocaixw.github.io/</id>
   
   <author>
@@ -17,11 +17,61 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>设计模式学习系列（12）--享元模式</title>
+    <link href="http://laocaixw.github.io/2018/09/15/Design_Mode_12_Flyweight/"/>
+    <id>http://laocaixw.github.io/2018/09/15/Design_Mode_12_Flyweight/</id>
+    <published>2018-09-14T16:00:00.000Z</published>
+    <updated>2021-02-07T09:19:23.809Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;享元模式：&lt;strong&gt;使用共享对象可有效的支持大量的细粒度的对象&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://laocaixw.gitee.io/img/design_mode/12_Flyweight.jpg&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="设计模式" scheme="http://laocaixw.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式学习系列（11）--外观模式</title>
+    <link href="http://laocaixw.github.io/2018/08/12/Design_Mode_11_Facade/"/>
+    <id>http://laocaixw.github.io/2018/08/12/Design_Mode_11_Facade/</id>
+    <published>2018-08-11T16:00:00.000Z</published>
+    <updated>2021-02-07T09:18:54.885Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;外观模式：&lt;strong&gt;要求一个子系统的外部与其内部的通信必须通过一个统一的对象进行。外观模式提供一个高层次的接口，使得子系统更易使用&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img
+        
+      
+    
+    </summary>
+    
+    
+      <category term="设计模式" scheme="http://laocaixw.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>设计模式学习系列（10）--桥梁模式</title>
-    <link href="http://laocaixw.github.io/2018/07/09/Design_Mode_10_Bridge/"/>
-    <id>http://laocaixw.github.io/2018/07/09/Design_Mode_10_Bridge/</id>
-    <published>2018-07-09T10:00:00.000Z</published>
-    <updated>2018-07-09T11:34:28.215Z</updated>
+    <link href="http://laocaixw.github.io/2018/07/14/Design_Mode_10_Bridge/"/>
+    <id>http://laocaixw.github.io/2018/07/14/Design_Mode_10_Bridge/</id>
+    <published>2018-07-13T16:00:00.000Z</published>
+    <updated>2021-02-07T09:17:40.101Z</updated>
     
     <summary type="html">
     
@@ -30,7 +80,32 @@
         
         
           &lt;p&gt;桥梁模式：&lt;strong&gt;将抽象和实现解耦，使得两者可以独立地变化。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/img/design_mode/10_Bridge.jpg&quot;
+&lt;p&gt;&lt;img src=&quot;https://laocaixw.gitee.io/img/design_mode/10_Bridge.jpg&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="设计模式" scheme="http://laocaixw.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式学习系列（9）--组合模式</title>
+    <link href="http://laocaixw.github.io/2018/07/08/Design_Mode_9_Composite/"/>
+    <id>http://laocaixw.github.io/2018/07/08/Design_Mode_9_Composite/</id>
+    <published>2018-07-07T16:00:00.000Z</published>
+    <updated>2021-02-07T09:17:30.619Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;组合模式：&lt;strong&gt;将对象组合成树形结构以表示“部分-整体”的层次结构，使得用户对单个对象和组合对象的使用具有一致性。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img
         
       
     
@@ -66,36 +141,11 @@
   </entry>
   
   <entry>
-    <title>设计模式学习系列（9）--组合模式</title>
-    <link href="http://laocaixw.github.io/2018/06/21/Design_Mode_9_Composite/"/>
-    <id>http://laocaixw.github.io/2018/06/21/Design_Mode_9_Composite/</id>
-    <published>2018-06-21T10:00:00.000Z</published>
-    <updated>2018-06-22T04:27:57.200Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;组合模式：&lt;strong&gt;将对象组合成树形结构以表示“部分-整体”的层次结构，使得用户对单个对象和组合对象的使用具有一致性。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/img/design_mode/9_Composite.jpg&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="设计模式" scheme="http://laocaixw.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
     <title>设计模式学习系列（8）--适配器模式</title>
     <link href="http://laocaixw.github.io/2018/06/16/Design_Mode_8_Adapter/"/>
     <id>http://laocaixw.github.io/2018/06/16/Design_Mode_8_Adapter/</id>
-    <published>2018-06-16T02:30:00.000Z</published>
-    <updated>2018-06-22T03:03:07.653Z</updated>
+    <published>2018-06-15T16:00:00.000Z</published>
+    <updated>2021-02-07T09:17:14.631Z</updated>
     
     <summary type="html">
     
@@ -104,7 +154,7 @@
         
         
           &lt;p&gt;适配器模式：&lt;strong&gt;将一个类的接口变换成客户端所需要的另一种接口，从而使原本因接口不匹配而无法一起工作的两个类能够在一起工作&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/img/design_mode/8_Adapter.jpg&quot;
+&lt;p&gt;&lt;img
         
       
     
@@ -183,8 +233,8 @@
     <title>设计模式学习系列（7）--装饰模式</title>
     <link href="http://laocaixw.github.io/2018/01/07/Design_Mode_7_Decorator/"/>
     <id>http://laocaixw.github.io/2018/01/07/Design_Mode_7_Decorator/</id>
-    <published>2018-01-07T02:30:00.000Z</published>
-    <updated>2018-06-10T03:52:27.827Z</updated>
+    <published>2018-01-06T16:00:00.000Z</published>
+    <updated>2021-02-07T09:17:03.878Z</updated>
     
     <summary type="html">
     
@@ -193,7 +243,7 @@
         
         
           &lt;p&gt;装饰模式：&lt;strong&gt;动态地给一个对象添加一些额外的职责。就增加功能来说，装饰模式比生成子类更为灵活。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/img/design_mode/7_Decorator.jpg&quot;
+&lt;p&gt;&lt;img
         
       
     
@@ -234,7 +284,7 @@
     <link href="http://laocaixw.github.io/2017/12/23/Design_Mode_6_Proxy/"/>
     <id>http://laocaixw.github.io/2017/12/23/Design_Mode_6_Proxy/</id>
     <published>2017-12-23T02:30:00.000Z</published>
-    <updated>2018-06-10T03:52:21.316Z</updated>
+    <updated>2021-02-07T09:16:52.773Z</updated>
     
     <summary type="html">
     
@@ -243,7 +293,7 @@
         
         
           &lt;p&gt;代理模式：&lt;strong&gt;为其他对象提供一种代理以控制对这个对象的访问。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/img/design_mode/6_Proxy.jpg&quot;
+&lt;p&gt;&lt;img src=&quot;https://laocaixw.gitee.io/img/design_mode/6_Proxy.jpg&quot;
         
       
     
@@ -258,8 +308,8 @@
     <title>设计模式学习系列（5）--原型模式</title>
     <link href="http://laocaixw.github.io/2017/11/24/Design_Mode_5_Prototype/"/>
     <id>http://laocaixw.github.io/2017/11/24/Design_Mode_5_Prototype/</id>
-    <published>2017-11-24T02:30:00.000Z</published>
-    <updated>2018-06-30T08:54:17.268Z</updated>
+    <published>2017-11-23T16:00:00.000Z</published>
+    <updated>2021-02-07T09:16:40.772Z</updated>
     
     <summary type="html">
     
@@ -268,8 +318,7 @@
         
         
           &lt;p&gt;原型模式：&lt;strong&gt;用原型实例指定创建对象的种类，并且通过复制这些原型创建新的对象。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/img/design_mode/5_Prototype.jpg&quot; alt=&quot;Prototype&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Java
+&lt;p&gt;&lt;img src=&quot;https://laocaixw.gitee.io/img/design_mode/5_Prototype.jpg&quot;
         
       
     
@@ -343,7 +392,7 @@
         
         
           &lt;p&gt;以下内容基于此系统版本：&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span
         
       
     
@@ -408,8 +457,8 @@
     <title>设计模式学习系列（4）--建造者模式</title>
     <link href="http://laocaixw.github.io/2017/08/11/Design_Mode_4_Builder/"/>
     <id>http://laocaixw.github.io/2017/08/11/Design_Mode_4_Builder/</id>
-    <published>2017-08-11T02:30:00.000Z</published>
-    <updated>2018-06-10T03:52:02.877Z</updated>
+    <published>2017-08-10T16:00:00.000Z</published>
+    <updated>2021-02-07T09:16:27.697Z</updated>
     
     <summary type="html">
     
@@ -418,7 +467,7 @@
         
         
           &lt;p&gt;建造者模式：&lt;strong&gt;将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/img/design_mode/4_Builder.jpg&quot;
+&lt;p&gt;&lt;img src=&quot;https://laocaixw.gitee.io/img/design_mode/4_Builder.jpg&quot;
         
       
     
@@ -443,54 +492,6 @@
         
         
           &lt;h2 id=&quot;Battery-Historian-3&quot;&gt;&lt;a href=&quot;#Battery-Historian-3&quot; class=&quot;headerlink&quot; title=&quot;Battery Historian 3&quot;&gt;&lt;/a&gt;Battery Historian
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Android" scheme="http://laocaixw.github.io/tags/Android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android反编译</title>
-    <link href="http://laocaixw.github.io/2017/08/03/Android_Decompile/"/>
-    <id>http://laocaixw.github.io/2017/08/03/Android_Decompile/</id>
-    <published>2017-08-03T02:30:00.000Z</published>
-    <updated>2018-04-04T07:46:21.672Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h3 id=&quot;1-apktool&quot;&gt;&lt;a href=&quot;#1-apktool&quot; class=&quot;headerlink&quot; title=&quot;1. apktool&quot;&gt;&lt;/a&gt;1. apktool&lt;/h3&gt;&lt;p&gt;将 apk 文件复制到 &lt;code&gt;apktool&lt;/code&gt; ，进入
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Android" scheme="http://laocaixw.github.io/tags/Android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android自定义View（3）事件机制</title>
-    <link href="http://laocaixw.github.io/2017/08/01/Android_Custom_View_3/"/>
-    <id>http://laocaixw.github.io/2017/08/01/Android_Custom_View_3/</id>
-    <published>2017-08-01T13:00:00.000Z</published>
-    <updated>2017-11-29T05:21:00.716Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;以 Activity 为最底层，View 为最顶层（底层 -&amp;gt; 顶层： Activity -&amp;gt; ViewGroup -&amp;gt; View）。事件的分发是从底层到顶层传递，而事件的消费又是从顶层往底层传递。事件的分发过程可以通过
         
       
     

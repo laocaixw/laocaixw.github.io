@@ -1,11 +1,11 @@
 <html lang="zh-CN">
-  <head>
+  <head><meta name="generator" content="Hexo 3.9.0">
     <title>网站服务器搭建相关 - laocaixw</title>
     <meta charset="UTF-8">
-<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
-<meta content='text/html; charset=utf-8' http-equiv='content-type'>
-<link href='/img/avatar.png' rel='shortcut icon'>
-<link href='undefined' rel='alternate' type='application/rss+xml'>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+<meta content="text/html; charset=utf-8" http-equiv="content-type">
+<link href="/img/avatar.png" rel="shortcut icon">
+<link href="undefined" rel="alternate" type="application/rss+xml">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/highlight.css">
 <link rel="stylesheet" href="/css/responsive.css">
@@ -16,74 +16,74 @@
   </head>
   <body>
     <header>
-  <a id='go-back-home' href='/'><img src='/img/avatar.png' alt='Home' width='60' height='60'></a>
+  <a id="go-back-home" href="/"><img src="/img/avatar.png" alt="Home" width="60" height="60"></a>
   <p>laocaixw</p>
   <p>Android Developer</p>
 </header>
 
-    <div id='container'>
-      <div class='block'>
+    <div id="container">
+      <div class="block">
   
-    <a class='main' href='/'>Home</a>
+    <a class="main" href="/">Home</a>
   
-    <a class='main' href='https://github.com/laocaixw'>Github</a>
+    <a class="main" href="https://github.com/laocaixw">Github</a>
   
-    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+    <a class="main" href="mailto:laocaixw@163.com">Email</a>
   
-    <a class='main' href='/about/'>About</a>
+    <a class="main" href="/about/">About</a>
   
-    <a class='main' href='/atom.xml'>RSS</a>
+    <a class="main" href="/atom.xml">RSS</a>
   
 </div>
 
-      <section class='paging'>
+      <section class="paging">
   
-    <div class='left'>
-      <a href='/2017/09/25/Android_WebView_Config_Record/'>
+    <div class="left">
+      <a href="/2017/09/25/Android_WebView_Config_Record/">
         ‹
       </a>
     </div>
   
   
-    <div class='right'>
-      <a href='/2017/08/27/Sublime_Text_3_Plugin_Key/'>
+    <div class="right">
+      <a href="/2017/08/27/Sublime_Text_3_Plugin_Key/">
         ›
       </a>
     </div>
   
 </section>
 
-      <div class='content'>
-        <section class='post'>
+      <div class="content">
+        <section class="post">
           <h1>
-            <div class='date'>2017-09-05</div>
+            <div class="date">2017-09-05</div>
             网站服务器搭建相关
           </h1>
           <blockquote>
           <p><strong><a href="http://blog.laocaixw.cn/">转载请声明出处</a></strong></p>
           </blockquote>
           <p>以下内容基于此系统版本：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Distributor ID:	Ubuntu</div><div class="line">Description:	Ubuntu 16.04.2 LTS</div><div class="line">Release:	16.04</div><div class="line">Codename:	xenial</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Distributor ID:	Ubuntu</span><br><span class="line">Description:	Ubuntu 16.04.2 LTS</span><br><span class="line">Release:	16.04</span><br><span class="line">Codename:	xenial</span><br></pre></td></tr></table></figure>
 <h2 id="安装-Apache2-PHP-MySQL"><a href="#安装-Apache2-PHP-MySQL" class="headerlink" title="安装 Apache2 + PHP + MySQL"></a>安装 Apache2 + PHP + MySQL</h2><ol>
 <li>安装之前先更新系统</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt update</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure>
 <ol>
 <li>安装 Apache2</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt install apache2</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install apache2</span><br></pre></td></tr></table></figure>
 <ol>
 <li>安装 PHP</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt install php</div><div class="line">sudo apt-get install libapache2-mod-php</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install php</span><br><span class="line">sudo apt-get install libapache2-mod-php</span><br></pre></td></tr></table></figure>
 <ol>
 <li>安装 MySQL</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo apt install mysql-server php7.0-mysql</div><div class="line">sudo apt-get install mysql-client</div><div class="line">mysql_secure_installation</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install mysql-server php7.0-mysql</span><br><span class="line">sudo apt-get install mysql-client</span><br><span class="line">mysql_secure_installation</span><br></pre></td></tr></table></figure>
 <ol>
 <li>安装 phpmyadmin</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install phpmyadmin</div><div class="line">sudo apt-get install php-mbstring</div><div class="line">sudo apt-get install php-gettext</div><div class="line">sudo ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install phpmyadmin</span><br><span class="line">sudo apt-get install php-mbstring</span><br><span class="line">sudo apt-get install php-gettext</span><br><span class="line">sudo ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin</span><br></pre></td></tr></table></figure>
 <ol>
 <li>一些配置</li>
 </ol>
@@ -91,62 +91,62 @@
 <li>配置 phpmyadmin</li>
 </ul>
 <p>打开 PHP 错误日志，修改 <code>/etc/php/7.0/apache2/php.ini</code> 以下两项：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vim /etc/php/7.0/apache2/php.ini</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">display_errors = On // 显示错误日志，出现两次，都要改，不然无效</div><div class="line">extension=php_mbstring.dll // 开启mbstring</div><div class="line">error_reporting = E_ALL | ~E_STRICT</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/php/7.0/apache2/php.ini</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">display_errors = On // 显示错误日志，出现两次，都要改，不然无效</span><br><span class="line">extension=php_mbstring.dll // 开启mbstring</span><br><span class="line">error_reporting = E_ALL | ~E_STRICT</span><br></pre></td></tr></table></figure>
 <ul>
 <li>隐藏入口文件 index.php</li>
 </ul>
 <p>启用 rewrite：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo a2enmod rewrite</div><div class="line">// 或</div><div class="line">sudo ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/rewrite.load</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo a2enmod rewrite</span><br><span class="line">// 或</span><br><span class="line">sudo ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/rewrite.load</span><br></pre></td></tr></table></figure>
 <p>修改 <code>AllowOverride</code> 为 <code>All</code>，位置 <code>/etc/apache2/apache2.conf</code> ：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;Directory /var/www/&gt;</div><div class="line">	Options Indexes FollowSymLinks</div><div class="line">	# AllowOverride None</div><div class="line">	AllowOverride All</div><div class="line">	Require all granted</div><div class="line">&lt;/Directory&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;Directory /var/www/&gt;</span><br><span class="line">	Options Indexes FollowSymLinks</span><br><span class="line">	# AllowOverride None</span><br><span class="line">	AllowOverride All</span><br><span class="line">	Require all granted</span><br><span class="line">&lt;/Directory&gt;</span><br></pre></td></tr></table></figure>
 <h2 id="配置-HTTPS"><a href="#配置-HTTPS" class="headerlink" title="配置 HTTPS"></a>配置 HTTPS</h2><ol>
 <li>启用 ssl 模块</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo a2enmod ssl</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo a2enmod ssl</span><br></pre></td></tr></table></figure>
 <ol>
 <li>安装openssl</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install openssl</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssl</span><br></pre></td></tr></table></figure>
 <ol>
 <li>创建 CA 签名(不使用密码去除-des3选项)</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl genrsa (-des3) -out server.key 1024</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa (-des3) -out server.key 1024</span><br></pre></td></tr></table></figure>
 <ol>
 <li>创建 CSR (Certificate Signing Request)</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl req -new -key server.key -out server.csr</div></pre></td></tr></table></figure>
-<p>#信息注解<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Country Name (2 letter code) [AU]:CN　←输入国家代码</div><div class="line">State or Province Name (full name) [Some-State]:FUJIAN　← 输入省名</div><div class="line">Locality Name (eg, city) []:FUZHOU　←输入城市名</div><div class="line">Organization Name (eg, company) [Internet Widgits Pty Ltd]:LAOCAIXW　← 输入公司名</div><div class="line">Organizational Unit Name (eg, section) []:LAOCAIXW　← 输入组织单位名</div><div class="line">Common Name (eg, YOUR name) []:laocaixw.cn　← 输入主机名(想要开启https的主机名)</div><div class="line">Email Address []:laocaixw@163.com　←输入电子邮箱地址</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req -new -key server.key -out server.csr</span><br></pre></td></tr></table></figure>
+<p>#信息注解<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Country Name (2 letter code) [AU]:CN　←输入国家代码</span><br><span class="line">State or Province Name (full name) [Some-State]:FUJIAN　← 输入省名</span><br><span class="line">Locality Name (eg, city) []:FUZHOU　←输入城市名</span><br><span class="line">Organization Name (eg, company) [Internet Widgits Pty Ltd]:LAOCAIXW　← 输入公司名</span><br><span class="line">Organizational Unit Name (eg, section) []:LAOCAIXW　← 输入组织单位名</span><br><span class="line">Common Name (eg, YOUR name) []:laocaixw.cn　← 输入主机名(想要开启https的主机名)</span><br><span class="line">Email Address []:laocaixw@163.com　←输入电子邮箱地址</span><br></pre></td></tr></table></figure></p>
 <ol>
 <li>自己签发证书</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt</span><br></pre></td></tr></table></figure>
 <ol>
 <li>复制到相应目录</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo cp server.crt /etc/ssl/certs</div><div class="line">sudo cp server.key /etc/ssl/private</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo cp server.crt /etc/ssl/certs</span><br><span class="line">sudo cp server.key /etc/ssl/private</span><br></pre></td></tr></table></figure>
 <ol>
 <li>修改配置文件</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo cp /etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/001-ssl.conf</div><div class="line">sudo vim /etc/apache2/sites-enabled/001-ssl.conf</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/001-ssl.conf</span><br><span class="line">sudo vim /etc/apache2/sites-enabled/001-ssl.conf</span><br></pre></td></tr></table></figure>
 <p>在 <code>&lt;VirtualHost *:80&gt;</code> 段中，<code>DocumentRoot</code> 一行的下方加入内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">SSLEngine On</div><div class="line">SSLOptions +StrictRequire</div><div class="line">SSLCertificateFile /etc/ssl/certs/server.crt</div><div class="line">SSLCertificateKeyFile /etc/ssl/private/server.key</div><div class="line">SSLCACertificateFile /etc/ssl/apache/root_bundle.crt</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SSLEngine On</span><br><span class="line">SSLOptions +StrictRequire</span><br><span class="line">SSLCertificateFile /etc/ssl/certs/server.crt</span><br><span class="line">SSLCertificateKeyFile /etc/ssl/private/server.key</span><br><span class="line">SSLCACertificateFile /etc/ssl/apache/root_bundle.crt</span><br></pre></td></tr></table></figure>
 <p>加入这段配置时，需保证对应的文件是存在的，否则无法重启服务。</p>
 <p>端口修改为：443，即 <code>&lt;VirtualHost *:443&gt;</code> ( ssl 的端口)</p>
 <ul>
 <li>自己签发的证书，浏览器会显示为不安全，通过腾讯云获取免费 ssl 证书，放到相应的文件夹中，并修改以上 <code>SSLCertificateFile</code> 和<br><code>SSLCertificateKeyFile</code> 两项配置，即可。</li>
 </ul>
-<h2 id="安装-cURL"><a href="#安装-cURL" class="headerlink" title="安装 cURL"></a>安装 cURL</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install curl libcurl3 libcurl3-dev php7.0-curl</div></pre></td></tr></table></figure>
+<h2 id="安装-cURL"><a href="#安装-cURL" class="headerlink" title="安装 cURL"></a>安装 cURL</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install curl libcurl3 libcurl3-dev php7.0-curl</span><br></pre></td></tr></table></figure>
 <p>如果仍然有问题，尝试编辑你的 <code>php.ini</code> 文件，位置： <code>/etc/php/7.0/apache2/php.ini</code> ，在最后加上一行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">extension=curl.so</div></pre></td></tr></table></figure>
-<h2 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 Git</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install git</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">extension=curl.so</span><br></pre></td></tr></table></figure>
+<h2 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 Git</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
 <h2 id="修改网站根目录"><a href="#修改网站根目录" class="headerlink" title="修改网站根目录"></a>修改网站根目录</h2><ul>
 <li><p>http 在 <code>/etc/apache2/sites-enabled/000-default.conf</code> </p>
 </li>
 <li><p>https 在 <code>/etc/apache2/sites-enabled/001-ssl.conf</code> </p>
 </li>
 </ul>
-<h2 id="相关命令："><a href="#相关命令：" class="headerlink" title="相关命令："></a>相关命令：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo /etc/init.d/apache2 force-reload // 重新加载配置</div><div class="line">sudo /etc/init.d/apache2 start // 启动apache服务</div><div class="line">sudo /etc/init.d/apache2 restart // 重启apache服务</div><div class="line">sudo /etc/init.d/apache2 stop // 停止apache服务</div></pre></td></tr></table></figure>
+<h2 id="相关命令："><a href="#相关命令：" class="headerlink" title="相关命令："></a>相关命令：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo /etc/init.d/apache2 force-reload // 重新加载配置</span><br><span class="line">sudo /etc/init.d/apache2 start // 启动apache服务</span><br><span class="line">sudo /etc/init.d/apache2 restart // 重启apache服务</span><br><span class="line">sudo /etc/init.d/apache2 stop // 停止apache服务</span><br></pre></td></tr></table></figure>
 
           
         </section>
@@ -170,24 +170,24 @@ var gitment = new Gitment({
 gitment.render('comment-container')
 </script>
       
-      <div class='block'>
+      <div class="block">
   
-    <a class='main' href='/'>Home</a>
+    <a class="main" href="/">Home</a>
   
-    <a class='main' href='https://github.com/laocaixw'>Github</a>
+    <a class="main" href="https://github.com/laocaixw">Github</a>
   
-    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+    <a class="main" href="mailto:laocaixw@163.com">Email</a>
   
-    <a class='main' href='/about/'>About</a>
+    <a class="main" href="/about/">About</a>
   
-    <a class='main' href='/atom.xml'>RSS</a>
+    <a class="main" href="/atom.xml">RSS</a>
   
 </div>
 
     </div>
     <footer>
-  <span class='muted'>&copy; laocaixw. All Rights Reserved.</span><br>
-  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>built with Hexo using Scribble theme</a>
+  <span class="muted">&copy; laocaixw. All Rights Reserved.</span><br>
+  <a href="https://github.com/saintwinkle/hexo-theme-scribble" class="muted">built with Hexo using Scribble theme</a>
   <br>
   <br>
 </footer>

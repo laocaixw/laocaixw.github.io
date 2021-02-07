@@ -1,11 +1,11 @@
 <html lang="zh-CN">
-  <head>
+  <head><meta name="generator" content="Hexo 3.9.0">
     <title>Android权限申请 - laocaixw</title>
     <meta charset="UTF-8">
-<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
-<meta content='text/html; charset=utf-8' http-equiv='content-type'>
-<link href='/img/avatar.png' rel='shortcut icon'>
-<link href='undefined' rel='alternate' type='application/rss+xml'>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+<meta content="text/html; charset=utf-8" http-equiv="content-type">
+<link href="/img/avatar.png" rel="shortcut icon">
+<link href="undefined" rel="alternate" type="application/rss+xml">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/highlight.css">
 <link rel="stylesheet" href="/css/responsive.css">
@@ -16,65 +16,65 @@
   </head>
   <body>
     <header>
-  <a id='go-back-home' href='/'><img src='/img/avatar.png' alt='Home' width='60' height='60'></a>
+  <a id="go-back-home" href="/"><img src="/img/avatar.png" alt="Home" width="60" height="60"></a>
   <p>laocaixw</p>
   <p>Android Developer</p>
 </header>
 
-    <div id='container'>
-      <div class='block'>
+    <div id="container">
+      <div class="block">
   
-    <a class='main' href='/'>Home</a>
+    <a class="main" href="/">Home</a>
   
-    <a class='main' href='https://github.com/laocaixw'>Github</a>
+    <a class="main" href="https://github.com/laocaixw">Github</a>
   
-    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+    <a class="main" href="mailto:laocaixw@163.com">Email</a>
   
-    <a class='main' href='/about/'>About</a>
+    <a class="main" href="/about/">About</a>
   
-    <a class='main' href='/atom.xml'>RSS</a>
+    <a class="main" href="/atom.xml">RSS</a>
   
 </div>
 
-      <section class='paging'>
+      <section class="paging">
   
-    <div class='left'>
-      <a href='/2017/05/15/Android_MultiDex/'>
+    <div class="left">
+      <a href="/2017/05/15/Android_MultiDex/">
         ‹
       </a>
     </div>
   
   
-    <div class='right'>
-      <a href='/2017/04/17/Design_Mode_3_AbstractFactory/'>
+    <div class="right">
+      <a href="/2017/04/17/Design_Mode_3_AbstractFactory/">
         ›
       </a>
     </div>
   
 </section>
 
-      <div class='content'>
-        <section class='post'>
+      <div class="content">
+        <section class="post">
           <h1>
-            <div class='date'>2017-05-12</div>
+            <div class="date">2017-05-12</div>
             Android权限申请
           </h1>
           <blockquote>
           <p><strong><a href="http://blog.laocaixw.cn/">转载请声明出处</a></strong></p>
           </blockquote>
           <h2 id="Android-6-0-变化"><a href="#Android-6-0-变化" class="headerlink" title="Android 6.0 变化"></a>Android 6.0 变化</h2><p>Android 6.0 (API23) 对权限系统做了一些变化，引入了一种新的权限模式–运行时权限。</p>
-<p>Android 6.0 之后，权限分为两类：正常权限和危险权限。正常权限一般不涉及用户隐私，只要在 manifest 中声明了之后，系统会自动授予该权限；而危险权限在声明了之后，还需要向用户申请，只有用户同意才会授予该权限。<a href="https://developer.android.google.cn/guide/topics/security/permissions.html?hl=zh-cn#normal-dangerous" target="_blank" rel="external">正常权限和危险权限</a>。</p>
+<p>Android 6.0 之后，权限分为两类：正常权限和危险权限。正常权限一般不涉及用户隐私，只要在 manifest 中声明了之后，系统会自动授予该权限；而危险权限在声明了之后，还需要向用户申请，只有用户同意才会授予该权限。<a href="https://developer.android.google.cn/guide/topics/security/permissions.html?hl=zh-cn#normal-dangerous" target="_blank" rel="noopener">正常权限和危险权限</a>。</p>
 <h2 id="权限申请"><a href="#权限申请" class="headerlink" title="权限申请"></a>权限申请</h2><p>下面来看看具体怎么申请，以申请短信权限为例。</p>
 <h3 id="1-声明"><a href="#1-声明" class="headerlink" title="1.声明"></a>1.声明</h3><p>第一步肯定还是需要在 manifest 中声明。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.SEND_SMS"</span>/&gt;</span></div></pre></td></tr></table></figure>
-<h3 id="2-检查权限"><a href="#2-检查权限" class="headerlink" title="2.检查权限"></a>2.检查权限</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ContextCompat.checkSelfPermission(SMSActivity.<span class="keyword">this</span>, Manifest.permission.SEND_SMS)</div></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.SEND_SMS"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-检查权限"><a href="#2-检查权限" class="headerlink" title="2.检查权限"></a>2.检查权限</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ContextCompat.checkSelfPermission(SMSActivity.<span class="keyword">this</span>, Manifest.permission.SEND_SMS)</span><br></pre></td></tr></table></figure>
 <p>返回 “PackageManager.PERMISSION_GRANTED” 表示已经授权可用，返回 “PackageManager.PERMISSION_DENIED” 表示需要申请授权。</p>
-<h3 id="3-申请授权"><a href="#3-申请授权" class="headerlink" title="3.申请授权"></a>3.申请授权</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ActivityCompat.requestPermissions(SMSActivity.<span class="keyword">this</span>, <span class="keyword">new</span> String[]&#123;Manifest.permission.SEND_SMS&#125;, REQUEST_CODE_PERMISSION_SEND_SMS);</div></pre></td></tr></table></figure>
+<h3 id="3-申请授权"><a href="#3-申请授权" class="headerlink" title="3.申请授权"></a>3.申请授权</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ActivityCompat.requestPermissions(SMSActivity.<span class="keyword">this</span>, <span class="keyword">new</span> String[]&#123;Manifest.permission.SEND_SMS&#125;, REQUEST_CODE_PERMISSION_SEND_SMS);</span><br></pre></td></tr></table></figure>
 <p>第一个参数是 context ；第二个参数是需要申请的权限字符串数组，支持一次性申请多个权限；第三个是请求码，下一步的回调中会看到。</p>
 <h3 id="4-权限申请回调"><a href="#4-权限申请回调" class="headerlink" title="4.权限申请回调"></a>4.权限申请回调</h3><p>用户允许或拒绝之后，会执行回调。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onRequestPermissionsResult</span><span class="params">(<span class="keyword">int</span> requestCode, String permissions[], <span class="keyword">int</span>[] grantResults)</span> </span>&#123;</div><div class="line">    <span class="keyword">switch</span> (requestCode) &#123;</div><div class="line">        <span class="keyword">case</span> REQUEST_CODE_PERMISSION_SEND_SMS:</div><div class="line">            <span class="keyword">if</span> (grantResults.length &gt; <span class="number">0</span></div><div class="line">                &amp;&amp; grantResults[<span class="number">0</span>] == PackageManager.PERMISSION_GRANTED) &#123;</div><div class="line">                <span class="comment">// 用户同意授权，可以执行你要的操作了</span></div><div class="line">                sendTextSMS(phoneNum, content);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        ...</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onRequestPermissionsResult</span><span class="params">(<span class="keyword">int</span> requestCode, String permissions[], <span class="keyword">int</span>[] grantResults)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (requestCode) &#123;</span><br><span class="line">        <span class="keyword">case</span> REQUEST_CODE_PERMISSION_SEND_SMS:</span><br><span class="line">            <span class="keyword">if</span> (grantResults.length &gt; <span class="number">0</span></span><br><span class="line">                &amp;&amp; grantResults[<span class="number">0</span>] == PackageManager.PERMISSION_GRANTED) &#123;</span><br><span class="line">                <span class="comment">// 用户同意授权，可以执行你要的操作了</span></span><br><span class="line">                sendTextSMS(phoneNum, content);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="5-拒绝后再申请"><a href="#5-拒绝后再申请" class="headerlink" title="5.拒绝后再申请"></a>5.拒绝后再申请</h3><p>如果用户上一次已经拒绝过你的权限，但是某个操作仍然需要授权，那么你又得弹出授权框。这个时候你需要给用户一个解释，为什么需要这个授权。这种情况下就可以调用以下接口。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">if (ActivityCompat.shouldShowRequestPermissionRationale(SMSActivity.this,</div><div class="line">        Manifest.permission.SEND_SMS)) &#123;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (ActivityCompat.shouldShowRequestPermissionRationale(SMSActivity.this,</span><br><span class="line">        Manifest.permission.SEND_SMS)) &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           
         </section>
       </div>
@@ -97,24 +97,24 @@ var gitment = new Gitment({
 gitment.render('comment-container')
 </script>
       
-      <div class='block'>
+      <div class="block">
   
-    <a class='main' href='/'>Home</a>
+    <a class="main" href="/">Home</a>
   
-    <a class='main' href='https://github.com/laocaixw'>Github</a>
+    <a class="main" href="https://github.com/laocaixw">Github</a>
   
-    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+    <a class="main" href="mailto:laocaixw@163.com">Email</a>
   
-    <a class='main' href='/about/'>About</a>
+    <a class="main" href="/about/">About</a>
   
-    <a class='main' href='/atom.xml'>RSS</a>
+    <a class="main" href="/atom.xml">RSS</a>
   
 </div>
 
     </div>
     <footer>
-  <span class='muted'>&copy; laocaixw. All Rights Reserved.</span><br>
-  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>built with Hexo using Scribble theme</a>
+  <span class="muted">&copy; laocaixw. All Rights Reserved.</span><br>
+  <a href="https://github.com/saintwinkle/hexo-theme-scribble" class="muted">built with Hexo using Scribble theme</a>
   <br>
   <br>
 </footer>

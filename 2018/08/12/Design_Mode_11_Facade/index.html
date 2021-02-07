@@ -1,0 +1,130 @@
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <title>设计模式学习系列（11）--外观模式 - laocaixw</title>
+    <meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+<meta content="text/html; charset=utf-8" http-equiv="content-type">
+<link href="/img/avatar.png" rel="shortcut icon">
+<link href="undefined" rel="alternate" type="application/rss+xml">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+
+  </head>
+  <body>
+    <header>
+  <a id="go-back-home" href="/"><img src="/img/avatar.png" alt="Home" width="60" height="60"></a>
+  <p>laocaixw</p>
+  <p>Android Developer</p>
+</header>
+
+    <div id="container">
+      <div class="block">
+  
+    <a class="main" href="/">Home</a>
+  
+    <a class="main" href="https://github.com/laocaixw">Github</a>
+  
+    <a class="main" href="mailto:laocaixw@163.com">Email</a>
+  
+    <a class="main" href="/about/">About</a>
+  
+    <a class="main" href="/atom.xml">RSS</a>
+  
+</div>
+
+      <section class="paging">
+  
+    <div class="left">
+      <a href="/2018/09/15/Design_Mode_12_Flyweight/">
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class="right">
+      <a href="/2018/07/14/Design_Mode_10_Bridge/">
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class="content">
+        <section class="post">
+          <h1>
+            <div class="date">2018-08-12</div>
+            设计模式学习系列（11）--外观模式
+          </h1>
+          <blockquote>
+          <p><strong><a href="http://blog.laocaixw.cn/">转载请声明出处</a></strong></p>
+          </blockquote>
+          <p>外观模式：<strong>要求一个子系统的外部与其内部的通信必须通过一个统一的对象进行。外观模式提供一个高层次的接口，使得子系统更易使用</strong></p>
+<p><img src="https://laocaixw.gitee.io/img/design_mode/11_Facade.jpg" alt="Facade"></p>
+<p>我们直接来看一个老板与秘书的故事，千万不要想歪了：</p>
+<p>机场，提供订票功能：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Airport</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">bookTicket</span><span class="params">(String from, String to)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"订购了从"</span> + from + <span class="string">"到"</span> + to + <span class="string">"的机票"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>司机，提供接送功能：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Chauffeur</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drive</span><span class="params">(String to)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"司机开车去"</span> + to);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>酒店，提供订房功能：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hotel</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reserve</span><span class="params">(<span class="keyword">int</span> days)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"订了"</span> + days + <span class="string">"天的房间"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>餐厅，提供订餐功能：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Restaurant</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reserve</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"订了一桌"</span> + num + <span class="string">"人的酒席"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>秘书，安排各种事项：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Secretary</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Chauffeur chauffeur = <span class="keyword">new</span> Chauffeur();</span><br><span class="line">    <span class="keyword">private</span> Hotel hotel = <span class="keyword">new</span> Hotel();</span><br><span class="line">    <span class="keyword">private</span> Restaurant restaurant = <span class="keyword">new</span> Restaurant();</span><br><span class="line">    <span class="keyword">private</span> Airport airport = <span class="keyword">new</span> Airport();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 安排出差</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">trip</span><span class="params">(String to, <span class="keyword">int</span> days)</span> </span>&#123;</span><br><span class="line">        airport.bookTicket(<span class="string">"福州"</span>, to);</span><br><span class="line">        chauffeur.drive(<span class="string">"长乐机场"</span>);</span><br><span class="line">        hotel.reserve(days);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 安排饭局</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">repast</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        restaurant.reserve(num);</span><br><span class="line">        chauffeur.drive(<span class="string">"酒店"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>老板：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class Boss &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        // 老板告诉秘书要去深圳出差10天，请8个人吃饭</span><br><span class="line">        Secretary secretary = new Secretary();</span><br><span class="line">        secretary.trip(&quot;深圳&quot;, 10);</span><br><span class="line">        System.out.println(&quot;----------&quot;);</span><br><span class="line">        secretary.repast(8);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">订购了从福州到深圳的机票</span><br><span class="line">司机开车去长乐机场</span><br><span class="line">订了10天的房间</span><br><span class="line">----------</span><br><span class="line">订了一桌8人的酒席</span><br><span class="line">司机开车去酒店</span><br></pre></td></tr></table></figure>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>外观模式可以为一个复杂的模块提供一个供外界访问的接口，外界对其的访问只要黑箱操作即可，这样风险相对容易控制，也减少了不同层次之间的耦合。</p>
+<h2 id="源码地址"><a href="#源码地址" class="headerlink" title="源码地址"></a>源码地址</h2><p><a href="https://github.com/laocaixw/DesignModeLearning" target="_blank" rel="noopener">https://github.com/laocaixw/DesignModeLearning</a></p>
+
+          
+        </section>
+      </div>
+      
+      
+        <div id="comment-container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  // id: location.href, // 可选。默认为 location.href
+  id: '设计模式学习系列（11）--外观模式',
+  owner: 'laocaixw', // 你的 GitHub ID
+  repo: 'laocaixw.github.io', // 存储评论的 repo
+  oauth: {
+    client_id: 'b41a264d7724fd5a364b', // 你的 client ID
+    client_secret: '9dc474e16291d40597b0ad55daae84c24eb41160', // 你的 client secret
+  },
+})
+gitment.render('comment-container')
+</script>
+      
+      <div class="block">
+  
+    <a class="main" href="/">Home</a>
+  
+    <a class="main" href="https://github.com/laocaixw">Github</a>
+  
+    <a class="main" href="mailto:laocaixw@163.com">Email</a>
+  
+    <a class="main" href="/about/">About</a>
+  
+    <a class="main" href="/atom.xml">RSS</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class="muted">&copy; laocaixw. All Rights Reserved.</span><br>
+  <a href="https://github.com/saintwinkle/hexo-theme-scribble" class="muted">built with Hexo using Scribble theme</a>
+  <br>
+  <br>
+</footer>
+
+  </body>
+</html>

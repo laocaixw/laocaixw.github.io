@@ -1,11 +1,11 @@
 <html lang="zh-CN">
-  <head>
+  <head><meta name="generator" content="Hexo 3.9.0">
     <title>Git删除历史记录中的大文件 - laocaixw</title>
     <meta charset="UTF-8">
-<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
-<meta content='text/html; charset=utf-8' http-equiv='content-type'>
-<link href='/img/avatar.png' rel='shortcut icon'>
-<link href='undefined' rel='alternate' type='application/rss+xml'>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+<meta content="text/html; charset=utf-8" http-equiv="content-type">
+<link href="/img/avatar.png" rel="shortcut icon">
+<link href="undefined" rel="alternate" type="application/rss+xml">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/highlight.css">
 <link rel="stylesheet" href="/css/responsive.css">
@@ -16,47 +16,47 @@
   </head>
   <body>
     <header>
-  <a id='go-back-home' href='/'><img src='/img/avatar.png' alt='Home' width='60' height='60'></a>
+  <a id="go-back-home" href="/"><img src="/img/avatar.png" alt="Home" width="60" height="60"></a>
   <p>laocaixw</p>
   <p>Android Developer</p>
 </header>
 
-    <div id='container'>
-      <div class='block'>
+    <div id="container">
+      <div class="block">
   
-    <a class='main' href='/'>Home</a>
+    <a class="main" href="/">Home</a>
   
-    <a class='main' href='https://github.com/laocaixw'>Github</a>
+    <a class="main" href="https://github.com/laocaixw">Github</a>
   
-    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+    <a class="main" href="mailto:laocaixw@163.com">Email</a>
   
-    <a class='main' href='/about/'>About</a>
+    <a class="main" href="/about/">About</a>
   
-    <a class='main' href='/atom.xml'>RSS</a>
+    <a class="main" href="/atom.xml">RSS</a>
   
 </div>
 
-      <section class='paging'>
+      <section class="paging">
   
-    <div class='left'>
-      <a href='/2018/07/09/Design_Mode_10_Bridge/'>
+    <div class="left">
+      <a href="/2018/07/08/Design_Mode_9_Composite/">
         ‹
       </a>
     </div>
   
   
-    <div class='right'>
-      <a href='/2018/06/21/Design_Mode_9_Composite/'>
+    <div class="right">
+      <a href="/2018/06/16/Design_Mode_8_Adapter/">
         ›
       </a>
     </div>
   
 </section>
 
-      <div class='content'>
-        <section class='post'>
+      <div class="content">
+        <section class="post">
           <h1>
-            <div class='date'>2018-06-28</div>
+            <div class="date">2018-06-28</div>
             Git删除历史记录中的大文件
           </h1>
           <blockquote>
@@ -66,22 +66,22 @@
 <p>如何解决这个问题呢？其实，Git 已经为我们提供了解决方案，就是被称为核弹级的命令 <code>filter-branch</code>。这个命令可以用来修改历史提交记录，把不需要的文件永久地从历史记录中删除。</p>
 <p>首先，我们需要找出大文件。  </p>
 <p>找出排名前 5 的 pack 记录：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git verify-pack -v .git/objects/pack/pack-*.idx | sort -k 3 -g | tail -5</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git verify-pack -v .git/objects/pack/pack-*.idx | sort -k 3 -g | tail -5</span><br></pre></td></tr></table></figure>
 <p>可以看到这样的信息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1753e0b6aa1cd3ed27d1d14e8e569664c685e896 blob   44600 43841 37970</div><div class="line">ca12c545eae19d688ac840c7f0e2e623a1a4192b blob   45262 8534 140448</div><div class="line">7a3265ee94c0ab25cf079ac8ccdf87f41d455d42 blob   54708 49093 171307</div><div class="line">72590cee1315e32dada25535184dcee97c6f5af9 blob   1114323 1104823 113887612</div><div class="line">4cc1f9dcef1004355d2a595d45808e99f100dc4d blob   114592569 113703558 184054</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1753e0b6aa1cd3ed27d1d14e8e569664c685e896 blob   44600 43841 37970</span><br><span class="line">ca12c545eae19d688ac840c7f0e2e623a1a4192b blob   45262 8534 140448</span><br><span class="line">7a3265ee94c0ab25cf079ac8ccdf87f41d455d42 blob   54708 49093 171307</span><br><span class="line">72590cee1315e32dada25535184dcee97c6f5af9 blob   1114323 1104823 113887612</span><br><span class="line">4cc1f9dcef1004355d2a595d45808e99f100dc4d blob   114592569 113703558 184054</span><br></pre></td></tr></table></figure>
 <p>最后一条就是最大的一条记录，4cc1f9dcef1004355d2a595d45808e99f100dc4d 是它的 id。<br>找出该记录对应的文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rev-list --objects --all | grep 4cc1f9dcef1004355d2a595d45808e99f100dc4d</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rev-list --objects --all | grep 4cc1f9dcef1004355d2a595d45808e99f100dc4d</span><br></pre></td></tr></table></figure>
 <p>可以看到：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">4cc1f9dcef1004355d2a595d45808e99f100dc4d app/src/main/assets/Android群英传.pdf</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4cc1f9dcef1004355d2a595d45808e99f100dc4d app/src/main/assets/Android群英传.pdf</span><br></pre></td></tr></table></figure>
 <p>这个文件就是罪魁祸首，它占了有 100 多 M 的空间。  </p>
 <p>将该文件从历史记录中移除:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">log</span> --pretty=oneline --branches -- app/src/main/assets/Android群英传.pdf</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> --pretty=oneline --branches -- app/src/main/assets/Android群英传.pdf</span><br></pre></td></tr></table></figure>
 <p>重写所有 commit，将该文件从 Git 历史中完全移除：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git filter-branch --index-filter <span class="string">'git rm --cached --ignore-unmatch app/src/main/assets/Android群英传.pdf'</span> -- --all</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git filter-branch --index-filter <span class="string">'git rm --cached --ignore-unmatch app/src/main/assets/Android群英传.pdf'</span> -- --all</span><br></pre></td></tr></table></figure>
 <p>到这里，历史记录中已经没有该文件了。不过运行 <code>filter-branch</code> 产生的日志还是会对该文件有引用，所以还需要运行以下几条命令，把该文件的引用完全删除：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">rm -Rf .git/refs/original</div><div class="line">rm -Rf .git/logs/</div><div class="line">git gc</div><div class="line">git prune</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rm -Rf .git/refs/original</span><br><span class="line">rm -Rf .git/logs/</span><br><span class="line">git gc</span><br><span class="line">git prune</span><br></pre></td></tr></table></figure>
 <p>这个时候，再看文件夹，已经小了很多了。然后就可以 push 代码了，不过就是需要强制 push：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push --force</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push --force</span><br></pre></td></tr></table></figure>
 <p>以上就是删除 Git 历史记录中大文件的过程。</p>
 <p>当然 <code>filter-branch</code> 的作用还不止这些，比如它还可以用来修改历史提交记录中的用户名(username)和邮箱(email)等。</p>
 
@@ -107,24 +107,24 @@ var gitment = new Gitment({
 gitment.render('comment-container')
 </script>
       
-      <div class='block'>
+      <div class="block">
   
-    <a class='main' href='/'>Home</a>
+    <a class="main" href="/">Home</a>
   
-    <a class='main' href='https://github.com/laocaixw'>Github</a>
+    <a class="main" href="https://github.com/laocaixw">Github</a>
   
-    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+    <a class="main" href="mailto:laocaixw@163.com">Email</a>
   
-    <a class='main' href='/about/'>About</a>
+    <a class="main" href="/about/">About</a>
   
-    <a class='main' href='/atom.xml'>RSS</a>
+    <a class="main" href="/atom.xml">RSS</a>
   
 </div>
 
     </div>
     <footer>
-  <span class='muted'>&copy; laocaixw. All Rights Reserved.</span><br>
-  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>built with Hexo using Scribble theme</a>
+  <span class="muted">&copy; laocaixw. All Rights Reserved.</span><br>
+  <a href="https://github.com/saintwinkle/hexo-theme-scribble" class="muted">built with Hexo using Scribble theme</a>
   <br>
   <br>
 </footer>

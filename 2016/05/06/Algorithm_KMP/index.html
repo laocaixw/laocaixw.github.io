@@ -1,11 +1,11 @@
 <html lang="zh-CN">
-  <head>
+  <head><meta name="generator" content="Hexo 3.9.0">
     <title>KMP算法的个人理解 - laocaixw</title>
     <meta charset="UTF-8">
-<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
-<meta content='text/html; charset=utf-8' http-equiv='content-type'>
-<link href='/img/avatar.png' rel='shortcut icon'>
-<link href='undefined' rel='alternate' type='application/rss+xml'>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+<meta content="text/html; charset=utf-8" http-equiv="content-type">
+<link href="/img/avatar.png" rel="shortcut icon">
+<link href="undefined" rel="alternate" type="application/rss+xml">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/highlight.css">
 <link rel="stylesheet" href="/css/responsive.css">
@@ -16,30 +16,30 @@
   </head>
   <body>
     <header>
-  <a id='go-back-home' href='/'><img src='/img/avatar.png' alt='Home' width='60' height='60'></a>
+  <a id="go-back-home" href="/"><img src="/img/avatar.png" alt="Home" width="60" height="60"></a>
   <p>laocaixw</p>
   <p>Android Developer</p>
 </header>
 
-    <div id='container'>
-      <div class='block'>
+    <div id="container">
+      <div class="block">
   
-    <a class='main' href='/'>Home</a>
+    <a class="main" href="/">Home</a>
   
-    <a class='main' href='https://github.com/laocaixw'>Github</a>
+    <a class="main" href="https://github.com/laocaixw">Github</a>
   
-    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+    <a class="main" href="mailto:laocaixw@163.com">Email</a>
   
-    <a class='main' href='/about/'>About</a>
+    <a class="main" href="/about/">About</a>
   
-    <a class='main' href='/atom.xml'>RSS</a>
+    <a class="main" href="/atom.xml">RSS</a>
   
 </div>
 
-      <section class='paging'>
+      <section class="paging">
   
-    <div class='left'>
-      <a href='/2016/06/08/Blog_Hexo_GitHub/'>
+    <div class="left">
+      <a href="/2016/06/08/Blog_Hexo_GitHub/">
         ‹
       </a>
     </div>
@@ -47,18 +47,18 @@
   
 </section>
 
-      <div class='content'>
-        <section class='post'>
+      <div class="content">
+        <section class="post">
           <h1>
-            <div class='date'>2016-05-06</div>
+            <div class="date">2016-05-06</div>
             KMP算法的个人理解
           </h1>
           <blockquote>
           <p><strong><a href="http://blog.laocaixw.cn/">转载请声明出处</a></strong></p>
           </blockquote>
-          <p>自学了一段时间，刚刚准备转行做软件开发，面试过程中被指出计算机基础知识薄弱。因为是非科班出生，确实有些计算机方面的基础没有学过，也开始恶补这些方面的东西。<br>最近在学习数据结构与算法过程中，学到 KMP 算法，甚是难解。看了<a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html?20160506194537#comment-last" target="_blank" rel="external">阮一峰的网络日志</a>后才慢慢理解，但也发现其中的瑕疵，在此也顺带指出，至于对或不对，还请各位看客指正。</p>
+          <p>自学了一段时间，刚刚准备转行做软件开发，面试过程中被指出计算机基础知识薄弱。因为是非科班出生，确实有些计算机方面的基础没有学过，也开始恶补这些方面的东西。<br>最近在学习数据结构与算法过程中，学到 KMP 算法，甚是难解。看了<a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html?20160506194537#comment-last" target="_blank" rel="noopener">阮一峰的网络日志</a>后才慢慢理解，但也发现其中的瑕疵，在此也顺带指出，至于对或不对，还请各位看客指正。</p>
 <blockquote>
-<p>图片和例子讲解均引自<a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html?20160506194537#comment-last" target="_blank" rel="external">阮一峰的网络日志</a>，稍作修改，侵改。</p>
+<p>图片和例子讲解均引自<a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html?20160506194537#comment-last" target="_blank" rel="noopener">阮一峰的网络日志</a>，稍作修改，侵改。</p>
 </blockquote>
 <h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>举例来说，有一个字符串”BBC ABCDAB ABCDABCDABDE”，我想知道，里面是否包含另一个字符串”ABCDABD”，即字符串”ABCDABD”是否是字符串”BBC ABCDAB ABCDABCDABDE”的子串。</p>
 <p>定义</p>
@@ -134,24 +134,24 @@ var gitment = new Gitment({
 gitment.render('comment-container')
 </script>
       
-      <div class='block'>
+      <div class="block">
   
-    <a class='main' href='/'>Home</a>
+    <a class="main" href="/">Home</a>
   
-    <a class='main' href='https://github.com/laocaixw'>Github</a>
+    <a class="main" href="https://github.com/laocaixw">Github</a>
   
-    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+    <a class="main" href="mailto:laocaixw@163.com">Email</a>
   
-    <a class='main' href='/about/'>About</a>
+    <a class="main" href="/about/">About</a>
   
-    <a class='main' href='/atom.xml'>RSS</a>
+    <a class="main" href="/atom.xml">RSS</a>
   
 </div>
 
     </div>
     <footer>
-  <span class='muted'>&copy; laocaixw. All Rights Reserved.</span><br>
-  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>built with Hexo using Scribble theme</a>
+  <span class="muted">&copy; laocaixw. All Rights Reserved.</span><br>
+  <a href="https://github.com/saintwinkle/hexo-theme-scribble" class="muted">built with Hexo using Scribble theme</a>
   <br>
   <br>
 </footer>

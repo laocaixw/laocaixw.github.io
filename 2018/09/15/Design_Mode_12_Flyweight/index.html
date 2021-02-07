@@ -1,0 +1,120 @@
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <title>设计模式学习系列（12）--享元模式 - laocaixw</title>
+    <meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+<meta content="text/html; charset=utf-8" http-equiv="content-type">
+<link href="/img/avatar.png" rel="shortcut icon">
+<link href="undefined" rel="alternate" type="application/rss+xml">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+
+  </head>
+  <body>
+    <header>
+  <a id="go-back-home" href="/"><img src="/img/avatar.png" alt="Home" width="60" height="60"></a>
+  <p>laocaixw</p>
+  <p>Android Developer</p>
+</header>
+
+    <div id="container">
+      <div class="block">
+  
+    <a class="main" href="/">Home</a>
+  
+    <a class="main" href="https://github.com/laocaixw">Github</a>
+  
+    <a class="main" href="mailto:laocaixw@163.com">Email</a>
+  
+    <a class="main" href="/about/">About</a>
+  
+    <a class="main" href="/atom.xml">RSS</a>
+  
+</div>
+
+      <section class="paging">
+  
+  
+    <div class="right">
+      <a href="/2018/08/12/Design_Mode_11_Facade/">
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class="content">
+        <section class="post">
+          <h1>
+            <div class="date">2018-09-15</div>
+            设计模式学习系列（12）--享元模式
+          </h1>
+          <blockquote>
+          <p><strong><a href="http://blog.laocaixw.cn/">转载请声明出处</a></strong></p>
+          </blockquote>
+          <p>享元模式：<strong>使用共享对象可有效的支持大量的细粒度的对象</strong></p>
+<p><img src="https://laocaixw.gitee.io/img/design_mode/12_Flyweight.jpg" alt="Facade"></p>
+<p>享元模式，顾名思义，共享某些元素。当系统中存在大量类似的对象时，可以用于提高资源的复用率。</p>
+<p>抽象享元接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Flyweight</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 业务方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">(String outerState)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>具体享元类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteFlyweight</span> <span class="keyword">implements</span> <span class="title">Flyweight</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String innerState; <span class="comment">// 内部状态</span></span><br><span class="line"></span><br><span class="line">    ConcreteFlyweight(String innerState) &#123;</span><br><span class="line">        System.out.println(<span class="string">"资源("</span> + innerState + <span class="string">")被创建"</span>);</span><br><span class="line">        <span class="keyword">this</span>.innerState = innerState;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">(String outerState)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"资源("</span> + innerState + <span class="string">")执行外部操作("</span> + outerState + <span class="string">")"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>享元工厂类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FlyweightFactory</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;String, Flyweight&gt; pool = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 私有构造方法</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">FlyweightFactory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Flyweight <span class="title">getFlyweight</span><span class="params">(String innerState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!pool.containsKey(innerState)) &#123;</span><br><span class="line">            Flyweight flyweight = <span class="keyword">new</span> ConcreteFlyweight(innerState);</span><br><span class="line">            pool.put(innerState, flyweight);</span><br><span class="line">            <span class="keyword">return</span> flyweight;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> pool.get(innerState);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>客户端：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        FlyweightFactory.getFlyweight(<span class="string">"innerA"</span>).operation(<span class="string">"outer1"</span>);</span><br><span class="line">        FlyweightFactory.getFlyweight(<span class="string">"innerB"</span>).operation(<span class="string">"outer2"</span>);</span><br><span class="line">        FlyweightFactory.getFlyweight(<span class="string">"innerA"</span>).operation(<span class="string">"outer3"</span>);</span><br><span class="line">        FlyweightFactory.getFlyweight(<span class="string">"innerA"</span>).operation(<span class="string">"outer4"</span>);</span><br><span class="line">        FlyweightFactory.getFlyweight(<span class="string">"innerB"</span>).operation(<span class="string">"outer5"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">资源(innerA)被创建</span><br><span class="line">资源(innerA)执行外部操作(outer1)</span><br><span class="line">资源(innerB)被创建</span><br><span class="line">资源(innerB)执行外部操作(outer2)</span><br><span class="line">资源(innerA)执行外部操作(outer3)</span><br><span class="line">资源(innerA)执行外部操作(outer4)</span><br><span class="line">资源(innerB)执行外部操作(outer5)</span><br></pre></td></tr></table></figure>
+<p>这样就可以重复利用 Flyweight 资源了。享元模式的思想有点类似单例模式，都是对资源的重复利用，减少系统的开销。享元模式也是很多池技术的重要实现方式。</p>
+<h2 id="源码地址"><a href="#源码地址" class="headerlink" title="源码地址"></a>源码地址</h2><p><a href="https://github.com/laocaixw/DesignModeLearning" target="_blank" rel="noopener">https://github.com/laocaixw/DesignModeLearning</a></p>
+
+          
+        </section>
+      </div>
+      
+      
+        <div id="comment-container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  // id: location.href, // 可选。默认为 location.href
+  id: '设计模式学习系列（12）--享元模式',
+  owner: 'laocaixw', // 你的 GitHub ID
+  repo: 'laocaixw.github.io', // 存储评论的 repo
+  oauth: {
+    client_id: 'b41a264d7724fd5a364b', // 你的 client ID
+    client_secret: '9dc474e16291d40597b0ad55daae84c24eb41160', // 你的 client secret
+  },
+})
+gitment.render('comment-container')
+</script>
+      
+      <div class="block">
+  
+    <a class="main" href="/">Home</a>
+  
+    <a class="main" href="https://github.com/laocaixw">Github</a>
+  
+    <a class="main" href="mailto:laocaixw@163.com">Email</a>
+  
+    <a class="main" href="/about/">About</a>
+  
+    <a class="main" href="/atom.xml">RSS</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class="muted">&copy; laocaixw. All Rights Reserved.</span><br>
+  <a href="https://github.com/saintwinkle/hexo-theme-scribble" class="muted">built with Hexo using Scribble theme</a>
+  <br>
+  <br>
+</footer>
+
+  </body>
+</html>

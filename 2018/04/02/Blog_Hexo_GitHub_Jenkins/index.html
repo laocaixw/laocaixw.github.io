@@ -1,11 +1,11 @@
 <html lang="zh-CN">
-  <head>
+  <head><meta name="generator" content="Hexo 3.9.0">
     <title>用Jenkins自动部署hexo搭建的GitHub静态博客 - laocaixw</title>
     <meta charset="UTF-8">
-<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
-<meta content='text/html; charset=utf-8' http-equiv='content-type'>
-<link href='/img/avatar.png' rel='shortcut icon'>
-<link href='undefined' rel='alternate' type='application/rss+xml'>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+<meta content="text/html; charset=utf-8" http-equiv="content-type">
+<link href="/img/avatar.png" rel="shortcut icon">
+<link href="undefined" rel="alternate" type="application/rss+xml">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/highlight.css">
 <link rel="stylesheet" href="/css/responsive.css">
@@ -16,47 +16,47 @@
   </head>
   <body>
     <header>
-  <a id='go-back-home' href='/'><img src='/img/avatar.png' alt='Home' width='60' height='60'></a>
+  <a id="go-back-home" href="/"><img src="/img/avatar.png" alt="Home" width="60" height="60"></a>
   <p>laocaixw</p>
   <p>Android Developer</p>
 </header>
 
-    <div id='container'>
-      <div class='block'>
+    <div id="container">
+      <div class="block">
   
-    <a class='main' href='/'>Home</a>
+    <a class="main" href="/">Home</a>
   
-    <a class='main' href='https://github.com/laocaixw'>Github</a>
+    <a class="main" href="https://github.com/laocaixw">Github</a>
   
-    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+    <a class="main" href="mailto:laocaixw@163.com">Email</a>
   
-    <a class='main' href='/about/'>About</a>
+    <a class="main" href="/about/">About</a>
   
-    <a class='main' href='/atom.xml'>RSS</a>
+    <a class="main" href="/atom.xml">RSS</a>
   
 </div>
 
-      <section class='paging'>
+      <section class="paging">
   
-    <div class='left'>
-      <a href='/2018/05/09/Java_Reference/'>
+    <div class="left">
+      <a href="/2018/05/09/Java_Reference/">
         ‹
       </a>
     </div>
   
   
-    <div class='right'>
-      <a href='/2018/01/07/Design_Mode_7_Decorator/'>
+    <div class="right">
+      <a href="/2018/01/07/Design_Mode_7_Decorator/">
         ›
       </a>
     </div>
   
 </section>
 
-      <div class='content'>
-        <section class='post'>
+      <div class="content">
+        <section class="post">
           <h1>
-            <div class='date'>2018-04-02</div>
+            <div class="date">2018-04-02</div>
             用Jenkins自动部署hexo搭建的GitHub静态博客
           </h1>
           <blockquote>
@@ -65,7 +65,7 @@
           <p>hexo 为我们提供了一套非常方便的静态博客搭建框架，我们只需要编写文章的 MarkDown 文件即可。但是即便方便，还是会有几个繁琐的步骤：每次写一篇博客都需要执行编译命令，再将新生成的网页代码提交到 GitHub；而且，如果博客是由团队成员共同贡献，很难做到协同维护。使用 Jenkins 可以帮我们一定程度上解决这两个问题。</p>
 <a id="more"></a>
 <h2 id="一、基本思路"><a href="#一、基本思路" class="headerlink" title="一、基本思路"></a>一、基本思路</h2><p>Jenkins 是一套非常常用且好用的自动化构建工具，也为我们提供了很多插件。这其中会用到 GitHub 提供的 WebHook 功能，GitHub 收到一个 Push 后，会向 Jenkins 服务器发起一条 Post 请求，告诉 Jenkins 现在可以去执行部署操作了。</p>
-<h2 id="二、安装-Jenkins"><a href="#二、安装-Jenkins" class="headerlink" title="二、安装 Jenkins"></a>二、安装 Jenkins</h2><p>Jenkins 的安装过程可以完全参考官网：<a href="https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins" target="_blank" rel="external">Jenkins 官网</a>，不同系统有不同的安装方法，比如 CentOS：</p>
+<h2 id="二、安装-Jenkins"><a href="#二、安装-Jenkins" class="headerlink" title="二、安装 Jenkins"></a>二、安装 Jenkins</h2><p>Jenkins 的安装过程可以完全参考官网：<a href="https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins" target="_blank" rel="noopener">Jenkins 官网</a>，不同系统有不同的安装方法，比如 CentOS：</p>
 <p><img src="/img/hexo/Jenkins_1.png" alt="Jenkins_1"></p>
 <p>只要按照步骤安装即可，基本上都会包含以下步骤：</p>
 <ol>
@@ -100,7 +100,7 @@
 <p><img src="/img/hexo/Jenkins_8.png" alt="Jenkins_8"></p>
 <p>配置好后，点击应用即可。</p>
 <p>注意：如果构建的过程中提示没有权限之类的错误，请设置一下 Jenkins 用户。Jenkins 安装好后，会自动新建一个用户叫 jenkins，可以把它改为 root 用户。 CentOS 配置文件为 <code>/etc/sysconfig/jenkins</code> ，修改 JENKINS_USER 项为 root 即可：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">JENKINS_USER=&quot;root&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JENKINS_USER=&quot;root&quot;</span><br></pre></td></tr></table></figure>
 <p>另外，还需要配置 Jenkins 的 GitHub 插件的 hook url：</p>
 <p><img src="/img/hexo/Jenkins_9.png" alt="Jenkins_9"></p>
 <p><img src="/img/hexo/Jenkins_10.png" alt="Jenkins_10"></p>
@@ -131,24 +131,24 @@ var gitment = new Gitment({
 gitment.render('comment-container')
 </script>
       
-      <div class='block'>
+      <div class="block">
   
-    <a class='main' href='/'>Home</a>
+    <a class="main" href="/">Home</a>
   
-    <a class='main' href='https://github.com/laocaixw'>Github</a>
+    <a class="main" href="https://github.com/laocaixw">Github</a>
   
-    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+    <a class="main" href="mailto:laocaixw@163.com">Email</a>
   
-    <a class='main' href='/about/'>About</a>
+    <a class="main" href="/about/">About</a>
   
-    <a class='main' href='/atom.xml'>RSS</a>
+    <a class="main" href="/atom.xml">RSS</a>
   
 </div>
 
     </div>
     <footer>
-  <span class='muted'>&copy; laocaixw. All Rights Reserved.</span><br>
-  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>built with Hexo using Scribble theme</a>
+  <span class="muted">&copy; laocaixw. All Rights Reserved.</span><br>
+  <a href="https://github.com/saintwinkle/hexo-theme-scribble" class="muted">built with Hexo using Scribble theme</a>
   <br>
   <br>
 </footer>

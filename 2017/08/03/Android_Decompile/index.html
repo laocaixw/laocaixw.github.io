@@ -1,11 +1,11 @@
 <html lang="zh-CN">
-  <head>
+  <head><meta name="generator" content="Hexo 3.9.0">
     <title>Android反编译 - laocaixw</title>
     <meta charset="UTF-8">
-<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
-<meta content='text/html; charset=utf-8' http-equiv='content-type'>
-<link href='/img/avatar.png' rel='shortcut icon'>
-<link href='undefined' rel='alternate' type='application/rss+xml'>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+<meta content="text/html; charset=utf-8" http-equiv="content-type">
+<link href="/img/avatar.png" rel="shortcut icon">
+<link href="undefined" rel="alternate" type="application/rss+xml">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/highlight.css">
 <link rel="stylesheet" href="/css/responsive.css">
@@ -16,60 +16,60 @@
   </head>
   <body>
     <header>
-  <a id='go-back-home' href='/'><img src='/img/avatar.png' alt='Home' width='60' height='60'></a>
+  <a id="go-back-home" href="/"><img src="/img/avatar.png" alt="Home" width="60" height="60"></a>
   <p>laocaixw</p>
   <p>Android Developer</p>
 </header>
 
-    <div id='container'>
-      <div class='block'>
+    <div id="container">
+      <div class="block">
   
-    <a class='main' href='/'>Home</a>
+    <a class="main" href="/">Home</a>
   
-    <a class='main' href='https://github.com/laocaixw'>Github</a>
+    <a class="main" href="https://github.com/laocaixw">Github</a>
   
-    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+    <a class="main" href="mailto:laocaixw@163.com">Email</a>
   
-    <a class='main' href='/about/'>About</a>
+    <a class="main" href="/about/">About</a>
   
-    <a class='main' href='/atom.xml'>RSS</a>
+    <a class="main" href="/atom.xml">RSS</a>
   
 </div>
 
-      <section class='paging'>
+      <section class="paging">
   
-    <div class='left'>
-      <a href='/2017/08/08/Android_Battery_Analysis/'>
+    <div class="left">
+      <a href="/2017/08/08/Android_Battery_Analysis/">
         ‹
       </a>
     </div>
   
   
-    <div class='right'>
-      <a href='/2017/08/01/Android_Custom_View_3/'>
+    <div class="right">
+      <a href="/2017/08/01/Android_Custom_View_3/">
         ›
       </a>
     </div>
   
 </section>
 
-      <div class='content'>
-        <section class='post'>
+      <div class="content">
+        <section class="post">
           <h1>
-            <div class='date'>2017-08-03</div>
+            <div class="date">2017-08-03</div>
             Android反编译
           </h1>
           <blockquote>
           <p><strong><a href="http://blog.laocaixw.cn/">转载请声明出处</a></strong></p>
           </blockquote>
           <h3 id="1-apktool"><a href="#1-apktool" class="headerlink" title="1. apktool"></a>1. apktool</h3><p>将 apk 文件复制到 <code>apktool</code> ，进入 <code>apktool</code> 目录，执行反编译命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apktool_2.2.4.jar d XXX.apk</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apktool_2.2.4.jar d XXX.apk</span><br></pre></td></tr></table></figure>
 <p>反编译后，生成对应的 XXX 文件夹。</p>
 <p>重新编译命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apktool_2.2.4.jar b XXX</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apktool_2.2.4.jar b XXX</span><br></pre></td></tr></table></figure>
 <p>重新编译后，生成 <code>build</code> 、 <code>dist</code> 文件夹，<code>build/apk</code> 中会生成 dex 文件，新的 apk 文件在 <code>dist</code> 中。自己实际操作的时候，貌似没看到生成了 <code>dist</code> 文件夹？</p>
 <h3 id="2-dex2jar"><a href="#2-dex2jar" class="headerlink" title="2. dex2jar"></a>2. dex2jar</h3><p>将 dex 文件复制到 <code>dex2jar</code> 根目录下，进入 <code>dex2jar</code> 目录，执行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">d2j-dex2jar.bat classes.dex</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d2j-dex2jar.bat classes.dex</span><br></pre></td></tr></table></figure>
 <p>完成后，生成 jar 文件。</p>
 <h3 id="3-jd-gui"><a href="#3-jd-gui" class="headerlink" title="3. jd-gui"></a>3. jd-gui</h3><p>最后，直接用 jd-gui 打开 jar 文件就可以查看代码了。</p>
 
@@ -95,24 +95,24 @@ var gitment = new Gitment({
 gitment.render('comment-container')
 </script>
       
-      <div class='block'>
+      <div class="block">
   
-    <a class='main' href='/'>Home</a>
+    <a class="main" href="/">Home</a>
   
-    <a class='main' href='https://github.com/laocaixw'>Github</a>
+    <a class="main" href="https://github.com/laocaixw">Github</a>
   
-    <a class='main' href='mailto:laocaixw@163.com'>Email</a>
+    <a class="main" href="mailto:laocaixw@163.com">Email</a>
   
-    <a class='main' href='/about/'>About</a>
+    <a class="main" href="/about/">About</a>
   
-    <a class='main' href='/atom.xml'>RSS</a>
+    <a class="main" href="/atom.xml">RSS</a>
   
 </div>
 
     </div>
     <footer>
-  <span class='muted'>&copy; laocaixw. All Rights Reserved.</span><br>
-  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>built with Hexo using Scribble theme</a>
+  <span class="muted">&copy; laocaixw. All Rights Reserved.</span><br>
+  <a href="https://github.com/saintwinkle/hexo-theme-scribble" class="muted">built with Hexo using Scribble theme</a>
   <br>
   <br>
 </footer>
